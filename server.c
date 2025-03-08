@@ -90,10 +90,19 @@ void *handle_client(void *socket_desc) {
     }
     json_object_put(parsed_json);
 
-    // Mantener la conexión abierta para futuras interacciones
-    while ((read_size = recv(sock, buffer, sizeof(buffer), 0)) > 0) {
+    // Mostrar mensajes recibidos
+    read_size = recv(sock, buffer, sizeof(buffer), 0);
+    if (read_size > 0) {
         buffer[read_size] = '\0';
-        printf("📩 Mensaje recibido: %s\n", buffer);
+        struct json_object *msg_json = json_tokener_parse(buffer);
+        struct json_object *msg_tipo, *msg_contenido;
+
+        if (json_object_object_get_ex(msg_json, "tipo", &msg_tipo) &&
+            json_object_object_get_ex(msg_json, "mensaje", &msg_contenido)) {
+            printf("📩 Mensaje recibido: %s\n", json_object_get_string(msg_contenido));
+        }
+
+        json_object_put(msg_json);
     }
 
     close(sock);

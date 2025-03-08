@@ -61,7 +61,21 @@ int main() {
     }
 
     json_object_put(json_response);
-    while (1) sleep(1);
+    printf("Ingrese un mensaje para enviar: ");
+    fgets(message, sizeof(message), stdin);
+    message[strcspn(message, "\n")] = 0;
+
+    // Crear JSON con el mensaje
+    json_msg = json_object_new_object();
+    json_object_object_add(json_msg, "tipo", json_object_new_string("MENSAJE"));
+    json_object_object_add(json_msg, "mensaje", json_object_new_string(message));
+    json_str = json_object_to_json_string(json_msg);
+
+    send(sock, json_str, strlen(json_str), 0);
+    json_object_put(json_msg);
+
+    printf("📤 Mensaje enviado al servidor.\n");
+
     close(sock);
     return 0;
 }
