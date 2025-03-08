@@ -67,7 +67,7 @@ int main() {
     fgets(message, sizeof(message), stdin);
     message[strcspn(message, "\n")] = 0;
 
-    // Crear JSON con el mensaje
+    // Crear JSON con el mensaje enviado por el cliente
     json_msg = json_object_new_object();
     json_object_object_add(json_msg, "tipo", json_object_new_string("MENSAJE"));
     json_object_object_add(json_msg, "mensaje", json_object_new_string(message));
@@ -76,7 +76,7 @@ int main() {
     send(sock, json_str, strlen(json_str), 0);
     json_object_put(json_msg);
 
-    printf("📤 Mensaje enviado al servidor.\n");
+    printf("Mensaje enviado al servidor.\n");
 
     close(sock);
     return 0;

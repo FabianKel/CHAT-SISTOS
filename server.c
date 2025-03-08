@@ -99,7 +99,7 @@ void *handle_client(void *socket_desc) {
 
         if (json_object_object_get_ex(msg_json, "tipo", &msg_tipo) &&
             json_object_object_get_ex(msg_json, "mensaje", &msg_contenido)) {
-            printf("📩 Mensaje recibido: %s\n", json_object_get_string(msg_contenido));
+            printf("Mensaje recibido: %s\n", json_object_get_string(msg_contenido));
         }
 
         json_object_put(msg_json);
@@ -132,6 +132,7 @@ int register_client(int socket, const char *username, const char *ip_address) {
     return 0;
 }
 
+// Estructura del mensaje en json
 void send_json_response(int socket, const char *status, const char *key, const char *message) {
     struct json_object *json_response = json_object_new_object();
     json_object_object_add(json_response, key, json_object_new_string(message));
