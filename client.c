@@ -61,6 +61,8 @@ int main() {
     }
 
     json_object_put(json_response);
+    char message[256];
+
     printf("Ingrese un mensaje para enviar: ");
     fgets(message, sizeof(message), stdin);
     message[strcspn(message, "\n")] = 0;
