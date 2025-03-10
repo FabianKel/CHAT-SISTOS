@@ -87,6 +87,7 @@ void *handle_client(void *socket_desc) {
         } 
         else if (accion_str) {
             if (strcmp(accion_str, "BROADCAST") == 0) {
+                printf("Se recibio un BROADCAST: %s\n", buffer);
                 struct json_object *emisor, *mensaje;
                 if (json_object_object_get_ex(msg_json, "nombre_emisor", &emisor) &&
                     json_object_object_get_ex(msg_json, "mensaje", &mensaje)) {
@@ -209,23 +210,30 @@ void send_direct_message(const char *receiver, const char *message, const char *
 
 void list_connected_users(int socket) {
     pthread_mutex_lock(&clients_mutex);
+    
     struct json_object *json_msg = json_object_new_object();
     json_object_object_add(json_msg, "accion", json_object_new_string("LISTA"));
     
     struct json_object *usuarios = json_object_new_array();
     for (int i = 0; i < MAX_CLIENTS; i++) {
-        if (clients[i] != NULL) {
+        if (clients[i] != NULL && clients[i]->username != NULL) {
             json_object_array_add(usuarios, json_object_new_string(clients[i]->username));
         }
     }
     json_object_object_add(json_msg, "usuarios", usuarios);
     
     const char *json_str = json_object_to_json_string(json_msg);
-    send(socket, json_str, strlen(json_str), 0);
+    
+    char buffer[1024];
+    strncpy(buffer, json_str, sizeof(buffer) - 1);
+    buffer[sizeof(buffer) - 1] = '\0';
     
     json_object_put(json_msg);
     pthread_mutex_unlock(&clients_mutex);
+    
+    send(socket, buffer, strlen(buffer), 0);
 }
+
 
 void handle_estado(struct json_object *parsed_json, int sock) {
     struct json_object *usuario, *estado;

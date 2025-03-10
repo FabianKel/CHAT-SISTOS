@@ -24,7 +24,16 @@ void manejar_comando(char *message, const char *username, const char *server_ip)
 
     // Verificar si el mensaje comienza con "/"
     if (message[0] == '/') {
-        if (strncmp(message, "/BROADCAST", 10) == 0) {
+        if(strncmp(message, "/EXIT", 4) == 0){
+            json_msg = json_object_new_object();
+            json_object_object_add(json_msg, "tipo", json_object_new_string("EXIT"));
+            json_object_object_add(json_msg, "usuario", json_object_new_string(username));
+            json_object_object_add(json_msg, "estado", json_object_new_string(""));
+            json_str = json_object_to_json_string(json_msg);
+            enviar_json(json_str);
+            json_object_put(json_msg);
+
+        } else if (strncmp(message, "/BROADCAST", 10) == 0) {
             // Comando de broadcast
             char mensaje[256];
             snprintf(mensaje, sizeof(mensaje), "%s", message + 11); // Obtener el mensaje después del comando
@@ -166,15 +175,17 @@ int main(int argc, char *argv[]) {
     char message[256];
 
     while (1) {
-        printf("Ingrese un mensaje para enviar (o escriba EXIT para salir): ");
+        printf("Ingrese un mensaje para enviar (o escriba /EXIT para salir): ");
         fgets(message, sizeof(message), stdin);
         message[strcspn(message, "\n")] = 0;
 	
-        if (strcmp(message, "EXIT") == 0) {
+        
+        manejar_comando(message, username, server_ip);
+
+        if (strcmp(message, "/EXIT") == 0) {
             break;
         }
 
-        manejar_comando(message, username, server_ip);
     }
 
     close(sock);
