@@ -1,7 +1,7 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -I../utils -ljson-c
+CFLAGS = -Wall -Wextra -I../utils -pthread -ljson-c
 LDFLAGS = -ljson-c
-SRV_SRC = server.c
+SRV_SRC = server.c server_utils.c
 SRV_OBJ = $(SRV_SRC:.c=.o)
 EXEC = server
 
