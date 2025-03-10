@@ -29,6 +29,8 @@ void list_connected_users(int socket);
 void handle_estado(struct json_object *parsed_json, int sock);
 void handle_mostrar(struct json_object *parsed_json, int sock);
 void remove_client(int socket);
+void handle_register(struct json_object *parsed_json, int sock);
+void handle_exit(struct json_object *parsed_json, int sock);
 
 int main() {
     int server_fd, new_socket;
@@ -67,7 +69,6 @@ void *handle_client(void *socket_desc) {
     free(socket_desc);
     char buffer[1024];
     int read_size;
-    char username[32] = {0};
 
     // Registro inicial
     read_size = recv(sock, buffer, sizeof(buffer), 0);
@@ -92,7 +93,7 @@ void *handle_client(void *socket_desc) {
     json_object_put(parsed_json);
 
     // Procesar mensajes subsiguientes
-    while ((read_size = recv(sock, buffer, sizeof(buffer) - 1, 0) > 0) {
+    while ((read_size = recv(sock, buffer, sizeof(buffer) - 1, 0)) > 0) {
         buffer[read_size] = '\0';
         struct json_object *msg_json = json_tokener_parse(buffer);
         if (!msg_json) {
@@ -200,6 +201,7 @@ void broadcast_message(const char *message, const char *emisor) {
 void send_direct_message(const char *receiver, const char *message, const char *emisor) {
     pthread_mutex_lock(&clients_mutex);
     int found = 0;
+    int emisor_socket = -1; // Declaración de emisor_socket
     for (int i = 0; i < MAX_CLIENTS; i++) {
         if (clients[i] != NULL && strcmp(clients[i]->username, receiver) == 0) {
             struct json_object *json_msg = json_object_new_object();
@@ -214,6 +216,10 @@ void send_direct_message(const char *receiver, const char *message, const char *
             found = 1;
             break;
         }
+        // Guarda el socket del emisor para usarlo más adelante
+        if (clients[i] != NULL && strcmp(clients[i]->username, emisor) == 0) {
+            emisor_socket = clients[i]->socket;
+        }
     }
     pthread_mutex_unlock(&clients_mutex);
     
@@ -223,7 +229,7 @@ void send_direct_message(const char *receiver, const char *message, const char *
         json_object_object_add(json_err, "respuesta", json_object_new_string("ERROR"));
         json_object_object_add(json_err, "razon", json_object_new_string("Usuario no encontrado"));
         const char *err_str = json_object_to_json_string(json_err);
-        send(emisor_socket, err_str, strlen(err_str), 0);
+        send(emisor_socket, err_str, strlen(err_str), 0); // Usar emisor_socket aquí
         json_object_put(json_err);
     }
 }
@@ -319,14 +325,11 @@ void remove_client(int socket) {
 
 void send_json_response(int socket, const char *status, const char *key, const char *message) {
     struct json_object *json_resp = json_object_new_object();
-    json_object_object_add(json_resp, key, json_object_new_string(message));
-    
-    if (strcmp(status, "OK") == 0) {
-        json_object_object_add(json_resp, "respuesta", json_object_new_string("OK"));
-    } else {
-        json_object_object_add(json_resp, "respuesta", json_object_new_string("ERROR"));
+
+    json_object_object_add(json_resp, "respuesta", json_object_new_string(status));
+    if (key != NULL && message != NULL) {
+        json_object_object_add(json_resp, key, json_object_new_string(message));
     }
-    
     const char *resp_str = json_object_to_json_string(json_resp);
     send(socket, resp_str, strlen(resp_str), 0);
     json_object_put(json_resp);

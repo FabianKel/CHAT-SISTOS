@@ -1,25 +1,17 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -I../utils -Iinclude
-LIBS = -ljson-c -lpthread
-SRC_DIR = src
-OBJ_DIR = obj
+CFLAGS = -Wall -Wextra -I../utils -ljson-c
+LDFLAGS = -ljson-c
+SRV_SRC = server.c
+SRV_OBJ = $(SRV_SRC:.c=.o)
+EXEC = server
 
-SOURCES = $(wildcard $(SRC_DIR)/*.c)
-OBJECTS = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SOURCES))
-UTILS_OBJ = ../utils/protocol.o
+all: $(EXEC)
 
-all: create_dirs server
+$(EXEC): $(SRV_OBJ)
+	$(CC) $^ -o $@ $(CFLAGS)
 
-server: $(OBJECTS) $(UTILS_OBJ)
-	$(CC) -o $@ $^ $(LIBS)
-
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	$(CC) $(CFLAGS) -c -o $@ $<
-
-create_dirs:
-	mkdir -p $(OBJ_DIR)
+%.o: %.c
+	$(CC) -c $< -o $@ $(CFLAGS)
 
 clean:
-	rm -rf $(OBJ_DIR) server
-
-.PHONY: all clean create_dirs
+	rm -f $(EXEC) *.o

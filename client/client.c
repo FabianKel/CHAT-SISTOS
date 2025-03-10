@@ -142,15 +142,20 @@ int main(int argc, char *argv[]) {
     buffer[read_size] = '\0';
 
     struct json_object *json_response = json_tokener_parse(buffer);
-    struct json_object *response;
-    if (json_object_object_get_ex(json_response, "response", &response)) {
-        printf("Servidor: %s\n", json_object_get_string(response));
+    struct json_object *respuesta, *razon;
+    if (json_object_object_get_ex(json_response, "respuesta", &respuesta)) {
+        const char *respuesta_str = json_object_get_string(respuesta);
+        if (strcmp(respuesta_str, "OK") == 0) {
+            printf("Servidor: Registro exitoso\n");
+        } else {
+            if (json_object_object_get_ex(json_response, "razon", &razon)) {
+                printf("Error: %s\n", json_object_get_string(razon));
+            } else {
+                printf("Error: Razón no especificada\n");
+            }
+        }
     } else {
-        struct json_object *razon;
-        json_object_object_get_ex(json_response, "razon", &razon);
-        printf("Error: %s\n", json_object_get_string(razon));
-        close(sock);
-        return 1;
+        printf("Error: Respuesta inválida del servidor\n");
     }
 
     json_object_put(json_response);

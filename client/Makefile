@@ -1,13 +1,16 @@
-CC=gcc
-CFLAGS=-Wall -I../utils
-LIBS=-ljson-c -lncurses
+CC = gcc
+CFLAGS = -Wall -Wextra -I../utils -ljson-c
+CLIENT_SRC = client.c
+CLIENT_OBJ = $(CLIENT_SRC:.c=.o)
+EXEC = client
 
-client: client.o ../utils/protocol.o
-	$(CC) -o client client.o ../utils/protocol.o $(LIBS)
+all: $(EXEC)
 
-client.o: client.c
-	$(CC) -c client.c $(CFLAGS)
+$(EXEC): $(CLIENT_OBJ)
+	$(CC) $^ -o $@ $(CFLAGS)
+
+%.o: %.c
+	$(CC) -c $< -o $@ $(CFLAGS)
 
 clean:
-	rm -f *.o client
-
+	rm -f $(EXEC) *.o

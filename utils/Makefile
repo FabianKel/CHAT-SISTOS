@@ -1,11 +1,16 @@
-CC=gcc
-CFLAGS=-Wall
-LIBS=-ljson-c
+CC = gcc
+CFLAGS = -Wall -Wextra -fPIC -ljson-c
+SRC = protocol.c
+OBJ = $(SRC:.c=.o)
+LIB = libprotocol.a
 
-all: protocol.o
+all: $(LIB)
 
-protocol.o: protocol.c protocol.h
-	$(CC) -c protocol.c $(CFLAGS)
+$(LIB): $(OBJ)
+	ar rcs $@ $^
+
+%.o: %.c
+	$(CC) -c $< -o $@ $(CFLAGS)
 
 clean:
-	rm -f *.o
+	rm -f $(LIB) *.o

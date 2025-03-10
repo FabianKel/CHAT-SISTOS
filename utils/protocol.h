@@ -1,7 +1,7 @@
 #ifndef PROTOCOL_H
 #define PROTOCOL_H
 
-void create_json_message(const char *message, char *output);
-void process_message(const char *message, int client_sock);
+char *create_json_message(const char *tipo, const char *usuario, const char *contenido);
+void process_message(const char *json_str, char *tipo, char *usuario, char *contenido);
 
 #endif

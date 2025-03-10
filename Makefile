@@ -1,9 +1,9 @@
 all:
-	make -C utils
-	make -C server
-	make -C client
+	$(MAKE) -C server
+	$(MAKE) -C client
+	$(MAKE) -C utils
 
 clean:
-	make -C utils clean
-	make -C server clean
-	make -C client clean
+	$(MAKE) -C server clean
+	$(MAKE) -C client clean
+	$(MAKE) -C utils clean
