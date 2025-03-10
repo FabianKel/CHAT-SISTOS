@@ -95,51 +95,74 @@ void *handle_client(void *socket_desc) {
     // Procesar mensajes subsiguientes
     while ((read_size = recv(sock, buffer, sizeof(buffer) - 1, 0)) > 0) {
         buffer[read_size] = '\0';
+        printf("Mensaje recibido en el servidor: %s\n", buffer);
         struct json_object *msg_json = json_tokener_parse(buffer);
         if (!msg_json) {
             printf("JSON inválido recibido\n");
             continue;
         }
 
-        struct json_object *accion, *tipo_obj;
+        struct json_object *tipo, *accion;
+        const char *tipo_str = NULL;
+        const char *accion_str = NULL;
+
+        // Verificar si el mensaje tiene "tipo"
+        if (json_object_object_get_ex(msg_json, "tipo", &tipo)) {
+            tipo_str = json_object_get_string(tipo);
+        }
+
+        // Verificar si el mensaje tiene "accion"
         if (json_object_object_get_ex(msg_json, "accion", &accion)) {
-            const char *accion_str = json_object_get_string(accion);
-            
+            accion_str = json_object_get_string(accion);
+        }
+
+        if (tipo_str) {
+            if (strcmp(tipo_str, "MENSAJE") == 0) {
+                struct json_object *usuario, *mensaje;
+                if (json_object_object_get_ex(msg_json, "usuario", &usuario) &&
+                    json_object_object_get_ex(msg_json, "mensaje", &mensaje)) {
+                    printf("[MENSAJE] %s: %s\n", json_object_get_string(usuario), json_object_get_string(mensaje));
+                } else {
+                    printf("Error: mensaje mal formado\n");
+                }
+            }
+            else if (strcmp(tipo_str, "REGISTRO") == 0) {
+                handle_register(msg_json, sock);
+            } 
+            else if (strcmp(tipo_str, "ESTADO") == 0) {
+                handle_estado(msg_json, sock);
+            } 
+            else if (strcmp(tipo_str, "MOSTRAR") == 0) {
+                handle_mostrar(msg_json, sock);
+            } 
+            else if (strcmp(tipo_str, "EXIT") == 0) {
+                handle_exit(msg_json, sock);
+            }
+        } 
+        else if (accion_str) {
             if (strcmp(accion_str, "BROADCAST") == 0) {
                 struct json_object *emisor, *mensaje;
                 if (json_object_object_get_ex(msg_json, "nombre_emisor", &emisor) &&
                     json_object_object_get_ex(msg_json, "mensaje", &mensaje)) {
-                    broadcast_message(json_object_get_string(mensaje), 
-                                    json_object_get_string(emisor));
+                    broadcast_message(json_object_get_string(mensaje), json_object_get_string(emisor));
                 }
-            }
+            } 
             else if (strcmp(accion_str, "DM") == 0) {
                 struct json_object *emisor, *destinatario, *mensaje;
                 if (json_object_object_get_ex(msg_json, "nombre_emisor", &emisor) &&
                     json_object_object_get_ex(msg_json, "nombre_destinatario", &destinatario) &&
                     json_object_object_get_ex(msg_json, "mensaje", &mensaje)) {
                     send_direct_message(json_object_get_string(destinatario),
-                                      json_object_get_string(mensaje),
-                                      json_object_get_string(emisor));
+                                        json_object_get_string(mensaje),
+                                        json_object_get_string(emisor));
                 }
-            }
+            } 
             else if (strcmp(accion_str, "LISTA") == 0) {
                 list_connected_users(sock);
             }
-        }
-        else if (json_object_object_get_ex(msg_json, "tipo", &tipo_obj)) {
-            const char *tipo_str = json_object_get_string(tipo_obj);
-            
-            if (strcmp(tipo_str, "ESTADO") == 0) {
-                handle_estado(msg_json, sock);
-            }
-            else if (strcmp(tipo_str, "MOSTRAR") == 0) {
-                handle_mostrar(msg_json, sock);
-            }
-            else if (strcmp(tipo_str, "EXIT") == 0) {
-                handle_exit(msg_json, sock);
-                break;
-            }
+        } 
+        else {
+            printf("Error: Mensaje con formato incorrecto\n");
         }
 
         json_object_put(msg_json);
@@ -160,13 +183,17 @@ void handle_register(struct json_object *parsed_json, int sock) {
         const char *username = json_object_get_string(usuario);
         const char *ip_addr = json_object_get_string(ip);
 
+        printf("Intentando registrar usuario: %s con IP: %s\n", username, ip_addr);
+
         if (register_client(sock, username, ip_addr)) {
+            printf("Registro exitoso para %s, enviando respuesta al cliente...\n", username);
             send_json_response(sock, "OK", "respuesta", "Registro exitoso");
-            printf("Usuario registrado: %s\n", username);
         } else {
+            printf("Registro fallido para %s, enviando error al cliente...\n", username);
             send_json_response(sock, "ERROR", "razon", "Usuario/IP duplicado");
         }
     } else {
+        printf("Registro fallido, campos faltantes\n");
         send_json_response(sock, "ERROR", "razon", "Campos faltantes");
     }
 }
@@ -331,6 +358,7 @@ void send_json_response(int socket, const char *status, const char *key, const c
         json_object_object_add(json_resp, key, json_object_new_string(message));
     }
     const char *resp_str = json_object_to_json_string(json_resp);
+    printf("Enviando al cliente: %s\n", resp_str); 
     send(socket, resp_str, strlen(resp_str), 0);
     json_object_put(json_resp);
 }

@@ -91,6 +91,7 @@ void manejar_comando(char *message, const char *username, const char *server_ip)
         // Enviar mensaje normal
         json_msg = json_object_new_object();
         json_object_object_add(json_msg, "tipo", json_object_new_string("MENSAJE"));
+        json_object_object_add(json_msg, "usuario", json_object_new_string(username));
         json_object_object_add(json_msg, "mensaje", json_object_new_string(message));
         json_str = json_object_to_json_string(json_msg);
         enviar_json(json_str);
@@ -109,7 +110,7 @@ int main(int argc, char *argv[]) {
     int port = atoi(argv[3]);
 
     struct sockaddr_in server_address;
-    char buffer[1024];
+    char buffer[4096];
 
     // Conectar al servidor
     sock = socket(AF_INET, SOCK_STREAM, 0);
@@ -141,17 +142,20 @@ int main(int argc, char *argv[]) {
     }
     buffer[read_size] = '\0';
 
+    printf("Mensaje recibido del servidor: %s\n", buffer);
+
     struct json_object *json_response = json_tokener_parse(buffer);
     struct json_object *respuesta, *razon;
     if (json_object_object_get_ex(json_response, "respuesta", &respuesta)) {
         const char *respuesta_str = json_object_get_string(respuesta);
-        if (strcmp(respuesta_str, "OK") == 0) {
+        printf("Servidor respondió: %s\n", respuesta_str);
+        if (strcmp(respuesta_str, "OK") == 0 || strcmp(respuesta_str, "Registro exitoso") == 0) {
             printf("Servidor: Registro exitoso\n");
         } else {
             if (json_object_object_get_ex(json_response, "razon", &razon)) {
                 printf("Error: %s\n", json_object_get_string(razon));
             } else {
-                printf("Error: Razón no especificada\n");
+                printf("Error desconocido en respuesta del servidor\n");
             }
         }
     } else {
