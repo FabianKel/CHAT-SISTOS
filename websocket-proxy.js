@@ -1,139 +1,231 @@
-const WebSocket = require('ws');
+const WebSocketServer = require('ws').WebSocketServer;
 const net = require('net');
-const crypto = require('crypto');
 
-// WebSocket server for frontend
-const WS_PORT = 50213;
-// TCP server port
-const TCP_PORT = 50213;
+// Usar puertos diferentes para WebSocket y TCP
+const WS_PORT = 50213;  // Puerto para el WebSocket (frontend)
 const TCP_HOST = '127.0.0.1';
+const TCP_PORT = 50214;  // Puerto para comunicarse con el servidor C (cambiado)
 
-// Create WebSocket server
-const wss = new WebSocket.Server({ port: WS_PORT });
+const wss = new WebSocketServer({ port: WS_PORT });
 
 wss.on('connection', function connection(ws) {
-  console.log('Cliente web conectado');
+  console.log('✅ Cliente web conectado');
   
-  // Conexión al servidor TCP
+  // Cola de mensajes pendientes
+  const messageQueue = [];
+  
+  // Crear conexión TCP con el servidor C
   const tcpClient = new net.Socket();
   
-  // Flag para rastrear si ya hemos completado el handshake
-  let handshakeCompleted = false;
+  let isConnected = false;
+  let connectionTimeout = null;
   
-  tcpClient.connect(TCP_PORT, TCP_HOST, function() {
-    console.log('Conectado al servidor TCP en ' + TCP_HOST + ':' + TCP_PORT);
-    
-    // Generar una clave aleatoria para el handshake WebSocket
-    const key = crypto.randomBytes(16).toString('base64');
-    
-    // Enviar solicitud de actualización WebSocket
-    const upgradeRequest = 
-      `GET / HTTP/1.1\r\n` +
-      `Host: ${TCP_HOST}:${TCP_PORT}\r\n` +
-      `Upgrade: websocket\r\n` +
-      `Connection: Upgrade\r\n` +
-      `Sec-WebSocket-Key: ${key}\r\n` +
-      `Sec-WebSocket-Version: 13\r\n` +
-      `Origin: http://${TCP_HOST}:${TCP_PORT}\r\n` +
-      `\r\n`;
-    
-    tcpClient.write(upgradeRequest);
-  });
-  
-  // Variable para acumular datos TCP
-  let tcpBuffer = '';
-  
-  // Recibir respuestas del servidor TCP
-  tcpClient.on('data', function(data) {
-    const dataStr = data.toString();
-    console.log('Respuesta del servidor TCP:', dataStr);
-    
-    // Acumular datos en buffer
-    tcpBuffer += dataStr;
-    
-    if (!handshakeCompleted) {
-      // Verificar si hemos recibido la respuesta completa al handshake
-      if (tcpBuffer.includes('HTTP/1.1 101') && tcpBuffer.includes('\r\n\r\n')) {
-        console.log('Handshake WebSocket completado con éxito');
-        handshakeCompleted = true;
-        tcpBuffer = ''; // Limpiar buffer después del handshake
-      } else if (tcpBuffer.includes('HTTP/1.1 4') && tcpBuffer.includes('\r\n\r\n')) {
-        // Recibimos un error HTTP durante el handshake
-        console.error('Error en handshake WebSocket:', tcpBuffer);
+  // Establecer un timeout para la conexión TCP
+  connectionTimeout = setTimeout(() => {
+    if (!isConnected) {
+      console.error('❌ Timeout al conectar con el servidor C');
+      try {
         ws.send(JSON.stringify({
           respuesta: "ERROR",
-          razon: "Error en la conexión WebSocket con el servidor"
+          razon: "Timeout al conectar con el servidor C"
         }));
-        ws.close();
+      } catch (error) {
+        console.error('Error enviando mensaje de error:', error);
+      }
+      tcpClient.destroy();
+    }
+  }, 5000);
+  
+  tcpClient.connect(TCP_PORT, TCP_HOST, function() {
+    console.log('📡 Conectado al servidor C');
+    isConnected = true;
+    clearTimeout(connectionTimeout);
+    
+    // Procesar mensajes en cola
+    while (messageQueue.length > 0) {
+      const pendingMsg = messageQueue.shift();
+      console.log('📤 Enviando mensaje en cola al servidor C:', pendingMsg);
+      tcpClient.write(pendingMsg + '\n');
+    }
+  });
+
+  // Manejar mensajes del cliente web
+  ws.on('message', function incoming(message) {
+    console.log('📤 Web -> C:', message.toString());
+    
+    try {
+      // Asegurarse que el mensaje es JSON válido
+      JSON.parse(message);
+      
+      if (!isConnected) {
+        // Añadir a la cola de mensajes
+        console.log('Añadiendo mensaje a la cola - TCP aún no conectado');
+        messageQueue.push(message.toString());
         return;
       }
-    } else {
-      // Una vez que el handshake está completo, necesitamos manejar los frames WebSocket
-      // Por simplicidad, asumimos que los datos recibidos ya están desenmarcados
-      // En un escenario real, necesitaríamos implementar el protocolo WebSocket completo
       
-      // Intentar procesar como JSON
+      // Enviar mensaje al servidor C con un salto de línea final 
+      tcpClient.write(message + '\n');
+    } catch (error) {
+      console.error('Error enviando mensaje al servidor C:', error);
       try {
-        // Eliminar cualquier carácter de control que pueda estar presente
-        const cleanData = tcpBuffer.replace(/[\x00-\x1F\x7F-\x9F]/g, '');
-        if (cleanData) {
-          console.log('Enviando datos al cliente web:', cleanData);
-          ws.send(cleanData);
-        }
-        tcpBuffer = ''; // Limpiar buffer después de procesar
-      } catch (error) {
-        console.error('Error al procesar datos:', error);
-        // Si no podemos procesar como JSON, enviamos los datos brutos
-        if (tcpBuffer) {
-          ws.send(tcpBuffer);
-          tcpBuffer = '';
-        }
+        ws.send(JSON.stringify({
+          respuesta: "ERROR",
+          razon: "Formato JSON inválido"
+        }));
+      } catch (wsError) {
+        console.error('Error enviando mensaje de error al cliente web:', wsError);
       }
     }
   });
-  
-  // Recibir mensajes desde el cliente web
-  ws.on('message', function incoming(message) {
-    console.log('Mensaje recibido del cliente web:', message.toString());
+
+  // Manejar mensajes del servidor C
+  let buffer = '';
+  tcpClient.on('data', function(data) {
+    const dataStr = data.toString();
+    console.log('📥 C -> Web (raw):', dataStr);
     
-    if (handshakeCompleted) {
-      // Si el handshake está completo, enviamos el mensaje tal cual
-      // En un escenario real, necesitaríamos enmarcar el mensaje según el protocolo WebSocket
-      tcpClient.write(message.toString());
-    } else {
-      // Si aún no hemos completado el handshake, lo guardamos para enviarlo después
-      console.log('Handshake no completado, guardando mensaje para envío posterior');
+    // Si recibimos una respuesta HTTP, es un error
+    if (dataStr.startsWith('HTTP/')) {
+      console.error('Respuesta HTTP detectada, posible error de protocolo:', dataStr);
+      try {
+        ws.send(JSON.stringify({
+          respuesta: "ERROR",
+          razon: "Error de comunicación con el servidor"
+        }));
+      } catch (error) {
+        console.error('Error enviando mensaje de error al cliente web:', error);
+      }
+      return;
+    }
+    
+    buffer += dataStr;
+    
+    // Intentar procesar mensaje completo (terminado en \n)
+    try {
+      // Dividir por \n y filtrar líneas vacías
+      const lines = buffer.split('\n');
+      
+      // Procesar todas las líneas completas
+      for (let i = 0; i < lines.length - 1; i++) {
+        const line = lines[i].trim();
+        if (line) {
+          try {
+            // Verificar que sea JSON válido
+            const jsonObj = JSON.parse(line);
+            console.log('📥 C -> Web (procesado):', jsonObj);
+            
+            // Si es un registro exitoso pero no tiene el tipo, lo agregamos
+            if (jsonObj.respuesta === "Registro exitoso" && !jsonObj.tipo) {
+              jsonObj.tipo = "REGISTRO_EXITOSO";
+              ws.send(JSON.stringify(jsonObj));
+              console.log('📤 Enviado a cliente web (modificado):', JSON.stringify(jsonObj));
+            } else {
+              // Enviar el mensaje tal cual al cliente web
+              ws.send(line);
+              console.log('📤 Enviado a cliente web:', line);
+            }
+          } catch (error) {
+            console.error('Error procesando respuesta del servidor C:', error, 'Mensaje:', line);
+            try {
+              ws.send(JSON.stringify({
+                respuesta: "ERROR",
+                razon: "Respuesta del servidor no es JSON válido"
+              }));
+            } catch (wsError) {
+              console.error('Error enviando mensaje de error al cliente web:', wsError);
+            }
+          }
+        }
+      }
+      
+      // Mantener el buffer solo con la última línea si no termina en \n
+      if (buffer.endsWith('\n')) {
+        // Si la última línea también está completa (termina en \n)
+        const lastLine = lines[lines.length - 1].trim();
+        if (lastLine) {
+          try {
+            const jsonObj = JSON.parse(lastLine);
+            console.log('📥 C -> Web (procesado última línea):', jsonObj);
+            
+            // Si es un registro exitoso pero no tiene el tipo, lo agregamos
+            if (jsonObj.respuesta === "Registro exitoso" && !jsonObj.tipo) {
+              jsonObj.tipo = "REGISTRO_EXITOSO";
+              ws.send(JSON.stringify(jsonObj));
+              console.log('📤 Enviado a cliente web (modificado):', JSON.stringify(jsonObj));
+            } else {
+              // Enviar el mensaje tal cual al cliente web
+              ws.send(lastLine);
+              console.log('📤 Enviado a cliente web:', lastLine);
+            }
+          } catch (error) {
+            console.error('Error procesando última línea:', error, 'Mensaje:', lastLine);
+          }
+        }
+        buffer = '';
+      } else {
+        buffer = lines[lines.length - 1];
+      }
+    } catch (error) {
+      console.error('Error procesando buffer:', error);
     }
   });
-  
-  // Manejar errores de conexión TCP
-  tcpClient.on('error', function(err) {
-    console.error('Error en conexión TCP:', err);
-    ws.send(JSON.stringify({
-      respuesta: "ERROR",
-      razon: "Error de conexión con el servidor"
-    }));
-    ws.close();
-  });
-  
-  // Manejo de desconexiones
+
+  // Manejar desconexiones
   ws.on('close', function() {
-    console.log('Cliente web desconectado');
+    console.log('🔴 Cliente web desconectado');
+    if (connectionTimeout) {
+      clearTimeout(connectionTimeout);
+    }
     tcpClient.destroy();
   });
-  
+
   tcpClient.on('close', function() {
-    console.log('Conexión TCP cerrada');
-    if (ws.readyState === WebSocket.OPEN) {
-      ws.close();
+    console.log('🔴 Conexión con servidor C cerrada');
+    if (connectionTimeout) {
+      clearTimeout(connectionTimeout);
     }
+    if (ws.readyState === ws.OPEN) {
+      try {
+        ws.send(JSON.stringify({
+          respuesta: "ERROR",
+          razon: "Servidor desconectado"
+        }));
+        ws.close();
+      } catch (error) {
+        console.error('Error cerrando conexión WebSocket:', error);
+      }
+    }
+  });
+
+  // Manejar errores
+  tcpClient.on('error', function(err) {
+    console.error('❌ Error en conexión TCP:', err.message);
+    if (connectionTimeout) {
+      clearTimeout(connectionTimeout);
+    }
+    
+    try {
+      ws.send(JSON.stringify({
+        respuesta: "ERROR",
+        razon: "Error de conexión con el servidor: " + err.message
+      }));
+      
+      if (ws.readyState === ws.OPEN) {
+        ws.close();
+      }
+    } catch (wsError) {
+      console.error('Error enviando mensaje de error al cliente web:', wsError);
+    }
+  });
+
+  ws.on('error', function(err) {
+    console.error('❌ Error en WebSocket:', err);
+    if (connectionTimeout) {
+      clearTimeout(connectionTimeout);
+    }
+    tcpClient.destroy();
   });
 });
 
-// Manejar errores del servidor WebSocket
-wss.on('error', function(err) {
-  console.error('Error en servidor WebSocket:', err);
-});
-
-console.log('Servidor WebSocket ejecutándose en puerto ' + WS_PORT);
-console.log('Redirigiendo tráfico al servidor TCP en ' + TCP_HOST + ':' + TCP_PORT);
+console.log(`🚀 Proxy WebSocket corriendo en puerto ${WS_PORT}, conectando a servidor C en puerto ${TCP_PORT}`);

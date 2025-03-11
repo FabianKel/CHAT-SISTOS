@@ -139,7 +139,9 @@ function procesarMensaje(data) {
         console.log("Mensaje procesado:", mensaje);
         
         // Verificar tipo de mensaje
-        if (mensaje.respuesta === "OK" || mensaje.respuesta === "Registro exitoso") {
+        if (mensaje.respuesta === "OK" || 
+            mensaje.respuesta === "Registro exitoso" || 
+            mensaje.tipo === "REGISTRO_EXITOSO") {
             // Registro exitoso
             iniciarChat();
             
@@ -186,8 +188,6 @@ function procesarMensaje(data) {
         mostrarError("Error al procesar respuesta del servidor");
     }
 }
-
-// El resto del código permanece igual
 // Mostrar mensaje en el chat
 function mostrarMensajeEnChat(mensaje) {
     const messageDiv = document.createElement('div');
