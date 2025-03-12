@@ -2,21 +2,12 @@ const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
 const net = require('net');
-const cors = require('cors');
 
 const app = express();
 const server = http.createServer(app);
 
-// Enable CORS
-app.use(cors());
-
-// Configure Socket.IO with CORS
-const io = new Server(server, {
-  cors: {
-    origin: "*",
-    methods: ["GET", "POST"]
-  }
-});
+// Configure Socket.IO without CORS
+const io = new Server(server);
 
 // Web application port
 const WEB_PORT = 3000;
@@ -72,62 +63,85 @@ io.on('connection', (socket) => {
     tcpClient.on('data', (data) => {
       try {
         buffer += data.toString();
+        console.log('Raw data received:', buffer);
         
         // Process complete JSON messages
-        let startPos = 0;
-        let endPos = buffer.indexOf('}', startPos);
+        let jsonMessages = [];
         
-        while (endPos !== -1) {
-          const jsonStr = buffer.substring(startPos, endPos + 1);
-          
-          try {
-            const jsonObj = JSON.parse(jsonStr);
-            console.log('Message from C server:', jsonObj);
-            
-            // Check if this is a registration response
-            if (jsonObj.respuesta && clientRegistrationStatus.get(socket.id) === 'pending') {
-              if (jsonObj.respuesta === 'OK') {
-                // Registration successful
-                clientRegistrationStatus.set(socket.id, 'registered');
-                console.log('Registration successful for client:', socket.id);
-                
-                // Process any pending messages
-                const queue = pendingMessages.get(socket.id) || [];
-                if (queue.length > 0) {
-                  console.log(`Processing ${queue.length} pending messages for ${socket.id}`);
-                  queue.forEach(msg => {
-                    const messageStr = JSON.stringify(msg) + '\n';
-                    console.log('Sending pending message to C server:', messageStr);
-                    tcpClient.write(messageStr);
-                  });
-                  pendingMessages.set(socket.id, []);
+        // Try to extract complete JSON objects
+        try {
+          // Check if the buffer contains complete JSON objects
+          if (buffer.trim()) {
+            try {
+              // First try to parse as a single JSON
+              const jsonObj = JSON.parse(buffer);
+              jsonMessages.push(jsonObj);
+              buffer = '';
+            } catch (e) {
+              // If failed, try to split by newlines and parse each
+              const parts = buffer.split('\n');
+              buffer = parts.pop(); // Keep the last part which might be incomplete
+              
+              for (const part of parts) {
+                if (part.trim()) {
+                  try {
+                    const jsonObj = JSON.parse(part);
+                    jsonMessages.push(jsonObj);
+                  } catch (e) {
+                    console.error('Error parsing JSON part:', part);
+                  }
                 }
-              } else {
-                // Registration failed
-                clientRegistrationStatus.set(socket.id, 'failed');
-                console.log('Registration failed for client:', socket.id);
               }
             }
-            
-            socket.emit('serverMessage', jsonObj);
-          } catch (e) {
-            console.error('Error parsing JSON:', e);
           }
-          
-          startPos = endPos + 1;
-          // Skip whitespace and new lines
-          while (startPos < buffer.length && (buffer[startPos] === ' ' || buffer[startPos] === '\n' || buffer[startPos] === '\r')) {
-            startPos++;
-          }
-          
-          endPos = buffer.indexOf('}', startPos);
+        } catch (e) {
+          console.error('Error processing messages:', e);
         }
         
-        // Keep remaining data for next processing
-        if (startPos < buffer.length) {
-          buffer = buffer.substring(startPos);
-        } else {
-          buffer = '';
+        // Process each extracted JSON message
+        for (const jsonObj of jsonMessages) {
+          console.log('Processed message from C server:', jsonObj);
+          
+          // Check if this is a registration response
+          if (clientRegistrationStatus.get(socket.id) === 'pending') {
+            // Look for respuesta field or the string "Registro exitoso" anywhere in the response
+            if (jsonObj.respuesta === 'OK' || 
+                jsonObj.respuesta === 'Registro exitoso' || 
+                (typeof jsonObj.respuesta === 'string' && jsonObj.respuesta.includes('exitoso'))) {
+              
+              // Registration successful
+              clientRegistrationStatus.set(socket.id, 'registered');
+              console.log('Registration successful for client:', socket.id);
+              
+              // Process any pending messages
+              const queue = pendingMessages.get(socket.id) || [];
+              if (queue.length > 0) {
+                console.log(`Processing ${queue.length} pending messages for ${socket.id}`);
+                queue.forEach(msg => {
+                  const messageStr = JSON.stringify(msg) + '\n';
+                  console.log('Sending pending message to C server:', messageStr);
+                  tcpClient.write(messageStr);
+                });
+                pendingMessages.set(socket.id, []);
+              }
+              
+              // Send standardized OK response to frontend
+              socket.emit('serverMessage', {
+                respuesta: 'OK'
+              });
+            } else {
+              // Registration failed
+              clientRegistrationStatus.set(socket.id, 'failed');
+              console.log('Registration failed for client:', socket.id);
+              socket.emit('serverMessage', {
+                respuesta: 'ERROR',
+                razon: jsonObj.razon || 'Error de registro desconocido'
+              });
+            }
+          } else {
+            // Forward other messages to the frontend
+            socket.emit('serverMessage', jsonObj);
+          }
         }
       } catch (e) {
         console.error('Error processing data:', e);
@@ -135,7 +149,7 @@ io.on('connection', (socket) => {
       }
     });
     
-    // Handle errors and connection close
+    // Handle errors in TCP connection
     tcpClient.on('error', (err) => {
       console.error('Error in TCP connection:', err);
       clientRegistrationStatus.set(socket.id, 'failed');

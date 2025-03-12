@@ -1,4 +1,3 @@
-// main.js - Client-side script
 document.addEventListener('DOMContentLoaded', function() {
     // UI Elements
     const loginScreen = document.getElementById('login-screen');
@@ -35,6 +34,8 @@ document.addEventListener('DOMContentLoaded', function() {
             loginBtn.textContent = 'Conectando...';
             loginBtn.disabled = true;
             
+            addSystemMessage('Conectando al servidor...');
+            
             // Emit register event
             socket.emit('register', {
                 username: username,
@@ -51,35 +52,40 @@ document.addEventListener('DOMContentLoaded', function() {
     socket.on('serverMessage', function(data) {
         console.log('Received server message:', data);
         
-        if (data.respuesta) {
+        if (data.respuesta !== undefined) {
             // Registration or command response
-            if (connectionStatus === 'connecting' && data.respuesta === 'OK') {
-                // Registration successful
-                connectionStatus = 'connected';
-                isConnected = true;
-                
-                // Switch to chat screen
-                loginScreen.classList.add('hidden');
-                chatScreen.classList.remove('hidden');
-                
-                // Set current user display
-                currentUserDisplay.textContent = currentUser;
-                
-                // Request user list after successful login
-                setTimeout(() => {
-                    if (isConnected) {
-                        requestUserList();
-                    }
-                }, 500);
-                
-                addSystemMessage(`Bienvenido al chat, ${currentUser}!`);
-            } else if (connectionStatus === 'connecting' && data.respuesta === 'ERROR') {
-                // Registration failed
-                connectionStatus = 'disconnected';
-                loginBtn.textContent = 'Conectar';
-                loginBtn.disabled = false;
-                
-                addSystemMessage(`Error al conectar: ${data.razon || 'Error desconocido'}`);
+            if (connectionStatus === 'connecting') {
+                if (data.respuesta === 'OK' || data.respuesta === 'Registro exitoso' || 
+                    (typeof data.respuesta === 'string' && data.respuesta.includes('exitoso'))) {
+                    
+                    // Registration successful
+                    console.log('Registration successful, switching to chat screen');
+                    connectionStatus = 'connected';
+                    isConnected = true;
+                    
+                    // Switch to chat screen
+                    loginScreen.classList.add('hidden');
+                    chatScreen.classList.remove('hidden');
+                    
+                    // Set current user display
+                    currentUserDisplay.textContent = currentUser;
+                    
+                    // Request user list after successful login
+                    setTimeout(() => {
+                        if (isConnected) {
+                            requestUserList();
+                        }
+                    }, 500);
+                    
+                    addSystemMessage(`Bienvenido al chat, ${currentUser}!`);
+                } else {
+                    // Registration failed
+                    connectionStatus = 'disconnected';
+                    loginBtn.textContent = 'Conectar';
+                    loginBtn.disabled = false;
+                    
+                    addSystemMessage(`Error al conectar: ${data.razon || 'Error desconocido'}`);
+                }
             }
         } else if (data.accion) {
             // Chat actions
@@ -220,8 +226,14 @@ document.addEventListener('DOMContentLoaded', function() {
         const msgDiv = document.createElement('div');
         msgDiv.className = 'system-message';
         msgDiv.textContent = message;
-        chatArea.appendChild(msgDiv);
-        chatArea.scrollTop = chatArea.scrollHeight;
+        
+        // Make sure chatArea exists before appending
+        if (chatArea) {
+            chatArea.appendChild(msgDiv);
+            chatArea.scrollTop = chatArea.scrollHeight;
+        } else {
+            console.error('Chat area element not found');
+        }
     }
 
     function addChatMessage(sender, message, type) {
