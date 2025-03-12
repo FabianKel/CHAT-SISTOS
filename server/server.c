@@ -7,7 +7,7 @@
 #include <json-c/json.h>
 #include "server_utils.h"
 
-#define PORT 50214
+#define PORT 50213
 
 int main() {
     int server_fd, new_socket;

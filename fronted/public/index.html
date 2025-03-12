@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Pantalla de Login -->
+    <div id="login-screen" class="login-container">
+        <div class="login-form">
+            <h2>Ingresa al Chat</h2>
+            <div class="form-group">
+                <label for="username">Nombre de usuario</label>
+                <input type="text" id="username" placeholder="Tu nombre de usuario">
+            </div>
+            <div class="form-group">
+                <label for="server-ip">IP del servidor (opcional)</label>
+                <input type="text" id="server-ip" placeholder="127.0.0.1">
+            </div>
+            <button id="login-btn" class="btn-primary">Conectar</button>
+        </div>
+    </div>
+    
+    <!-- Pantalla Principal de Chat -->
+    <div id="chat-screen" class="container hidden">
+        <div class="sidebar">
+            <div class="user-info">
+                <h3 id="current-user">Usuario</h3>
+            </div>
+            <div class="status-selector">
+                <select id="status-select">
+                    <option value="ONLINE">En línea</option>
+                    <option value="AWAY">Ausente</option>
+                    <option value="BUSY">Ocupado</option>
+                </select>
+                <button id="update-status-btn">✓</button>
+            </div>
+            <div class="user-list" id="user-list">
+                <!-- Lista de usuarios se cargará dinámicamente -->
+            </div>
+        </div>
+        <div class="main-content">
+            <div class="chat-header">
+                <h3 id="chat-title">Chat General</h3>
+                <div>
+                    <button id="refresh-users-btn">Actualizar usuarios</button>
+                </div>
+            </div>
+            <div class="chat-area" id="chat-area">
+                <div class="system-message">Bienvenido al chat. Comienza a enviar mensajes.</div>
+            </div>
+            <div class="message-input">
+                <input type="text" id="message-input" placeholder="Escribe un mensaje...">
+                <button id="send-btn">Enviar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
