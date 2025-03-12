@@ -2,9 +2,9 @@
     "name": "chat-bridge",
     "version": "1.0.0",
     "description": "Puente entre clientes web y servidor de chat en C",
-    "main": "bridge_server.js",
+    "main": "server.js",
     "scripts": {
-        "start": "node bridge_server.js"
+        "start": "node server.js"
     },
     "dependencies": {
         "express": "^4.21.2",
