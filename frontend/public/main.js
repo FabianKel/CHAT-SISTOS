@@ -103,7 +103,13 @@ document.addEventListener('DOMContentLoaded', function() {
         } else if (data.tipo) {
             // Special messages
             switch(data.tipo) {
+                case 'LISTA':
+                    if (data.usuarios) {
+                        updateUserList(data.usuarios);
+                    }
+                    break;
                 case 'MOSTRAR':
+                case 'INFO_USUARIO':
                     const userInfo = `Usuario: ${data.usuario}\nEstado: ${data.estado}\nIP: ${data.direccionIP}`;
                     addSystemMessage(userInfo);
                     break;
@@ -137,6 +143,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     nombre_emisor: currentUser,
                     mensaje: broadcastMsg
                 });
+                // Add sent message to chat (client-side acknowledgment)
+                addChatMessage(currentUser, broadcastMsg, 'sent');
             } else if (message.startsWith('/DM ')) {
                 const parts = message.substring(4).split(' ');
                 const recipient = parts[0];
@@ -148,6 +156,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     nombre_destinatario: recipient,
                     mensaje: dmMessage
                 });
+                
+                // Add sent message to chat (client-side acknowledgment)
+                addChatMessage(currentUser, `(DM para ${recipient}): ${dmMessage}`, 'sent');
             } else if (message.startsWith('/LISTA')) {
                 requestUserList();
             } else if (message.startsWith('/ESTADO ')) {
@@ -157,12 +168,23 @@ document.addEventListener('DOMContentLoaded', function() {
                     usuario: currentUser,
                     estado: newStatus
                 });
+                
+                addSystemMessage(`Cambiando estado a: ${newStatus}`);
             } else if (message.startsWith('/MOSTRAR ')) {
                 const userToShow = message.substring(9);
                 socket.emit('clientMessage', {
                     tipo: 'MOSTRAR',
                     usuario: userToShow
                 });
+            } else if (message === '/AYUDA') {
+                addSystemMessage("=== AYUDA DEL CHAT ===");
+                addSystemMessage("/BROADCAST <mensaje> - Envía un mensaje a todos");
+                addSystemMessage("/DM <usuario> <mensaje> - Envía un mensaje privado");
+                addSystemMessage("/LISTA - Muestra la lista de usuarios");
+                addSystemMessage("/ESTADO <estado> - Cambia tu estado (ACTIVO, OCUPADO, INACTIVO)");
+                addSystemMessage("/MOSTRAR <usuario> - Muestra información de un usuario");
+                addSystemMessage("/AYUDA - Muestra esta ayuda");
+                addSystemMessage("/EXIT - Salir del chat");
             } else if (message === '/EXIT') {
                 socket.emit('clientMessage', {
                     tipo: 'EXIT',
@@ -177,14 +199,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 connectionStatus = 'disconnected';
                 loginBtn.textContent = 'Conectar';
                 loginBtn.disabled = false;
+                
+                addSystemMessage("Has salido del chat");
             } else {
-                addSystemMessage('Comando desconocido');
+                addSystemMessage('Comando desconocido. Usa /AYUDA para ver los comandos disponibles.');
             }
         } else {
-            // Regular message
+            // Regular message - send as BROADCAST
             socket.emit('clientMessage', {
-                tipo: 'MENSAJE',
-                usuario: currentUser,
+                accion: 'BROADCAST',
+                nombre_emisor: currentUser,
                 mensaje: message
             });
             
@@ -200,10 +224,18 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!isConnected) return;
         
         const newStatus = statusSelect.value;
+        const statusMap = {
+            'ONLINE': 'ACTIVO',
+            'AWAY': 'INACTIVO',
+            'BUSY': 'OCUPADO'
+        };
+        
+        const cStatus = statusMap[newStatus] || newStatus;
+        
         socket.emit('clientMessage', {
             tipo: 'ESTADO',
             usuario: currentUser,
-            estado: newStatus
+            estado: cStatus
         });
         
         addSystemMessage(`Cambiando estado a: ${newStatus}`);
@@ -219,6 +251,8 @@ document.addEventListener('DOMContentLoaded', function() {
             accion: 'LISTA',
             nombre_usuario: currentUser
         });
+        
+        addSystemMessage("Solicitando lista de usuarios...");
     }
 
     // Helper functions
@@ -258,10 +292,22 @@ document.addEventListener('DOMContentLoaded', function() {
         userList.innerHTML = '';
         
         if (Array.isArray(users)) {
-            users.forEach(username => {
+            users.forEach(user => {
+                // Handle both string usernames and user objects
+                let username, status;
+                if (typeof user === 'string') {
+                    username = user;
+                    status = 'ACTIVO'; // Default status
+                } else if (user.nombre) {
+                    username = user.nombre;
+                    status = user.estado || 'ACTIVO';
+                } else {
+                    return; // Skip invalid user format
+                }
+                
                 const userItem = document.createElement('div');
                 userItem.className = 'user-item';
-                userItem.textContent = username;
+                userItem.textContent = `${username} [${status}]`;
                 
                 // Add click event to initiate DM
                 userItem.addEventListener('click', function() {
@@ -286,9 +332,13 @@ document.addEventListener('DOMContentLoaded', function() {
         isConnected = false;
         connectionStatus = 'disconnected';
         
-        // If we were in chat screen, show error
-        if (!loginScreen.classList.contains('hidden')) {
-            addSystemMessage('Desconectado del servidor');
-        }
+        // Show error message and return to login screen
+        addSystemMessage('Desconectado del servidor');
+        
+        // Go back to login screen
+        chatScreen.classList.add('hidden');
+        loginScreen.classList.remove('hidden');
+        loginBtn.textContent = 'Conectar';
+        loginBtn.disabled = false;
     });
 });
