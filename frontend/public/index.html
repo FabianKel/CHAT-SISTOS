@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat </title>
+    <title>Chat</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -37,6 +37,22 @@
                 </select>
                 <button id="update-status-btn">✓</button>
             </div>
+            <div class="commands-help">
+                <h4>Comandos Disponibles:</h4>
+                <ul>
+                    <li>/BROADCAST &lt;mensaje&gt;</li>
+                    <li>/DM &lt;usuario&gt; &lt;mensaje&gt;</li>
+                    <li>/LISTA</li>
+                    <li>/ESTADO &lt;estado&gt;</li>
+                    <li>/MOSTRAR &lt;usuario&gt;</li>
+                    <li>/AYUDA</li>
+                    <li>/EXIT</li>
+                </ul>
+            </div>
+            <div class="user-list-header">
+                <h4>Usuarios Conectados</h4>
+                <button id="refresh-users-btn">↻</button>
+            </div>
             <div class="user-list" id="user-list">
                 <!-- Lista de usuarios se cargará dinámicamente -->
             </div>
@@ -44,9 +60,6 @@
         <div class="main-content">
             <div class="chat-header">
                 <h3 id="chat-title">Chat General</h3>
-                <div>
-                    <button id="refresh-users-btn">Actualizar usuarios</button>
-                </div>
             </div>
             <div class="chat-area" id="chat-area">
                 <div class="system-message">Bienvenido al chat. Comienza a enviar mensajes.</div>

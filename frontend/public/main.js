@@ -52,12 +52,10 @@ document.addEventListener('DOMContentLoaded', function() {
     socket.on('serverMessage', function(data) {
         console.log('Received server message:', data);
         
+        // Handle registration or error responses
         if (data.respuesta !== undefined) {
-            // Registration or command response
             if (connectionStatus === 'connecting') {
-                if (data.respuesta === 'OK' || data.respuesta === 'Registro exitoso' || 
-                    (typeof data.respuesta === 'string' && data.respuesta.includes('exitoso'))) {
-                    
+                if (data.respuesta === 'OK') {
                     // Registration successful
                     console.log('Registration successful, switching to chat screen');
                     connectionStatus = 'connected';
@@ -70,38 +68,58 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Set current user display
                     currentUserDisplay.textContent = currentUser;
                     
+                    // Welcome message with available commands
+                    addSystemMessage(`Bienvenido al chat, ${currentUser}!`);
+                    addSystemMessage("=== Comandos disponibles: /BROADCAST, /DM, /LISTA, /ESTADO, /MOSTRAR, /AYUDA, /EXIT ===");
+                    
                     // Request user list after successful login
                     setTimeout(() => {
                         if (isConnected) {
                             requestUserList();
                         }
                     }, 500);
-                    
-                    addSystemMessage(`Bienvenido al chat, ${currentUser}!`);
-                } else {
+                } else if (data.respuesta === 'ERROR') {
                     // Registration failed
                     connectionStatus = 'disconnected';
                     loginBtn.textContent = 'Conectar';
                     loginBtn.disabled = false;
                     
-                    addSystemMessage(`Error al conectar: ${data.razon || 'Error desconocido'}`);
+                    addSystemMessage(`Error: ${data.razon || 'Error desconocido'}`);
                 }
+            } else if (data.respuesta === 'ERROR') {
+                // Error message while connected
+                addSystemMessage(`Error: ${data.razon || 'Error desconocido'}`);
+            } else if (data.mensaje) {
+                // General message
+                addSystemMessage(data.mensaje);
             }
-        } else if (data.accion) {
-            // Chat actions
+        }
+        
+        // Handle action messages (chat, etc.)
+        if (data.accion) {
             switch(data.accion) {
                 case 'BROADCAST':
-                    addChatMessage(data.nombre_emisor, data.mensaje, 'broadcast');
+                    // Skip messages from self as they're already displayed
+                    if (data.nombre_emisor !== currentUser) {
+                        addChatMessage(data.nombre_emisor, data.mensaje, 'broadcast');
+                    }
                     break;
                 case 'DM':
-                    addChatMessage(data.nombre_emisor, data.mensaje, 'direct');
+                    // Only show DMs if you're the sender or recipient
+                    if (data.nombre_emisor !== currentUser && data.nombre_destinatario === currentUser) {
+                        addChatMessage(data.nombre_emisor, data.mensaje, 'direct');
+                    }
                     break;
                 case 'LISTA':
-                    updateUserList(data.usuarios);
+                    if (data.usuarios) {
+                        updateUserList(data.usuarios);
+                    }
                     break;
             }
-        } else if (data.tipo) {
-            // Special messages
+        }
+        
+        // Handle type-specific messages
+        if (data.tipo) {
             switch(data.tipo) {
                 case 'LISTA':
                     if (data.usuarios) {
@@ -110,8 +128,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     break;
                 case 'MOSTRAR':
                 case 'INFO_USUARIO':
-                    const userInfo = `Usuario: ${data.usuario}\nEstado: ${data.estado}\nIP: ${data.direccionIP}`;
-                    addSystemMessage(userInfo);
+                    if (data.usuario) {
+                        const userInfo = `Usuario: ${data.usuario}\nEstado: ${data.estado || 'ACTIVO'}\nIP: ${data.direccionIP || 'No disponible'}`;
+                        addSystemMessage(userInfo);
+                    }
+                    break;
+                case 'ESTADO':
+                    addSystemMessage(`Estado actualizado a: ${data.estado}`);
                     break;
             }
         }
@@ -147,6 +170,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 addChatMessage(currentUser, broadcastMsg, 'sent');
             } else if (message.startsWith('/DM ')) {
                 const parts = message.substring(4).split(' ');
+                if (parts.length < 2) {
+                    addSystemMessage('Formato incorrecto. Uso: /DM <usuario> <mensaje>');
+                    return;
+                }
+                
                 const recipient = parts[0];
                 const dmMessage = parts.slice(1).join(' ');
                 
@@ -159,10 +187,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Add sent message to chat (client-side acknowledgment)
                 addChatMessage(currentUser, `(DM para ${recipient}): ${dmMessage}`, 'sent');
-            } else if (message.startsWith('/LISTA')) {
+            } else if (message === '/LISTA') {
                 requestUserList();
             } else if (message.startsWith('/ESTADO ')) {
                 const newStatus = message.substring(8);
+                if (!['ACTIVO', 'OCUPADO', 'INACTIVO'].includes(newStatus)) {
+                    addSystemMessage('Estado inválido. Use ACTIVO, OCUPADO o INACTIVO.');
+                    return;
+                }
+                
                 socket.emit('clientMessage', {
                     tipo: 'ESTADO',
                     usuario: currentUser,
@@ -177,7 +210,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     usuario: userToShow
                 });
             } else if (message === '/AYUDA') {
-                addSystemMessage("=== AYUDA DEL CHAT ===");
+                addSystemMessage("=== COMANDOS DISPONIBLES ===");
                 addSystemMessage("/BROADCAST <mensaje> - Envía un mensaje a todos");
                 addSystemMessage("/DM <usuario> <mensaje> - Envía un mensaje privado");
                 addSystemMessage("/LISTA - Muestra la lista de usuarios");
@@ -224,6 +257,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!isConnected) return;
         
         const newStatus = statusSelect.value;
+        // Map frontend status to server status codes
         const statusMap = {
             'ONLINE': 'ACTIVO',
             'AWAY': 'INACTIVO',
@@ -245,7 +279,10 @@ document.addEventListener('DOMContentLoaded', function() {
     refreshUsersBtn.addEventListener('click', requestUserList);
 
     function requestUserList() {
-        if (!isConnected) return;
+        if (!isConnected) {
+            addSystemMessage('No estás conectado al servidor');
+            return;
+        }
         
         socket.emit('clientMessage', {
             accion: 'LISTA',
@@ -259,7 +296,18 @@ document.addEventListener('DOMContentLoaded', function() {
     function addSystemMessage(message) {
         const msgDiv = document.createElement('div');
         msgDiv.className = 'system-message';
-        msgDiv.textContent = message;
+        
+        // Handle multi-line messages (like from /AYUDA)
+        if (message.includes('\n')) {
+            const lines = message.split('\n');
+            lines.forEach(line => {
+                const lineSpan = document.createElement('div');
+                lineSpan.textContent = line;
+                msgDiv.appendChild(lineSpan);
+            });
+        } else {
+            msgDiv.textContent = message;
+        }
         
         // Make sure chatArea exists before appending
         if (chatArea) {
@@ -291,35 +339,55 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateUserList(users) {
         userList.innerHTML = '';
         
+        console.log('Updating user list with data:', users);
+        
         if (Array.isArray(users)) {
             users.forEach(user => {
-                // Handle both string usernames and user objects
-                let username, status;
-                if (typeof user === 'string') {
-                    username = user;
-                    status = 'ACTIVO'; // Default status
-                } else if (user.nombre) {
-                    username = user.nombre;
-                    status = user.estado || 'ACTIVO';
-                } else {
-                    return; // Skip invalid user format
-                }
-                
-                const userItem = document.createElement('div');
-                userItem.className = 'user-item';
-                userItem.textContent = `${username} [${status}]`;
-                
-                // Add click event to initiate DM
-                userItem.addEventListener('click', function() {
-                    messageInput.value = `/DM ${username} `;
-                    messageInput.focus();
-                });
-                
-                userList.appendChild(userItem);
+                addUserToList(user);
+            });
+        } else if (typeof users === 'object' && users !== null) {
+            // Handle case where users might be an object instead of array
+            Object.keys(users).forEach(key => {
+                const userData = users[key];
+                addUserToList(userData);
             });
         } else {
             addSystemMessage('Error al obtener lista de usuarios');
         }
+    }
+
+    function addUserToList(user) {
+        let username, status;
+        
+        // Handle different user data formats
+        if (typeof user === 'string') {
+            username = user;
+            status = 'ACTIVO'; // Default status
+        } else if (user.nombre) {
+            username = user.nombre;
+            status = user.estado || 'ACTIVO';
+        } else if (user.usuario) {
+            username = user.usuario;
+            status = user.estado || 'ACTIVO';
+        } else if (user.name) {
+            username = user.name;
+            status = user.status || 'ACTIVO';
+        } else {
+            console.log('Formato de usuario no reconocido:', user);
+            return; // Skip invalid user format
+        }
+        
+        const userItem = document.createElement('div');
+        userItem.className = 'user-item';
+        userItem.textContent = `${username} [${status}]`;
+        
+        // Add click event to initiate DM
+        userItem.addEventListener('click', function() {
+            messageInput.value = `/DM ${username} `;
+            messageInput.focus();
+        });
+        
+        userList.appendChild(userItem);
     }
 
     // Connection status handling

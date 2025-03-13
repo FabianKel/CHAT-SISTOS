@@ -6,7 +6,7 @@ const net = require('net');
 const app = express();
 const server = http.createServer(app);
 
-// Configure Socket.IO without CORS
+// Configure Socket.IO
 const io = new Server(server);
 
 // Web application port
@@ -46,7 +46,7 @@ io.on('connection', (socket) => {
     // Set registration status to pending
     clientRegistrationStatus.set(socket.id, 'pending');
     
-    // Simple auto-reconnect
+    // Handle TCP connection errors
     tcpClient.on('error', (err) => {
       console.error('TCP connection error:', err.message);
       socket.emit('serverMessage', {
@@ -90,105 +90,114 @@ io.on('connection', (socket) => {
     // Handle data received from C server
     tcpClient.on('data', (data) => {
       try {
-        buffer += data.toString();
-        console.log('Raw data received:', buffer);
+        const dataStr = data.toString();
+        console.log('Raw data received:', dataStr);
+        buffer += dataStr;
         
-        // Process complete JSON messages
-        let jsonMessages = [];
+        // Process complete JSON objects
+        let jsonStart = 0;
+        let jsonEnd = -1;
         
-        // Try to extract complete JSON objects
-        try {
-          // Check if buffer contains complete JSON objects
-          if (buffer.trim()) {
-            // Try to find complete JSON objects
-            let validJson = false;
+        // Look for complete JSON objects in buffer
+        while ((jsonStart = buffer.indexOf('{', jsonStart)) !== -1) {
+          // Find matching closing bracket
+          let openBrackets = 0;
+          let foundComplete = false;
+          
+          for (let i = jsonStart; i < buffer.length; i++) {
+            if (buffer[i] === '{') openBrackets++;
+            if (buffer[i] === '}') openBrackets--;
             
-            // First try - whole buffer as one JSON
-            try {
-              const parsed = JSON.parse(buffer);
-              jsonMessages.push(parsed);
-              buffer = '';
-              validJson = true;
-            } catch (e) {
-              // Not a single valid JSON
+            if (openBrackets === 0) {
+              jsonEnd = i + 1;
+              foundComplete = true;
+              break;
             }
+          }
+          
+          if (!foundComplete) break; // No complete JSON object found
+          
+          // Try to parse the JSON object
+          const jsonStr = buffer.substring(jsonStart, jsonEnd);
+          try {
+            const jsonObj = JSON.parse(jsonStr);
+            console.log('Processed message from C server:', jsonObj);
             
-            // Second try - split by newlines
-            if (!validJson) {
-              const parts = buffer.split('\n').filter(part => part.trim());
-              let newBuffer = '';
-              
-              for (const part of parts) {
-                try {
-                  const parsed = JSON.parse(part);
-                  jsonMessages.push(parsed);
-                } catch (e) {
-                  // Not valid JSON, keep in buffer
-                  newBuffer += part + '\n';
+            // Handle registration response
+            if (clientRegistrationStatus.get(socket.id) === 'pending') {
+              // Check for successful registration response
+              if (jsonObj.respuesta === 'OK' || 
+                jsonObj.respuesta === 'Registro exitoso' ||
+                (jsonObj.tipo === 'REGISTRO' && !jsonObj.respuesta)) {
+             
+                // Registration successful
+                clientRegistrationStatus.set(socket.id, 'registered');
+                console.log('Registration successful for client:', socket.id);
+                
+                // Process any pending messages
+                const queue = pendingMessages.get(socket.id) || [];
+                if (queue.length > 0) {
+                  console.log(`Processing ${queue.length} pending messages`);
+                  queue.forEach(msg => {
+                    tcpClient.write(JSON.stringify(msg));
+                  });
+                  pendingMessages.set(socket.id, []);
                 }
-              }
-              
-              buffer = newBuffer;
-            }
-          }
-        } catch (e) {
-          console.error('Error processing messages:', e);
-        }
-        
-        // Process each extracted JSON message
-        for (const jsonObj of jsonMessages) {
-          console.log('Processed message from C server:', jsonObj);
-          
-          // Registration response handling
-          if (clientRegistrationStatus.get(socket.id) === 'pending') {
-            // Check for successful registration
-            if (jsonObj.respuesta === 'OK' || 
-                (jsonObj.tipo === 'REGISTRO' && !jsonObj.razon)) {
-              
-              // Registration successful
-              clientRegistrationStatus.set(socket.id, 'registered');
-              console.log('Registration successful for client:', socket.id);
-              
-              // Process any pending messages
-              const queue = pendingMessages.get(socket.id) || [];
-              if (queue.length > 0) {
-                console.log(`Processing ${queue.length} pending messages for ${socket.id}`);
-                queue.forEach(msg => {
-                  tcpClient.write(JSON.stringify(msg));
+                
+                // Send standardized OK response to frontend
+                socket.emit('serverMessage', {
+                  respuesta: 'OK'
                 });
-                pendingMessages.set(socket.id, []);
+              } else if (jsonObj.respuesta === 'ERROR' || jsonObj.razon) {
+                // Registration failed
+                clientRegistrationStatus.set(socket.id, 'failed');
+                console.log('Registration failed:', jsonObj.razon);
+                socket.emit('serverMessage', {
+                  respuesta: 'ERROR',
+                  razon: jsonObj.razon || 'Error de registro desconocido'
+                });
               }
-              
-              // Send standardized OK response to frontend
-              socket.emit('serverMessage', {
-                respuesta: 'OK'
-              });
-              
-              continue; // Skip further processing for this message
-            } else if (jsonObj.respuesta === 'ERROR' || jsonObj.razon) {
-              // Registration failed
-              clientRegistrationStatus.set(socket.id, 'failed');
-              console.log('Registration failed for client:', socket.id);
-              socket.emit('serverMessage', {
-                respuesta: 'ERROR',
-                razon: jsonObj.razon || 'Error de registro desconocido'
-              });
-              
-              continue; // Skip further processing for this message
             }
+            
+            // Forward messages to frontend based on message type
+            if (jsonObj.accion === 'BROADCAST') {
+              // If it's a broadcast, send to all clients
+              io.emit('serverMessage', jsonObj);
+            } else if (jsonObj.accion === 'DM') {
+              // If it's a DM, find the target client
+              const targetSocketId = usernameToSocketId.get(jsonObj.nombre_destinatario);
+              if (targetSocketId) {
+                io.to(targetSocketId).emit('serverMessage', jsonObj);
+              }
+              // Also send to sender for confirmation
+              const senderSocketId = usernameToSocketId.get(jsonObj.nombre_emisor);
+              if (senderSocketId) {
+                io.to(senderSocketId).emit('serverMessage', jsonObj);
+              }
+            } else if (jsonObj.accion === 'LISTA' || jsonObj.tipo === 'LISTA') {
+              // Handle user list
+              socket.emit('serverMessage', jsonObj);
+            } else if (jsonObj.tipo === 'INFO_USUARIO' || jsonObj.tipo === 'MOSTRAR') {
+              // User info response
+              socket.emit('serverMessage', jsonObj);
+            } else if (jsonObj.tipo === 'ESTADO') {
+              // State update - just acknowledge
+              socket.emit('serverMessage', {
+                respuesta: 'OK',
+                mensaje: 'Estado actualizado correctamente'
+              });
+            } else {
+              // For any other message types, just forward to the client
+              socket.emit('serverMessage', jsonObj);
+            }
+            
+          } catch (parseError) {
+            console.error('Error parsing JSON:', parseError, 'String:', jsonStr);
           }
           
-          // Forward message to the appropriate client
-          // If this is a message to a specific user (DM), find that user's socket
-          if (jsonObj.accion === 'DM' && jsonObj.nombre_destinatario) {
-            const targetSocketId = usernameToSocketId.get(jsonObj.nombre_destinatario);
-            if (targetSocketId) {
-              io.to(targetSocketId).emit('serverMessage', jsonObj);
-            }
-          } else {
-            // Otherwise, send to the current client
-            socket.emit('serverMessage', jsonObj);
-          }
+          // Move to next position in buffer
+          buffer = buffer.substring(jsonEnd);
+          jsonStart = 0;
         }
       } catch (e) {
         console.error('Error processing data:', e);
