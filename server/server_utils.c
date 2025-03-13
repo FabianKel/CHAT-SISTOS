@@ -212,12 +212,16 @@ void list_connected_users(int socket) {
     pthread_mutex_lock(&clients_mutex);
     
     struct json_object *json_msg = json_object_new_object();
-    json_object_object_add(json_msg, "accion", json_object_new_string("LISTA"));
+    json_object_object_add(json_msg, "tipo", json_object_new_string("LISTA"));
     
     struct json_object *usuarios = json_object_new_array();
     for (int i = 0; i < MAX_CLIENTS; i++) {
         if (clients[i] != NULL && clients[i]->username != NULL) {
-            json_object_array_add(usuarios, json_object_new_string(clients[i]->username));
+            // Crear un objeto para cada usuario con su nombre y estado
+            struct json_object *usuario_obj = json_object_new_object();
+            json_object_object_add(usuario_obj, "nombre", json_object_new_string(clients[i]->username));
+            json_object_object_add(usuario_obj, "estado", json_object_new_string(clients[i]->estado));
+            json_object_array_add(usuarios, usuario_obj);
         }
     }
     json_object_object_add(json_msg, "usuarios", usuarios);
@@ -272,7 +276,8 @@ void handle_mostrar(struct json_object *parsed_json, int sock) {
         for (int i = 0; i < MAX_CLIENTS; i++) {
             if (clients[i] != NULL && strcmp(clients[i]->username, user) == 0) {
                 struct json_object *json_resp = json_object_new_object();
-                json_object_object_add(json_resp, "tipo", json_object_new_string("MOSTRAR"));
+                // Cambiar de MOSTRAR a INFO_USUARIO para que el cliente lo reconozca correctamente
+                json_object_object_add(json_resp, "tipo", json_object_new_string("INFO_USUARIO"));
                 json_object_object_add(json_resp, "usuario", json_object_new_string(user));
                 json_object_object_add(json_resp, "estado", json_object_new_string(clients[i]->estado));
                 json_object_object_add(json_resp, "direccionIP", json_object_new_string(clients[i]->ip_address));
@@ -335,7 +340,8 @@ int register_client(int socket, const char *username, const char *ip_address) {
             clients[i]->socket = socket;
             strncpy(clients[i]->username, username, sizeof(clients[i]->username));
             strncpy(clients[i]->ip_address, ip_address, sizeof(clients[i]->ip_address));
-            memset(clients[i]->estado, 0, sizeof(clients[i]->estado));
+            // Inicializar estado como ACTIVO
+            strncpy(clients[i]->estado, "ACTIVO", ESTADO_LENGTH);
             pthread_mutex_unlock(&clients_mutex);
             return 1;
         }
