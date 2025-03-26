@@ -246,7 +246,6 @@ void *receive_thread(void *arg) {
         // Verificar si hay tipo
         if (json_object_object_get_ex(parsed_json, "tipo", &tipo)) {
             tipo_str = json_object_get_string(tipo);
-            
             if (strcmp(tipo_str, "LISTA") == 0) {
                 struct json_object *usuarios;
                 if (json_object_object_get_ex(parsed_json, "usuarios", &usuarios)) {
@@ -270,12 +269,12 @@ void *receive_thread(void *arg) {
                     add_to_history("==========================");
                     display_history();
                 }
-            } else if (strcmp(tipo_str, "INFO_USUARIO") == 0) {
+            }
+            else if (strcmp(tipo_str, "INFO_USUARIO") == 0) {
                 struct json_object *usuario, *estado_usr, *direccionIP;
                 if (json_object_object_get_ex(parsed_json, "usuario", &usuario) && 
                     json_object_object_get_ex(parsed_json, "estado", &estado_usr) && 
-                    json_object_object_get_ex(parsed_json, "direccionIP", &direccionIP)
-                ) {
+                    json_object_object_get_ex(parsed_json, "direccionIP", &direccionIP)) {
                     
                     add_to_history("=== INFORMACIÓN DE USUARIO ===");
                     char history_msg[256];
