@@ -52,12 +52,10 @@ void *handle_client(void *socket_desc) {
         const char *tipo_str = NULL;
         const char *accion_str = NULL;
 
-        // Verificar si el mensaje tiene "tipo"
         if (json_object_object_get_ex(msg_json, "tipo", &tipo)) {
             tipo_str = json_object_get_string(tipo);
         }
 
-        // Verificar si el mensaje tiene "accion"
         if (json_object_object_get_ex(msg_json, "accion", &accion)) {
             accion_str = json_object_get_string(accion);
         }
@@ -71,30 +69,23 @@ void *handle_client(void *socket_desc) {
                 } else {
                     printf("Error: mensaje mal formado\n");
                 }
-            }
-            else if (strcmp(tipo_str, "REGISTRO") == 0) {
+            } else if (strcmp(tipo_str, "REGISTRO") == 0) {
                 handle_register(msg_json, sock);
-            } 
-            else if (strcmp(tipo_str, "ESTADO") == 0) {
+            } else if (strcmp(tipo_str, "ESTADO") == 0) {
                 handle_estado(msg_json, sock);
-            } 
-            else if (strcmp(tipo_str, "MOSTRAR") == 0) {
+            } else if (strcmp(tipo_str, "MOSTRAR") == 0) {
                 handle_mostrar(msg_json, sock);
-            } 
-            else if (strcmp(tipo_str, "EXIT") == 0) {
+            } else if (strcmp(tipo_str, "EXIT") == 0) {
                 handle_exit(msg_json, sock);
             }
-        } 
-        else if (accion_str) {
+        } else if (accion_str) {
             if (strcmp(accion_str, "BROADCAST") == 0) {
-                printf("Se recibio un BROADCAST: %s\n", buffer);
                 struct json_object *emisor, *mensaje;
                 if (json_object_object_get_ex(msg_json, "nombre_emisor", &emisor) &&
                     json_object_object_get_ex(msg_json, "mensaje", &mensaje)) {
                     broadcast_message(json_object_get_string(mensaje), json_object_get_string(emisor));
                 }
-            } 
-            else if (strcmp(accion_str, "DM") == 0) {
+            } else if (strcmp(accion_str, "DM") == 0) {
                 struct json_object *emisor, *destinatario, *mensaje;
                 if (json_object_object_get_ex(msg_json, "nombre_emisor", &emisor) &&
                     json_object_object_get_ex(msg_json, "nombre_destinatario", &destinatario) &&
@@ -103,12 +94,10 @@ void *handle_client(void *socket_desc) {
                                         json_object_get_string(mensaje),
                                         json_object_get_string(emisor));
                 }
-            } 
-            else if (strcmp(accion_str, "LISTA") == 0) {
+            } else if (strcmp(accion_str, "LISTA") == 0) {
                 list_connected_users(sock);
             }
-        } 
-        else {
+        } else {
             printf("Error: Mensaje con formato incorrecto\n");
         }
 
@@ -121,18 +110,23 @@ void *handle_client(void *socket_desc) {
     return NULL;
 }
 
+
 // Implementación de funciones auxiliares
 void handle_register(struct json_object *parsed_json, int sock) {
-    struct json_object *usuario, *ip;
-    if (json_object_object_get_ex(parsed_json, "usuario", &usuario) &&
-        json_object_object_get_ex(parsed_json, "direccionIP", &ip)) {
-        
+    struct json_object *usuario;
+    if (json_object_object_get_ex(parsed_json, "usuario", &usuario)) {
         const char *username = json_object_get_string(usuario);
-        const char *ip_addr = json_object_get_string(ip);
 
-        printf("Intentando registrar usuario: %s con IP: %s\n", username, ip_addr);
+        // Obtener la dirección IP del cliente directamente
+        struct sockaddr_in peer_address;
+        socklen_t peer_address_len = sizeof(peer_address);
+        getpeername(sock, (struct sockaddr *)&peer_address, &peer_address_len);
+        char client_ip[INET_ADDRSTRLEN];
+        inet_ntop(AF_INET, &peer_address.sin_addr, client_ip, INET_ADDRSTRLEN);
 
-        if (register_client(sock, username, ip_addr)) {
+        printf("Intentando registrar usuario: %s con IP: %s\n", username, client_ip);
+
+        if (register_client(sock, username, client_ip)) {
             printf("Registro exitoso para %s, enviando respuesta al cliente...\n", username);
             send_json_response(sock, "OK", "respuesta", "Registro exitoso");
         } else {

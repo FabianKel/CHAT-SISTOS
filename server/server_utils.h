@@ -15,7 +15,6 @@ typedef struct {
     time_t last_activity;
 } Client;
 
-
 extern Client *clients[MAX_CLIENTS];
 extern pthread_mutex_t clients_mutex;
 
@@ -33,4 +32,4 @@ void handle_exit(struct json_object *parsed_json, int sock);
 void *check_activity(void *socket_desc);
 void init_clients();
 
-#endif 
+#endif

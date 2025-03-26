@@ -1,0 +1,1231 @@
+
+---
+events:
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CMakeDetermineSystem.cmake:205 (message)"
+      - "CMakeLists.txt:4 (project)"
+    message: |
+      The system is: Windows - 10.0.26100 - AMD64
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:4 (project)"
+    message: |
+      Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+      Compiler: C:/MinGW64/mingw64/bin/gcc.exe 
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.exe"
+      
+      The C compiler identification is GNU, found in:
+        D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/3.31.6/CompilerIdC/a.exe
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:74 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:4 (project)"
+    checks:
+      - "Detecting C compiler ABI info"
+    directories:
+      source: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-xybl23"
+      binary: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-xybl23"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+    buildResult:
+      variable: "CMAKE_C_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-xybl23'
+        
+        Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/MinGW64/mingw64/bin/mingw32-make.exe -f Makefile cmTC_641c8/fast
+        C:/MinGW64/mingw64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_641c8.dir\\build.make CMakeFiles/cmTC_641c8.dir/build
+        mingw32-make.exe[1]: Entering directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-xybl23'
+        Building C object CMakeFiles/cmTC_641c8.dir/CMakeCCompilerABI.c.obj
+        C:\\MinGW64\\mingw64\\bin\\gcc.exe   -v -o CMakeFiles\\cmTC_641c8.dir\\CMakeCCompilerABI.c.obj -c "C:\\Program Files\\CMake\\share\\cmake-3.31\\Modules\\CMakeCCompilerABI.c"
+        Using built-in specs.
+        COLLECT_GCC=C:\\MinGW64\\mingw64\\bin\\gcc.exe
+        Target: x86_64-w64-mingw32
+        Configured with: ../../../src/gcc-8.1.0/configure --host=x86_64-w64-mingw32 --build=x86_64-w64-mingw32 --target=x86_64-w64-mingw32 --prefix=/mingw64 --with-sysroot=/c/mingw810/x86_64-810-posix-sjlj-rt_v6-rev0/mingw64 --enable-shared --enable-static --enable-targets=all --enable-multilib --enable-languages=c,c++,fortran,lto --enable-libstdcxx-time=yes --enable-threads=posix --enable-libgomp --enable-libatomic --enable-lto --enable-graphite --enable-checking=release --enable-fully-dynamic-string --enable-version-specific-runtime-libs --enable-sjlj-exceptions --disable-libstdcxx-pch --disable-libstdcxx-debug --enable-bootstrap --disable-rpath --disable-win32-registry --disable-nls --disable-werror --disable-symvers --with-gnu-as --with-gnu-ld --with-arch-32=i686 --with-arch-64=nocona --with-tune-32=generic --with-tune-64=core2 --with-libiconv --with-system-zlib --with-gmp=/c/mingw810/prerequisites/x86_64-w64-mingw32-static --with-mpfr=/c/mingw810/prerequisites/x86_64-w64-mingw32-static --with-mpc=/c/mingw810/prerequisites/x86_64-w64-mingw32-static --with-isl=/c/mingw810/prerequisites/x86_64-w64-mingw32-static --with-pkgversion='x86_64-posix-sjlj-rev0, Built by MinGW-W64 project' --with-bugurl=https://sourceforge.net/projects/mingw-w64 CFLAGS='-O2 -pipe -fno-ident -I/c/mingw810/x86_64-810-posix-sjlj-rt_v6-rev0/mingw64/opt/include -I/c/mingw810/prerequisites/x86_64-zlib-static/include -I/c/mingw810/prerequisites/x86_64-w64-mingw32-static/include' CXXFLAGS='-O2 -pipe -fno-ident -I/c/mingw810/x86_64-810-posix-sjlj-rt_v6-rev0/mingw64/opt/include -I/c/mingw810/prerequisites/x86_64-zlib-static/include -I/c/mingw810/prerequisites/x86_64-w64-mingw32-static/include' CPPFLAGS=' -I/c/mingw810/x86_64-810-posix-sjlj-rt_v6-rev0/mingw64/opt/include -I/c/mingw810/prerequisites/x86_64-zlib-static/include -I/c/mingw810/prerequisites/x86_64-w64-mingw32-static/include' LDFLAGS='-pipe -fno-ident -L/c/mingw810/x86_64-810-posix-sjlj-rt_v6-rev0/mingw64/opt/lib -L/c/mingw810/prerequisites/x86_64-zlib-static/lib -L/c/mingw810/prerequisites/x86_64-w64-mingw32-static/lib '
+        Thread model: posix
+        gcc version 8.1.0 (x86_64-posix-sjlj-rev0, Built by MinGW-W64 project) 
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_641c8.dir\\CMakeCCompilerABI.c.obj' '-c' '-mtune=core2' '-march=nocona'
+         C:/MinGW64/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/8.1.0/cc1.exe -quiet -v -iprefix C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/ -D_REENTRANT C:\\Program Files\\CMake\\share\\cmake-3.31\\Modules\\CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mtune=core2 -march=nocona -auxbase-strip CMakeFiles\\cmTC_641c8.dir\\CMakeCCompilerABI.c.obj -version -o C:\\Users\\distelsa\\AppData\\Local\\Temp\\ccxEsqeD.s
+        GNU C17 (x86_64-posix-sjlj-rev0, Built by MinGW-W64 project) version 8.1.0 (x86_64-w64-mingw32)
+        	compiled by GNU C version 8.1.0, GMP version 6.1.2, MPFR version 4.0.1, MPC version 1.1.0, isl version isl-0.18-GMP
+        
+        GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+        ignoring duplicate directory "C:/MinGW64/mingw64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/8.1.0/include"
+        ignoring nonexistent directory "C:/mingw810/x86_64-810-posix-sjlj-rt_v6-rev0/mingw64C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../include"
+        ignoring duplicate directory "C:/MinGW64/mingw64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed"
+        ignoring duplicate directory "C:/MinGW64/mingw64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include"
+        ignoring nonexistent directory "C:/mingw810/x86_64-810-posix-sjlj-rt_v6-rev0/mingw64/mingw/include"
+        #include "..." search starts here:
+        #include <...> search starts here:
+         C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include
+         C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed
+         C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include
+        End of search list.
+        GNU C17 (x86_64-posix-sjlj-rev0, Built by MinGW-W64 project) version 8.1.0 (x86_64-w64-mingw32)
+        	compiled by GNU C version 8.1.0, GMP version 6.1.2, MPFR version 4.0.1, MPC version 1.1.0, isl version isl-0.18-GMP
+        
+        GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+        Compiler executable checksum: 7d6121789872d4509209e56c3264e038
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_641c8.dir\\CMakeCCompilerABI.c.obj' '-c' '-mtune=core2' '-march=nocona'
+         C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/bin/as.exe -v -o CMakeFiles\\cmTC_641c8.dir\\CMakeCCompilerABI.c.obj C:\\Users\\distelsa\\AppData\\Local\\Temp\\ccxEsqeD.s
+        GNU assembler version 2.30 (x86_64-w64-mingw32) using BFD version (GNU Binutils) 2.30
+        COMPILER_PATH=C:/MinGW64/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/8.1.0/;C:/MinGW64/mingw64/bin/../libexec/gcc/;C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/bin/
+        LIBRARY_PATH=C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/;C:/MinGW64/mingw64/bin/../lib/gcc/;C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/lib/../lib/;C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../lib/;C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/lib/;C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_641c8.dir\\CMakeCCompilerABI.c.obj' '-c' '-mtune=core2' '-march=nocona'
+        Linking C executable cmTC_641c8.exe
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_641c8.dir\\link.txt --verbose=1
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_641c8.dir/objects.a
+        C:\\MinGW64\\mingw64\\bin\\ar.exe qc CMakeFiles\\cmTC_641c8.dir/objects.a @CMakeFiles\\cmTC_641c8.dir\\objects1.rsp
+        C:\\MinGW64\\mingw64\\bin\\gcc.exe  -v -Wl,-v -Wl,--whole-archive CMakeFiles\\cmTC_641c8.dir/objects.a -Wl,--no-whole-archive -o cmTC_641c8.exe -Wl,--out-implib,libcmTC_641c8.dll.a -Wl,--major-image-version,0,--minor-image-version,0
+        Using built-in specs.
+        COLLECT_GCC=C:\\MinGW64\\mingw64\\bin\\gcc.exe
+        COLLECT_LTO_WRAPPER=C:/MinGW64/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/8.1.0/lto-wrapper.exe
+        Target: x86_64-w64-mingw32
+        Configured with: ../../../src/gcc-8.1.0/configure --host=x86_64-w64-mingw32 --build=x86_64-w64-mingw32 --target=x86_64-w64-mingw32 --prefix=/mingw64 --with-sysroot=/c/mingw810/x86_64-810-posix-sjlj-rt_v6-rev0/mingw64 --enable-shared --enable-static --enable-targets=all --enable-multilib --enable-languages=c,c++,fortran,lto --enable-libstdcxx-time=yes --enable-threads=posix --enable-libgomp --enable-libatomic --enable-lto --enable-graphite --enable-checking=release --enable-fully-dynamic-string --enable-version-specific-runtime-libs --enable-sjlj-exceptions --disable-libstdcxx-pch --disable-libstdcxx-debug --enable-bootstrap --disable-rpath --disable-win32-registry --disable-nls --disable-werror --disable-symvers --with-gnu-as --with-gnu-ld --with-arch-32=i686 --with-arch-64=nocona --with-tune-32=generic --with-tune-64=core2 --with-libiconv --with-system-zlib --with-gmp=/c/mingw810/prerequisites/x86_64-w64-mingw32-static --with-mpfr=/c/mingw810/prerequisites/x86_64-w64-mingw32-static --with-mpc=/c/mingw810/prerequisites/x86_64-w64-mingw32-static --with-isl=/c/mingw810/prerequisites/x86_64-w64-mingw32-static --with-pkgversion='x86_64-posix-sjlj-rev0, Built by MinGW-W64 project' --with-bugurl=https://sourceforge.net/projects/mingw-w64 CFLAGS='-O2 -pipe -fno-ident -I/c/mingw810/x86_64-810-posix-sjlj-rt_v6-rev0/mingw64/opt/include -I/c/mingw810/prerequisites/x86_64-zlib-static/include -I/c/mingw810/prerequisites/x86_64-w64-mingw32-static/include' CXXFLAGS='-O2 -pipe -fno-ident -I/c/mingw810/x86_64-810-posix-sjlj-rt_v6-rev0/mingw64/opt/include -I/c/mingw810/prerequisites/x86_64-zlib-static/include -I/c/mingw810/prerequisites/x86_64-w64-mingw32-static/include' CPPFLAGS=' -I/c/mingw810/x86_64-810-posix-sjlj-rt_v6-rev0/mingw64/opt/include -I/c/mingw810/prerequisites/x86_64-zlib-static/include -I/c/mingw810/prerequisites/x86_64-w64-mingw32-static/include' LDFLAGS='-pipe -fno-ident -L/c/mingw810/x86_64-810-posix-sjlj-rt_v6-rev0/mingw64/opt/lib -L/c/mingw810/prerequisites/x86_64-zlib-static/lib -L/c/mingw810/prerequisites/x86_64-w64-mingw32-static/lib '
+        Thread model: posix
+        gcc version 8.1.0 (x86_64-posix-sjlj-rev0, Built by MinGW-W64 project) 
+        COMPILER_PATH=C:/MinGW64/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/8.1.0/;C:/MinGW64/mingw64/bin/../libexec/gcc/;C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/bin/
+        LIBRARY_PATH=C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/;C:/MinGW64/mingw64/bin/../lib/gcc/;C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/lib/../lib/;C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../lib/;C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/lib/;C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_641c8.exe' '-mtune=core2' '-march=nocona'
+         C:/MinGW64/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/8.1.0/collect2.exe -plugin C:/MinGW64/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/8.1.0/liblto_plugin-0.dll -plugin-opt=C:/MinGW64/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/8.1.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\distelsa\\AppData\\Local\\Temp\\ccBSsSjO.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-liconv -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt --sysroot=C:/mingw810/x86_64-810-posix-sjlj-rt_v6-rev0/mingw64 -m i386pep -Bdynamic -o cmTC_641c8.exe C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/crtbegin.o -LC:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0 -LC:/MinGW64/mingw64/bin/../lib/gcc -LC:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../lib -LC:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/lib -LC:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../.. -v --whole-archive CMakeFiles\\cmTC_641c8.dir/objects.a --no-whole-archive --out-implib libcmTC_641c8.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lgcc_eh -lmoldname -lmingwex -lmsvcrt -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -liconv -lmingw32 -lgcc -lgcc_eh -lmoldname -lmingwex -lmsvcrt C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/crtend.o
+        collect2 version 8.1.0
+        C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe -plugin C:/MinGW64/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/8.1.0/liblto_plugin-0.dll -plugin-opt=C:/MinGW64/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/8.1.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\distelsa\\AppData\\Local\\Temp\\ccBSsSjO.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-liconv -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt --sysroot=C:/mingw810/x86_64-810-posix-sjlj-rt_v6-rev0/mingw64 -m i386pep -Bdynamic -o cmTC_641c8.exe C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/crtbegin.o -LC:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0 -LC:/MinGW64/mingw64/bin/../lib/gcc -LC:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../lib -LC:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/lib -LC:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../.. -v --whole-archive CMakeFiles\\cmTC_641c8.dir/objects.a --no-whole-archive --out-implib libcmTC_641c8.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lgcc_eh -lmoldname -lmingwex -lmsvcrt -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -liconv -lmingw32 -lgcc -lgcc_eh -lmoldname -lmingwex -lmsvcrt C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/crtend.o
+        GNU ld (GNU Binutils) 2.30
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_641c8.exe' '-mtune=core2' '-march=nocona'
+        mingw32-make.exe[1]: Leaving directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-xybl23'
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:182 (message)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:4 (project)"
+    message: |
+      Parsed C implicit include dir info: rv=done
+        found start of include info
+        found start of implicit include info
+          add: [C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include]
+          add: [C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed]
+          add: [C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include]
+        end of search list found
+        collapse include dir [C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include] ==> [C:/MinGW64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include]
+        collapse include dir [C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed] ==> [C:/MinGW64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed]
+        collapse include dir [C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include] ==> [C:/MinGW64/mingw64/x86_64-w64-mingw32/include]
+        implicit include dirs: [C:/MinGW64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include;C:/MinGW64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed;C:/MinGW64/mingw64/x86_64-w64-mingw32/include]
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:218 (message)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:4 (project)"
+    message: |
+      Parsed C implicit link information:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(\\.[a-z]+)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(\\.[a-z]+)?))("|,| |$)]
+        ignore line: [Change Dir: 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-xybl23']
+        ignore line: []
+        ignore line: [Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/MinGW64/mingw64/bin/mingw32-make.exe -f Makefile cmTC_641c8/fast]
+        ignore line: [C:/MinGW64/mingw64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_641c8.dir\\build.make CMakeFiles/cmTC_641c8.dir/build]
+        ignore line: [mingw32-make.exe[1]: Entering directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-xybl23']
+        ignore line: [Building C object CMakeFiles/cmTC_641c8.dir/CMakeCCompilerABI.c.obj]
+        ignore line: [C:\\MinGW64\\mingw64\\bin\\gcc.exe   -v -o CMakeFiles\\cmTC_641c8.dir\\CMakeCCompilerABI.c.obj -c "C:\\Program Files\\CMake\\share\\cmake-3.31\\Modules\\CMakeCCompilerABI.c"]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=C:\\MinGW64\\mingw64\\bin\\gcc.exe]
+        ignore line: [Target: x86_64-w64-mingw32]
+        ignore line: [Configured with: ../../../src/gcc-8.1.0/configure --host=x86_64-w64-mingw32 --build=x86_64-w64-mingw32 --target=x86_64-w64-mingw32 --prefix=/mingw64 --with-sysroot=/c/mingw810/x86_64-810-posix-sjlj-rt_v6-rev0/mingw64 --enable-shared --enable-static --enable-targets=all --enable-multilib --enable-languages=c,c++,fortran,lto --enable-libstdcxx-time=yes --enable-threads=posix --enable-libgomp --enable-libatomic --enable-lto --enable-graphite --enable-checking=release --enable-fully-dynamic-string --enable-version-specific-runtime-libs --enable-sjlj-exceptions --disable-libstdcxx-pch --disable-libstdcxx-debug --enable-bootstrap --disable-rpath --disable-win32-registry --disable-nls --disable-werror --disable-symvers --with-gnu-as --with-gnu-ld --with-arch-32=i686 --with-arch-64=nocona --with-tune-32=generic --with-tune-64=core2 --with-libiconv --with-system-zlib --with-gmp=/c/mingw810/prerequisites/x86_64-w64-mingw32-static --with-mpfr=/c/mingw810/prerequisites/x86_64-w64-mingw32-static --with-mpc=/c/mingw810/prerequisites/x86_64-w64-mingw32-static --with-isl=/c/mingw810/prerequisites/x86_64-w64-mingw32-static --with-pkgversion='x86_64-posix-sjlj-rev0, Built by MinGW-W64 project' --with-bugurl=https://sourceforge.net/projects/mingw-w64 CFLAGS='-O2 -pipe -fno-ident -I/c/mingw810/x86_64-810-posix-sjlj-rt_v6-rev0/mingw64/opt/include -I/c/mingw810/prerequisites/x86_64-zlib-static/include -I/c/mingw810/prerequisites/x86_64-w64-mingw32-static/include' CXXFLAGS='-O2 -pipe -fno-ident -I/c/mingw810/x86_64-810-posix-sjlj-rt_v6-rev0/mingw64/opt/include -I/c/mingw810/prerequisites/x86_64-zlib-static/include -I/c/mingw810/prerequisites/x86_64-w64-mingw32-static/include' CPPFLAGS=' -I/c/mingw810/x86_64-810-posix-sjlj-rt_v6-rev0/mingw64/opt/include -I/c/mingw810/prerequisites/x86_64-zlib-static/include -I/c/mingw810/prerequisites/x86_64-w64-mingw32-static/include' LDFLAGS='-pipe -fno-ident -L/c/mingw810/x86_64-810-posix-sjlj-rt_v6-rev0/mingw64/opt/lib -L/c/mingw810/prerequisites/x86_64-zlib-static/lib -L/c/mingw810/prerequisites/x86_64-w64-mingw32-static/lib ']
+        ignore line: [Thread model: posix]
+        ignore line: [gcc version 8.1.0 (x86_64-posix-sjlj-rev0  Built by MinGW-W64 project) ]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_641c8.dir\\CMakeCCompilerABI.c.obj' '-c' '-mtune=core2' '-march=nocona']
+        ignore line: [ C:/MinGW64/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/8.1.0/cc1.exe -quiet -v -iprefix C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/ -D_REENTRANT C:\\Program Files\\CMake\\share\\cmake-3.31\\Modules\\CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mtune=core2 -march=nocona -auxbase-strip CMakeFiles\\cmTC_641c8.dir\\CMakeCCompilerABI.c.obj -version -o C:\\Users\\distelsa\\AppData\\Local\\Temp\\ccxEsqeD.s]
+        ignore line: [GNU C17 (x86_64-posix-sjlj-rev0  Built by MinGW-W64 project) version 8.1.0 (x86_64-w64-mingw32)]
+        ignore line: [	compiled by GNU C version 8.1.0  GMP version 6.1.2  MPFR version 4.0.1  MPC version 1.1.0  isl version isl-0.18-GMP]
+        ignore line: []
+        ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+        ignore line: [ignoring duplicate directory "C:/MinGW64/mingw64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/8.1.0/include"]
+        ignore line: [ignoring nonexistent directory "C:/mingw810/x86_64-810-posix-sjlj-rt_v6-rev0/mingw64C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../include"]
+        ignore line: [ignoring duplicate directory "C:/MinGW64/mingw64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed"]
+        ignore line: [ignoring duplicate directory "C:/MinGW64/mingw64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include"]
+        ignore line: [ignoring nonexistent directory "C:/mingw810/x86_64-810-posix-sjlj-rt_v6-rev0/mingw64/mingw/include"]
+        ignore line: [#include "..." search starts here:]
+        ignore line: [#include <...> search starts here:]
+        ignore line: [ C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include]
+        ignore line: [ C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed]
+        ignore line: [ C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include]
+        ignore line: [End of search list.]
+        ignore line: [GNU C17 (x86_64-posix-sjlj-rev0  Built by MinGW-W64 project) version 8.1.0 (x86_64-w64-mingw32)]
+        ignore line: [	compiled by GNU C version 8.1.0  GMP version 6.1.2  MPFR version 4.0.1  MPC version 1.1.0  isl version isl-0.18-GMP]
+        ignore line: []
+        ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+        ignore line: [Compiler executable checksum: 7d6121789872d4509209e56c3264e038]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_641c8.dir\\CMakeCCompilerABI.c.obj' '-c' '-mtune=core2' '-march=nocona']
+        ignore line: [ C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/bin/as.exe -v -o CMakeFiles\\cmTC_641c8.dir\\CMakeCCompilerABI.c.obj C:\\Users\\distelsa\\AppData\\Local\\Temp\\ccxEsqeD.s]
+        ignore line: [GNU assembler version 2.30 (x86_64-w64-mingw32) using BFD version (GNU Binutils) 2.30]
+        ignore line: [COMPILER_PATH=C:/MinGW64/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/8.1.0/]
+        ignore line: [C:/MinGW64/mingw64/bin/../libexec/gcc/]
+        ignore line: [C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/bin/]
+        ignore line: [LIBRARY_PATH=C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/]
+        ignore line: [C:/MinGW64/mingw64/bin/../lib/gcc/]
+        ignore line: [C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/lib/../lib/]
+        ignore line: [C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../lib/]
+        ignore line: [C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/lib/]
+        ignore line: [C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_641c8.dir\\CMakeCCompilerABI.c.obj' '-c' '-mtune=core2' '-march=nocona']
+        ignore line: [Linking C executable cmTC_641c8.exe]
+        ignore line: ["C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_641c8.dir\\link.txt --verbose=1]
+        ignore line: ["C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_641c8.dir/objects.a]
+        ignore line: [C:\\MinGW64\\mingw64\\bin\\ar.exe qc CMakeFiles\\cmTC_641c8.dir/objects.a @CMakeFiles\\cmTC_641c8.dir\\objects1.rsp]
+        ignore line: [C:\\MinGW64\\mingw64\\bin\\gcc.exe  -v -Wl -v -Wl --whole-archive CMakeFiles\\cmTC_641c8.dir/objects.a -Wl --no-whole-archive -o cmTC_641c8.exe -Wl --out-implib libcmTC_641c8.dll.a -Wl --major-image-version 0 --minor-image-version 0]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=C:\\MinGW64\\mingw64\\bin\\gcc.exe]
+        ignore line: [COLLECT_LTO_WRAPPER=C:/MinGW64/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/8.1.0/lto-wrapper.exe]
+        ignore line: [Target: x86_64-w64-mingw32]
+        ignore line: [Configured with: ../../../src/gcc-8.1.0/configure --host=x86_64-w64-mingw32 --build=x86_64-w64-mingw32 --target=x86_64-w64-mingw32 --prefix=/mingw64 --with-sysroot=/c/mingw810/x86_64-810-posix-sjlj-rt_v6-rev0/mingw64 --enable-shared --enable-static --enable-targets=all --enable-multilib --enable-languages=c,c++,fortran,lto --enable-libstdcxx-time=yes --enable-threads=posix --enable-libgomp --enable-libatomic --enable-lto --enable-graphite --enable-checking=release --enable-fully-dynamic-string --enable-version-specific-runtime-libs --enable-sjlj-exceptions --disable-libstdcxx-pch --disable-libstdcxx-debug --enable-bootstrap --disable-rpath --disable-win32-registry --disable-nls --disable-werror --disable-symvers --with-gnu-as --with-gnu-ld --with-arch-32=i686 --with-arch-64=nocona --with-tune-32=generic --with-tune-64=core2 --with-libiconv --with-system-zlib --with-gmp=/c/mingw810/prerequisites/x86_64-w64-mingw32-static --with-mpfr=/c/mingw810/prerequisites/x86_64-w64-mingw32-static --with-mpc=/c/mingw810/prerequisites/x86_64-w64-mingw32-static --with-isl=/c/mingw810/prerequisites/x86_64-w64-mingw32-static --with-pkgversion='x86_64-posix-sjlj-rev0, Built by MinGW-W64 project' --with-bugurl=https://sourceforge.net/projects/mingw-w64 CFLAGS='-O2 -pipe -fno-ident -I/c/mingw810/x86_64-810-posix-sjlj-rt_v6-rev0/mingw64/opt/include -I/c/mingw810/prerequisites/x86_64-zlib-static/include -I/c/mingw810/prerequisites/x86_64-w64-mingw32-static/include' CXXFLAGS='-O2 -pipe -fno-ident -I/c/mingw810/x86_64-810-posix-sjlj-rt_v6-rev0/mingw64/opt/include -I/c/mingw810/prerequisites/x86_64-zlib-static/include -I/c/mingw810/prerequisites/x86_64-w64-mingw32-static/include' CPPFLAGS=' -I/c/mingw810/x86_64-810-posix-sjlj-rt_v6-rev0/mingw64/opt/include -I/c/mingw810/prerequisites/x86_64-zlib-static/include -I/c/mingw810/prerequisites/x86_64-w64-mingw32-static/include' LDFLAGS='-pipe -fno-ident -L/c/mingw810/x86_64-810-posix-sjlj-rt_v6-rev0/mingw64/opt/lib -L/c/mingw810/prerequisites/x86_64-zlib-static/lib -L/c/mingw810/prerequisites/x86_64-w64-mingw32-static/lib ']
+        ignore line: [Thread model: posix]
+        ignore line: [gcc version 8.1.0 (x86_64-posix-sjlj-rev0  Built by MinGW-W64 project) ]
+        ignore line: [COMPILER_PATH=C:/MinGW64/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/8.1.0/]
+        ignore line: [C:/MinGW64/mingw64/bin/../libexec/gcc/]
+        ignore line: [C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/bin/]
+        ignore line: [LIBRARY_PATH=C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/]
+        ignore line: [C:/MinGW64/mingw64/bin/../lib/gcc/]
+        ignore line: [C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/lib/../lib/]
+        ignore line: [C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../lib/]
+        ignore line: [C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/lib/]
+        ignore line: [C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_641c8.exe' '-mtune=core2' '-march=nocona']
+        link line: [ C:/MinGW64/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/8.1.0/collect2.exe -plugin C:/MinGW64/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/8.1.0/liblto_plugin-0.dll -plugin-opt=C:/MinGW64/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/8.1.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\distelsa\\AppData\\Local\\Temp\\ccBSsSjO.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-liconv -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt --sysroot=C:/mingw810/x86_64-810-posix-sjlj-rt_v6-rev0/mingw64 -m i386pep -Bdynamic -o cmTC_641c8.exe C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/crtbegin.o -LC:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0 -LC:/MinGW64/mingw64/bin/../lib/gcc -LC:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../lib -LC:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/lib -LC:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../.. -v --whole-archive CMakeFiles\\cmTC_641c8.dir/objects.a --no-whole-archive --out-implib libcmTC_641c8.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lgcc_eh -lmoldname -lmingwex -lmsvcrt -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -liconv -lmingw32 -lgcc -lgcc_eh -lmoldname -lmingwex -lmsvcrt C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/crtend.o]
+          arg [C:/MinGW64/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/8.1.0/collect2.exe] ==> ignore
+          arg [-plugin] ==> ignore
+          arg [C:/MinGW64/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/8.1.0/liblto_plugin-0.dll] ==> ignore
+          arg [-plugin-opt=C:/MinGW64/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/8.1.0/lto-wrapper.exe] ==> ignore
+          arg [-plugin-opt=-fresolution=C:\\Users\\distelsa\\AppData\\Local\\Temp\\ccBSsSjO.res] ==> ignore
+          arg [-plugin-opt=-pass-through=-lmingw32] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_eh] ==> ignore
+          arg [-plugin-opt=-pass-through=-lmoldname] ==> ignore
+          arg [-plugin-opt=-pass-through=-lmingwex] ==> ignore
+          arg [-plugin-opt=-pass-through=-lmsvcrt] ==> ignore
+          arg [-plugin-opt=-pass-through=-lpthread] ==> ignore
+          arg [-plugin-opt=-pass-through=-ladvapi32] ==> ignore
+          arg [-plugin-opt=-pass-through=-lshell32] ==> ignore
+          arg [-plugin-opt=-pass-through=-luser32] ==> ignore
+          arg [-plugin-opt=-pass-through=-lkernel32] ==> ignore
+          arg [-plugin-opt=-pass-through=-liconv] ==> ignore
+          arg [-plugin-opt=-pass-through=-lmingw32] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_eh] ==> ignore
+          arg [-plugin-opt=-pass-through=-lmoldname] ==> ignore
+          arg [-plugin-opt=-pass-through=-lmingwex] ==> ignore
+          arg [-plugin-opt=-pass-through=-lmsvcrt] ==> ignore
+          arg [--sysroot=C:/mingw810/x86_64-810-posix-sjlj-rt_v6-rev0/mingw64] ==> ignore
+          arg [-m] ==> ignore
+          arg [i386pep] ==> ignore
+          arg [-Bdynamic] ==> search dynamic
+          arg [-o] ==> ignore
+          arg [cmTC_641c8.exe] ==> ignore
+          arg [C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o] ==> obj [C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o]
+          arg [C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/crtbegin.o] ==> obj [C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/crtbegin.o]
+          arg [-LC:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0] ==> dir [C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0]
+          arg [-LC:/MinGW64/mingw64/bin/../lib/gcc] ==> dir [C:/MinGW64/mingw64/bin/../lib/gcc]
+          arg [-LC:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/lib/../lib] ==> dir [C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/lib/../lib]
+          arg [-LC:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../lib] ==> dir [C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../lib]
+          arg [-LC:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/lib] ==> dir [C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/lib]
+          arg [-LC:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../..] ==> dir [C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../..]
+          arg [-v] ==> ignore
+          arg [--whole-archive] ==> ignore
+          arg [CMakeFiles\\cmTC_641c8.dir/objects.a] ==> ignore
+          arg [--no-whole-archive] ==> ignore
+          arg [--out-implib] ==> ignore
+          arg [libcmTC_641c8.dll.a] ==> ignore
+          arg [--major-image-version] ==> ignore
+          arg [0] ==> ignore
+          arg [--minor-image-version] ==> ignore
+          arg [0] ==> ignore
+          arg [-lmingw32] ==> lib [mingw32]
+          arg [-lgcc] ==> lib [gcc]
+          arg [-lgcc_eh] ==> lib [gcc_eh]
+          arg [-lmoldname] ==> lib [moldname]
+          arg [-lmingwex] ==> lib [mingwex]
+          arg [-lmsvcrt] ==> lib [msvcrt]
+          arg [-lpthread] ==> lib [pthread]
+          arg [-ladvapi32] ==> lib [advapi32]
+          arg [-lshell32] ==> lib [shell32]
+          arg [-luser32] ==> lib [user32]
+          arg [-lkernel32] ==> lib [kernel32]
+          arg [-liconv] ==> lib [iconv]
+          arg [-lmingw32] ==> lib [mingw32]
+          arg [-lgcc] ==> lib [gcc]
+          arg [-lgcc_eh] ==> lib [gcc_eh]
+          arg [-lmoldname] ==> lib [moldname]
+          arg [-lmingwex] ==> lib [mingwex]
+          arg [-lmsvcrt] ==> lib [msvcrt]
+          arg [C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/crtend.o] ==> obj [C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/crtend.o]
+        ignore line: [collect2 version 8.1.0]
+        ignore line: [C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe -plugin C:/MinGW64/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/8.1.0/liblto_plugin-0.dll -plugin-opt=C:/MinGW64/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/8.1.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\distelsa\\AppData\\Local\\Temp\\ccBSsSjO.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-liconv -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt --sysroot=C:/mingw810/x86_64-810-posix-sjlj-rt_v6-rev0/mingw64 -m i386pep -Bdynamic -o cmTC_641c8.exe C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/crtbegin.o -LC:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0 -LC:/MinGW64/mingw64/bin/../lib/gcc -LC:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../lib -LC:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/lib -LC:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../.. -v --whole-archive CMakeFiles\\cmTC_641c8.dir/objects.a --no-whole-archive --out-implib libcmTC_641c8.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lgcc_eh -lmoldname -lmingwex -lmsvcrt -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -liconv -lmingw32 -lgcc -lgcc_eh -lmoldname -lmingwex -lmsvcrt C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/crtend.o]
+        linker tool for 'C': C:/MinGW64/mingw64/x86_64-w64-mingw32/bin/ld.exe
+        remove lib [gcc_eh]
+        remove lib [msvcrt]
+        remove lib [gcc_eh]
+        remove lib [msvcrt]
+        collapse obj [C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o] ==> [C:/MinGW64/mingw64/x86_64-w64-mingw32/lib/crt2.o]
+        collapse obj [C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/crtbegin.o] ==> [C:/MinGW64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/crtbegin.o]
+        collapse obj [C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/crtend.o] ==> [C:/MinGW64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/crtend.o]
+        collapse library dir [C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0] ==> [C:/MinGW64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0]
+        collapse library dir [C:/MinGW64/mingw64/bin/../lib/gcc] ==> [C:/MinGW64/mingw64/lib/gcc]
+        collapse library dir [C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/lib/../lib] ==> [C:/MinGW64/mingw64/x86_64-w64-mingw32/lib]
+        collapse library dir [C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../lib] ==> [C:/MinGW64/mingw64/lib]
+        collapse library dir [C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/lib] ==> [C:/MinGW64/mingw64/x86_64-w64-mingw32/lib]
+        collapse library dir [C:/MinGW64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../..] ==> [C:/MinGW64/mingw64/lib]
+        implicit libs: [mingw32;gcc;moldname;mingwex;pthread;advapi32;shell32;user32;kernel32;iconv;mingw32;gcc;moldname;mingwex]
+        implicit objs: [C:/MinGW64/mingw64/x86_64-w64-mingw32/lib/crt2.o;C:/MinGW64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/crtbegin.o;C:/MinGW64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/crtend.o]
+        implicit dirs: [C:/MinGW64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0;C:/MinGW64/mingw64/lib/gcc;C:/MinGW64/mingw64/x86_64-w64-mingw32/lib;C:/MinGW64/mingw64/lib]
+        implicit fwks: []
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CMakeDetermineLinkerId.cmake:40 (message)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:255 (cmake_determine_linker_id)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:4 (project)"
+    message: |
+      Running the C compiler's linker: "C:/MinGW64/mingw64/x86_64-w64-mingw32/bin/ld.exe" "-v"
+      GNU ld (GNU Binutils) 2.30
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CheckCCompilerFlag.cmake:56 (cmake_check_compiler_flag)"
+      - "CMakeLists.txt:102 (CHECK_C_COMPILER_FLAG)"
+    checks:
+      - "Performing Test FLAG_SUPPORTED_stdc89"
+    directories:
+      source: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-96rpfu"
+      binary: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-96rpfu"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+    buildResult:
+      variable: "FLAG_SUPPORTED_stdc89"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-96rpfu'
+        
+        Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/MinGW64/mingw64/bin/mingw32-make.exe -f Makefile cmTC_8b48b/fast
+        C:/MinGW64/mingw64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_8b48b.dir\\build.make CMakeFiles/cmTC_8b48b.dir/build
+        mingw32-make.exe[1]: Entering directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-96rpfu'
+        Building C object CMakeFiles/cmTC_8b48b.dir/src.c.obj
+        C:\\MinGW64\\mingw64\\bin\\gcc.exe -DFLAG_SUPPORTED_stdc89  -std=c89 -o CMakeFiles\\cmTC_8b48b.dir\\src.c.obj -c "D:\\Documentos\\Septimo semestre\\Sistos\\CHAT-SISTO\\cJSON\\build_mingw_no_tests\\CMakeFiles\\CMakeScratch\\TryCompile-96rpfu\\src.c"
+        Linking C executable cmTC_8b48b.exe
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_8b48b.dir\\link.txt --verbose=1
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_8b48b.dir/objects.a
+        C:\\MinGW64\\mingw64\\bin\\ar.exe qc CMakeFiles\\cmTC_8b48b.dir/objects.a @CMakeFiles\\cmTC_8b48b.dir\\objects1.rsp
+        C:\\MinGW64\\mingw64\\bin\\gcc.exe -Wl,--whole-archive CMakeFiles\\cmTC_8b48b.dir/objects.a -Wl,--no-whole-archive -o cmTC_8b48b.exe -Wl,--out-implib,libcmTC_8b48b.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\\cmTC_8b48b.dir\\linkLibs.rsp
+        mingw32-make.exe[1]: Leaving directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-96rpfu'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CheckCCompilerFlag.cmake:56 (cmake_check_compiler_flag)"
+      - "CMakeLists.txt:102 (CHECK_C_COMPILER_FLAG)"
+    checks:
+      - "Performing Test FLAG_SUPPORTED_pedantic"
+    directories:
+      source: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-z7bj5w"
+      binary: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-z7bj5w"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " -std=c89"
+    buildResult:
+      variable: "FLAG_SUPPORTED_pedantic"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-z7bj5w'
+        
+        Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/MinGW64/mingw64/bin/mingw32-make.exe -f Makefile cmTC_cc704/fast
+        C:/MinGW64/mingw64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_cc704.dir\\build.make CMakeFiles/cmTC_cc704.dir/build
+        mingw32-make.exe[1]: Entering directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-z7bj5w'
+        Building C object CMakeFiles/cmTC_cc704.dir/src.c.obj
+        C:\\MinGW64\\mingw64\\bin\\gcc.exe -DFLAG_SUPPORTED_pedantic  -std=c89    -pedantic -o CMakeFiles\\cmTC_cc704.dir\\src.c.obj -c "D:\\Documentos\\Septimo semestre\\Sistos\\CHAT-SISTO\\cJSON\\build_mingw_no_tests\\CMakeFiles\\CMakeScratch\\TryCompile-z7bj5w\\src.c"
+        Linking C executable cmTC_cc704.exe
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_cc704.dir\\link.txt --verbose=1
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_cc704.dir/objects.a
+        C:\\MinGW64\\mingw64\\bin\\ar.exe qc CMakeFiles\\cmTC_cc704.dir/objects.a @CMakeFiles\\cmTC_cc704.dir\\objects1.rsp
+        C:\\MinGW64\\mingw64\\bin\\gcc.exe  -std=c89  -Wl,--whole-archive CMakeFiles\\cmTC_cc704.dir/objects.a -Wl,--no-whole-archive -o cmTC_cc704.exe -Wl,--out-implib,libcmTC_cc704.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\\cmTC_cc704.dir\\linkLibs.rsp
+        mingw32-make.exe[1]: Leaving directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-z7bj5w'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CheckCCompilerFlag.cmake:56 (cmake_check_compiler_flag)"
+      - "CMakeLists.txt:102 (CHECK_C_COMPILER_FLAG)"
+    checks:
+      - "Performing Test FLAG_SUPPORTED_Wall"
+    directories:
+      source: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-n47hzd"
+      binary: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-n47hzd"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " -std=c89 -pedantic"
+    buildResult:
+      variable: "FLAG_SUPPORTED_Wall"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-n47hzd'
+        
+        Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/MinGW64/mingw64/bin/mingw32-make.exe -f Makefile cmTC_220b5/fast
+        C:/MinGW64/mingw64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_220b5.dir\\build.make CMakeFiles/cmTC_220b5.dir/build
+        mingw32-make.exe[1]: Entering directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-n47hzd'
+        Building C object CMakeFiles/cmTC_220b5.dir/src.c.obj
+        C:\\MinGW64\\mingw64\\bin\\gcc.exe -DFLAG_SUPPORTED_Wall  -std=c89 -pedantic    -Wall -o CMakeFiles\\cmTC_220b5.dir\\src.c.obj -c "D:\\Documentos\\Septimo semestre\\Sistos\\CHAT-SISTO\\cJSON\\build_mingw_no_tests\\CMakeFiles\\CMakeScratch\\TryCompile-n47hzd\\src.c"
+        Linking C executable cmTC_220b5.exe
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_220b5.dir\\link.txt --verbose=1
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_220b5.dir/objects.a
+        C:\\MinGW64\\mingw64\\bin\\ar.exe qc CMakeFiles\\cmTC_220b5.dir/objects.a @CMakeFiles\\cmTC_220b5.dir\\objects1.rsp
+        C:\\MinGW64\\mingw64\\bin\\gcc.exe  -std=c89 -pedantic  -Wl,--whole-archive CMakeFiles\\cmTC_220b5.dir/objects.a -Wl,--no-whole-archive -o cmTC_220b5.exe -Wl,--out-implib,libcmTC_220b5.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\\cmTC_220b5.dir\\linkLibs.rsp
+        mingw32-make.exe[1]: Leaving directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-n47hzd'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CheckCCompilerFlag.cmake:56 (cmake_check_compiler_flag)"
+      - "CMakeLists.txt:102 (CHECK_C_COMPILER_FLAG)"
+    checks:
+      - "Performing Test FLAG_SUPPORTED_Wextra"
+    directories:
+      source: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-o1hkg3"
+      binary: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-o1hkg3"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " -std=c89 -pedantic -Wall"
+    buildResult:
+      variable: "FLAG_SUPPORTED_Wextra"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-o1hkg3'
+        
+        Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/MinGW64/mingw64/bin/mingw32-make.exe -f Makefile cmTC_9e639/fast
+        C:/MinGW64/mingw64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_9e639.dir\\build.make CMakeFiles/cmTC_9e639.dir/build
+        mingw32-make.exe[1]: Entering directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-o1hkg3'
+        Building C object CMakeFiles/cmTC_9e639.dir/src.c.obj
+        C:\\MinGW64\\mingw64\\bin\\gcc.exe -DFLAG_SUPPORTED_Wextra  -std=c89 -pedantic -Wall    -Wextra -o CMakeFiles\\cmTC_9e639.dir\\src.c.obj -c "D:\\Documentos\\Septimo semestre\\Sistos\\CHAT-SISTO\\cJSON\\build_mingw_no_tests\\CMakeFiles\\CMakeScratch\\TryCompile-o1hkg3\\src.c"
+        Linking C executable cmTC_9e639.exe
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_9e639.dir\\link.txt --verbose=1
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_9e639.dir/objects.a
+        C:\\MinGW64\\mingw64\\bin\\ar.exe qc CMakeFiles\\cmTC_9e639.dir/objects.a @CMakeFiles\\cmTC_9e639.dir\\objects1.rsp
+        C:\\MinGW64\\mingw64\\bin\\gcc.exe  -std=c89 -pedantic -Wall  -Wl,--whole-archive CMakeFiles\\cmTC_9e639.dir/objects.a -Wl,--no-whole-archive -o cmTC_9e639.exe -Wl,--out-implib,libcmTC_9e639.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\\cmTC_9e639.dir\\linkLibs.rsp
+        mingw32-make.exe[1]: Leaving directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-o1hkg3'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CheckCCompilerFlag.cmake:56 (cmake_check_compiler_flag)"
+      - "CMakeLists.txt:102 (CHECK_C_COMPILER_FLAG)"
+    checks:
+      - "Performing Test FLAG_SUPPORTED_Werror"
+    directories:
+      source: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-4718af"
+      binary: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-4718af"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " -std=c89 -pedantic -Wall -Wextra"
+    buildResult:
+      variable: "FLAG_SUPPORTED_Werror"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-4718af'
+        
+        Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/MinGW64/mingw64/bin/mingw32-make.exe -f Makefile cmTC_3f609/fast
+        C:/MinGW64/mingw64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_3f609.dir\\build.make CMakeFiles/cmTC_3f609.dir/build
+        mingw32-make.exe[1]: Entering directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-4718af'
+        Building C object CMakeFiles/cmTC_3f609.dir/src.c.obj
+        C:\\MinGW64\\mingw64\\bin\\gcc.exe -DFLAG_SUPPORTED_Werror  -std=c89 -pedantic -Wall -Wextra    -Werror -o CMakeFiles\\cmTC_3f609.dir\\src.c.obj -c "D:\\Documentos\\Septimo semestre\\Sistos\\CHAT-SISTO\\cJSON\\build_mingw_no_tests\\CMakeFiles\\CMakeScratch\\TryCompile-4718af\\src.c"
+        Linking C executable cmTC_3f609.exe
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_3f609.dir\\link.txt --verbose=1
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_3f609.dir/objects.a
+        C:\\MinGW64\\mingw64\\bin\\ar.exe qc CMakeFiles\\cmTC_3f609.dir/objects.a @CMakeFiles\\cmTC_3f609.dir\\objects1.rsp
+        C:\\MinGW64\\mingw64\\bin\\gcc.exe  -std=c89 -pedantic -Wall -Wextra  -Wl,--whole-archive CMakeFiles\\cmTC_3f609.dir/objects.a -Wl,--no-whole-archive -o cmTC_3f609.exe -Wl,--out-implib,libcmTC_3f609.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\\cmTC_3f609.dir\\linkLibs.rsp
+        mingw32-make.exe[1]: Leaving directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-4718af'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CheckCCompilerFlag.cmake:56 (cmake_check_compiler_flag)"
+      - "CMakeLists.txt:102 (CHECK_C_COMPILER_FLAG)"
+    checks:
+      - "Performing Test FLAG_SUPPORTED_Wstrictprototypes"
+    directories:
+      source: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-hxmunq"
+      binary: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-hxmunq"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " -std=c89 -pedantic -Wall -Wextra -Werror"
+    buildResult:
+      variable: "FLAG_SUPPORTED_Wstrictprototypes"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-hxmunq'
+        
+        Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/MinGW64/mingw64/bin/mingw32-make.exe -f Makefile cmTC_03c75/fast
+        C:/MinGW64/mingw64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_03c75.dir\\build.make CMakeFiles/cmTC_03c75.dir/build
+        mingw32-make.exe[1]: Entering directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-hxmunq'
+        Building C object CMakeFiles/cmTC_03c75.dir/src.c.obj
+        C:\\MinGW64\\mingw64\\bin\\gcc.exe -DFLAG_SUPPORTED_Wstrictprototypes  -std=c89 -pedantic -Wall -Wextra -Werror    -Wstrict-prototypes -o CMakeFiles\\cmTC_03c75.dir\\src.c.obj -c "D:\\Documentos\\Septimo semestre\\Sistos\\CHAT-SISTO\\cJSON\\build_mingw_no_tests\\CMakeFiles\\CMakeScratch\\TryCompile-hxmunq\\src.c"
+        Linking C executable cmTC_03c75.exe
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_03c75.dir\\link.txt --verbose=1
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_03c75.dir/objects.a
+        C:\\MinGW64\\mingw64\\bin\\ar.exe qc CMakeFiles\\cmTC_03c75.dir/objects.a @CMakeFiles\\cmTC_03c75.dir\\objects1.rsp
+        C:\\MinGW64\\mingw64\\bin\\gcc.exe  -std=c89 -pedantic -Wall -Wextra -Werror  -Wl,--whole-archive CMakeFiles\\cmTC_03c75.dir/objects.a -Wl,--no-whole-archive -o cmTC_03c75.exe -Wl,--out-implib,libcmTC_03c75.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\\cmTC_03c75.dir\\linkLibs.rsp
+        mingw32-make.exe[1]: Leaving directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-hxmunq'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CheckCCompilerFlag.cmake:56 (cmake_check_compiler_flag)"
+      - "CMakeLists.txt:102 (CHECK_C_COMPILER_FLAG)"
+    checks:
+      - "Performing Test FLAG_SUPPORTED_Wwritestrings"
+    directories:
+      source: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-58l92l"
+      binary: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-58l92l"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes"
+    buildResult:
+      variable: "FLAG_SUPPORTED_Wwritestrings"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-58l92l'
+        
+        Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/MinGW64/mingw64/bin/mingw32-make.exe -f Makefile cmTC_38fe5/fast
+        C:/MinGW64/mingw64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_38fe5.dir\\build.make CMakeFiles/cmTC_38fe5.dir/build
+        mingw32-make.exe[1]: Entering directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-58l92l'
+        Building C object CMakeFiles/cmTC_38fe5.dir/src.c.obj
+        C:\\MinGW64\\mingw64\\bin\\gcc.exe -DFLAG_SUPPORTED_Wwritestrings  -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes    -Wwrite-strings -o CMakeFiles\\cmTC_38fe5.dir\\src.c.obj -c "D:\\Documentos\\Septimo semestre\\Sistos\\CHAT-SISTO\\cJSON\\build_mingw_no_tests\\CMakeFiles\\CMakeScratch\\TryCompile-58l92l\\src.c"
+        Linking C executable cmTC_38fe5.exe
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_38fe5.dir\\link.txt --verbose=1
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_38fe5.dir/objects.a
+        C:\\MinGW64\\mingw64\\bin\\ar.exe qc CMakeFiles\\cmTC_38fe5.dir/objects.a @CMakeFiles\\cmTC_38fe5.dir\\objects1.rsp
+        C:\\MinGW64\\mingw64\\bin\\gcc.exe  -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes  -Wl,--whole-archive CMakeFiles\\cmTC_38fe5.dir/objects.a -Wl,--no-whole-archive -o cmTC_38fe5.exe -Wl,--out-implib,libcmTC_38fe5.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\\cmTC_38fe5.dir\\linkLibs.rsp
+        mingw32-make.exe[1]: Leaving directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-58l92l'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CheckCCompilerFlag.cmake:56 (cmake_check_compiler_flag)"
+      - "CMakeLists.txt:102 (CHECK_C_COMPILER_FLAG)"
+    checks:
+      - "Performing Test FLAG_SUPPORTED_Wshadow"
+    directories:
+      source: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-x5g5ci"
+      binary: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-x5g5ci"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings"
+    buildResult:
+      variable: "FLAG_SUPPORTED_Wshadow"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-x5g5ci'
+        
+        Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/MinGW64/mingw64/bin/mingw32-make.exe -f Makefile cmTC_17f58/fast
+        C:/MinGW64/mingw64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_17f58.dir\\build.make CMakeFiles/cmTC_17f58.dir/build
+        mingw32-make.exe[1]: Entering directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-x5g5ci'
+        Building C object CMakeFiles/cmTC_17f58.dir/src.c.obj
+        C:\\MinGW64\\mingw64\\bin\\gcc.exe -DFLAG_SUPPORTED_Wshadow  -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings    -Wshadow -o CMakeFiles\\cmTC_17f58.dir\\src.c.obj -c "D:\\Documentos\\Septimo semestre\\Sistos\\CHAT-SISTO\\cJSON\\build_mingw_no_tests\\CMakeFiles\\CMakeScratch\\TryCompile-x5g5ci\\src.c"
+        Linking C executable cmTC_17f58.exe
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_17f58.dir\\link.txt --verbose=1
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_17f58.dir/objects.a
+        C:\\MinGW64\\mingw64\\bin\\ar.exe qc CMakeFiles\\cmTC_17f58.dir/objects.a @CMakeFiles\\cmTC_17f58.dir\\objects1.rsp
+        C:\\MinGW64\\mingw64\\bin\\gcc.exe  -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings  -Wl,--whole-archive CMakeFiles\\cmTC_17f58.dir/objects.a -Wl,--no-whole-archive -o cmTC_17f58.exe -Wl,--out-implib,libcmTC_17f58.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\\cmTC_17f58.dir\\linkLibs.rsp
+        mingw32-make.exe[1]: Leaving directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-x5g5ci'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CheckCCompilerFlag.cmake:56 (cmake_check_compiler_flag)"
+      - "CMakeLists.txt:102 (CHECK_C_COMPILER_FLAG)"
+    checks:
+      - "Performing Test FLAG_SUPPORTED_Winitself"
+    directories:
+      source: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-lh2v18"
+      binary: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-lh2v18"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow"
+    buildResult:
+      variable: "FLAG_SUPPORTED_Winitself"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-lh2v18'
+        
+        Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/MinGW64/mingw64/bin/mingw32-make.exe -f Makefile cmTC_75be5/fast
+        C:/MinGW64/mingw64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_75be5.dir\\build.make CMakeFiles/cmTC_75be5.dir/build
+        mingw32-make.exe[1]: Entering directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-lh2v18'
+        Building C object CMakeFiles/cmTC_75be5.dir/src.c.obj
+        C:\\MinGW64\\mingw64\\bin\\gcc.exe -DFLAG_SUPPORTED_Winitself  -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow    -Winit-self -o CMakeFiles\\cmTC_75be5.dir\\src.c.obj -c "D:\\Documentos\\Septimo semestre\\Sistos\\CHAT-SISTO\\cJSON\\build_mingw_no_tests\\CMakeFiles\\CMakeScratch\\TryCompile-lh2v18\\src.c"
+        Linking C executable cmTC_75be5.exe
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_75be5.dir\\link.txt --verbose=1
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_75be5.dir/objects.a
+        C:\\MinGW64\\mingw64\\bin\\ar.exe qc CMakeFiles\\cmTC_75be5.dir/objects.a @CMakeFiles\\cmTC_75be5.dir\\objects1.rsp
+        C:\\MinGW64\\mingw64\\bin\\gcc.exe  -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow  -Wl,--whole-archive CMakeFiles\\cmTC_75be5.dir/objects.a -Wl,--no-whole-archive -o cmTC_75be5.exe -Wl,--out-implib,libcmTC_75be5.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\\cmTC_75be5.dir\\linkLibs.rsp
+        mingw32-make.exe[1]: Leaving directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-lh2v18'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CheckCCompilerFlag.cmake:56 (cmake_check_compiler_flag)"
+      - "CMakeLists.txt:102 (CHECK_C_COMPILER_FLAG)"
+    checks:
+      - "Performing Test FLAG_SUPPORTED_Wcastalign"
+    directories:
+      source: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-wsapy6"
+      binary: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-wsapy6"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self"
+    buildResult:
+      variable: "FLAG_SUPPORTED_Wcastalign"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-wsapy6'
+        
+        Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/MinGW64/mingw64/bin/mingw32-make.exe -f Makefile cmTC_cfb4f/fast
+        C:/MinGW64/mingw64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_cfb4f.dir\\build.make CMakeFiles/cmTC_cfb4f.dir/build
+        mingw32-make.exe[1]: Entering directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-wsapy6'
+        Building C object CMakeFiles/cmTC_cfb4f.dir/src.c.obj
+        C:\\MinGW64\\mingw64\\bin\\gcc.exe -DFLAG_SUPPORTED_Wcastalign  -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self    -Wcast-align -o CMakeFiles\\cmTC_cfb4f.dir\\src.c.obj -c "D:\\Documentos\\Septimo semestre\\Sistos\\CHAT-SISTO\\cJSON\\build_mingw_no_tests\\CMakeFiles\\CMakeScratch\\TryCompile-wsapy6\\src.c"
+        Linking C executable cmTC_cfb4f.exe
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_cfb4f.dir\\link.txt --verbose=1
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_cfb4f.dir/objects.a
+        C:\\MinGW64\\mingw64\\bin\\ar.exe qc CMakeFiles\\cmTC_cfb4f.dir/objects.a @CMakeFiles\\cmTC_cfb4f.dir\\objects1.rsp
+        C:\\MinGW64\\mingw64\\bin\\gcc.exe  -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self  -Wl,--whole-archive CMakeFiles\\cmTC_cfb4f.dir/objects.a -Wl,--no-whole-archive -o cmTC_cfb4f.exe -Wl,--out-implib,libcmTC_cfb4f.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\\cmTC_cfb4f.dir\\linkLibs.rsp
+        mingw32-make.exe[1]: Leaving directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-wsapy6'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CheckCCompilerFlag.cmake:56 (cmake_check_compiler_flag)"
+      - "CMakeLists.txt:102 (CHECK_C_COMPILER_FLAG)"
+    checks:
+      - "Performing Test FLAG_SUPPORTED_Wformat2"
+    directories:
+      source: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-iz38a0"
+      binary: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-iz38a0"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align"
+    buildResult:
+      variable: "FLAG_SUPPORTED_Wformat2"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-iz38a0'
+        
+        Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/MinGW64/mingw64/bin/mingw32-make.exe -f Makefile cmTC_56bfd/fast
+        C:/MinGW64/mingw64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_56bfd.dir\\build.make CMakeFiles/cmTC_56bfd.dir/build
+        mingw32-make.exe[1]: Entering directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-iz38a0'
+        Building C object CMakeFiles/cmTC_56bfd.dir/src.c.obj
+        C:\\MinGW64\\mingw64\\bin\\gcc.exe -DFLAG_SUPPORTED_Wformat2  -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align    -Wformat=2 -o CMakeFiles\\cmTC_56bfd.dir\\src.c.obj -c "D:\\Documentos\\Septimo semestre\\Sistos\\CHAT-SISTO\\cJSON\\build_mingw_no_tests\\CMakeFiles\\CMakeScratch\\TryCompile-iz38a0\\src.c"
+        Linking C executable cmTC_56bfd.exe
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_56bfd.dir\\link.txt --verbose=1
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_56bfd.dir/objects.a
+        C:\\MinGW64\\mingw64\\bin\\ar.exe qc CMakeFiles\\cmTC_56bfd.dir/objects.a @CMakeFiles\\cmTC_56bfd.dir\\objects1.rsp
+        C:\\MinGW64\\mingw64\\bin\\gcc.exe  -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align  -Wl,--whole-archive CMakeFiles\\cmTC_56bfd.dir/objects.a -Wl,--no-whole-archive -o cmTC_56bfd.exe -Wl,--out-implib,libcmTC_56bfd.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\\cmTC_56bfd.dir\\linkLibs.rsp
+        mingw32-make.exe[1]: Leaving directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-iz38a0'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CheckCCompilerFlag.cmake:56 (cmake_check_compiler_flag)"
+      - "CMakeLists.txt:102 (CHECK_C_COMPILER_FLAG)"
+    checks:
+      - "Performing Test FLAG_SUPPORTED_Wmissingprototypes"
+    directories:
+      source: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-eayczw"
+      binary: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-eayczw"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align -Wformat=2"
+    buildResult:
+      variable: "FLAG_SUPPORTED_Wmissingprototypes"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-eayczw'
+        
+        Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/MinGW64/mingw64/bin/mingw32-make.exe -f Makefile cmTC_c23e2/fast
+        C:/MinGW64/mingw64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_c23e2.dir\\build.make CMakeFiles/cmTC_c23e2.dir/build
+        mingw32-make.exe[1]: Entering directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-eayczw'
+        Building C object CMakeFiles/cmTC_c23e2.dir/src.c.obj
+        C:\\MinGW64\\mingw64\\bin\\gcc.exe -DFLAG_SUPPORTED_Wmissingprototypes  -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align -Wformat=2    -Wmissing-prototypes -o CMakeFiles\\cmTC_c23e2.dir\\src.c.obj -c "D:\\Documentos\\Septimo semestre\\Sistos\\CHAT-SISTO\\cJSON\\build_mingw_no_tests\\CMakeFiles\\CMakeScratch\\TryCompile-eayczw\\src.c"
+        Linking C executable cmTC_c23e2.exe
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_c23e2.dir\\link.txt --verbose=1
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_c23e2.dir/objects.a
+        C:\\MinGW64\\mingw64\\bin\\ar.exe qc CMakeFiles\\cmTC_c23e2.dir/objects.a @CMakeFiles\\cmTC_c23e2.dir\\objects1.rsp
+        C:\\MinGW64\\mingw64\\bin\\gcc.exe  -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align -Wformat=2  -Wl,--whole-archive CMakeFiles\\cmTC_c23e2.dir/objects.a -Wl,--no-whole-archive -o cmTC_c23e2.exe -Wl,--out-implib,libcmTC_c23e2.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\\cmTC_c23e2.dir\\linkLibs.rsp
+        mingw32-make.exe[1]: Leaving directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-eayczw'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CheckCCompilerFlag.cmake:56 (cmake_check_compiler_flag)"
+      - "CMakeLists.txt:102 (CHECK_C_COMPILER_FLAG)"
+    checks:
+      - "Performing Test FLAG_SUPPORTED_Wstrictoverflow2"
+    directories:
+      source: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-kp41ja"
+      binary: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-kp41ja"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align -Wformat=2 -Wmissing-prototypes"
+    buildResult:
+      variable: "FLAG_SUPPORTED_Wstrictoverflow2"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-kp41ja'
+        
+        Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/MinGW64/mingw64/bin/mingw32-make.exe -f Makefile cmTC_73051/fast
+        C:/MinGW64/mingw64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_73051.dir\\build.make CMakeFiles/cmTC_73051.dir/build
+        mingw32-make.exe[1]: Entering directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-kp41ja'
+        Building C object CMakeFiles/cmTC_73051.dir/src.c.obj
+        C:\\MinGW64\\mingw64\\bin\\gcc.exe -DFLAG_SUPPORTED_Wstrictoverflow2  -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align -Wformat=2 -Wmissing-prototypes    -Wstrict-overflow=2 -o CMakeFiles\\cmTC_73051.dir\\src.c.obj -c "D:\\Documentos\\Septimo semestre\\Sistos\\CHAT-SISTO\\cJSON\\build_mingw_no_tests\\CMakeFiles\\CMakeScratch\\TryCompile-kp41ja\\src.c"
+        Linking C executable cmTC_73051.exe
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_73051.dir\\link.txt --verbose=1
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_73051.dir/objects.a
+        C:\\MinGW64\\mingw64\\bin\\ar.exe qc CMakeFiles\\cmTC_73051.dir/objects.a @CMakeFiles\\cmTC_73051.dir\\objects1.rsp
+        C:\\MinGW64\\mingw64\\bin\\gcc.exe  -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align -Wformat=2 -Wmissing-prototypes  -Wl,--whole-archive CMakeFiles\\cmTC_73051.dir/objects.a -Wl,--no-whole-archive -o cmTC_73051.exe -Wl,--out-implib,libcmTC_73051.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\\cmTC_73051.dir\\linkLibs.rsp
+        mingw32-make.exe[1]: Leaving directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-kp41ja'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CheckCCompilerFlag.cmake:56 (cmake_check_compiler_flag)"
+      - "CMakeLists.txt:102 (CHECK_C_COMPILER_FLAG)"
+    checks:
+      - "Performing Test FLAG_SUPPORTED_Wcastqual"
+    directories:
+      source: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-j5l3id"
+      binary: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-j5l3id"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align -Wformat=2 -Wmissing-prototypes -Wstrict-overflow=2"
+    buildResult:
+      variable: "FLAG_SUPPORTED_Wcastqual"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-j5l3id'
+        
+        Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/MinGW64/mingw64/bin/mingw32-make.exe -f Makefile cmTC_147a7/fast
+        C:/MinGW64/mingw64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_147a7.dir\\build.make CMakeFiles/cmTC_147a7.dir/build
+        mingw32-make.exe[1]: Entering directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-j5l3id'
+        Building C object CMakeFiles/cmTC_147a7.dir/src.c.obj
+        C:\\MinGW64\\mingw64\\bin\\gcc.exe -DFLAG_SUPPORTED_Wcastqual  -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align -Wformat=2 -Wmissing-prototypes -Wstrict-overflow=2    -Wcast-qual -o CMakeFiles\\cmTC_147a7.dir\\src.c.obj -c "D:\\Documentos\\Septimo semestre\\Sistos\\CHAT-SISTO\\cJSON\\build_mingw_no_tests\\CMakeFiles\\CMakeScratch\\TryCompile-j5l3id\\src.c"
+        Linking C executable cmTC_147a7.exe
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_147a7.dir\\link.txt --verbose=1
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_147a7.dir/objects.a
+        C:\\MinGW64\\mingw64\\bin\\ar.exe qc CMakeFiles\\cmTC_147a7.dir/objects.a @CMakeFiles\\cmTC_147a7.dir\\objects1.rsp
+        C:\\MinGW64\\mingw64\\bin\\gcc.exe  -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align -Wformat=2 -Wmissing-prototypes -Wstrict-overflow=2  -Wl,--whole-archive CMakeFiles\\cmTC_147a7.dir/objects.a -Wl,--no-whole-archive -o cmTC_147a7.exe -Wl,--out-implib,libcmTC_147a7.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\\cmTC_147a7.dir\\linkLibs.rsp
+        mingw32-make.exe[1]: Leaving directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-j5l3id'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CheckCCompilerFlag.cmake:56 (cmake_check_compiler_flag)"
+      - "CMakeLists.txt:102 (CHECK_C_COMPILER_FLAG)"
+    checks:
+      - "Performing Test FLAG_SUPPORTED_Wundef"
+    directories:
+      source: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-zhsaa5"
+      binary: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-zhsaa5"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align -Wformat=2 -Wmissing-prototypes -Wstrict-overflow=2 -Wcast-qual"
+    buildResult:
+      variable: "FLAG_SUPPORTED_Wundef"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-zhsaa5'
+        
+        Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/MinGW64/mingw64/bin/mingw32-make.exe -f Makefile cmTC_57968/fast
+        C:/MinGW64/mingw64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_57968.dir\\build.make CMakeFiles/cmTC_57968.dir/build
+        mingw32-make.exe[1]: Entering directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-zhsaa5'
+        Building C object CMakeFiles/cmTC_57968.dir/src.c.obj
+        C:\\MinGW64\\mingw64\\bin\\gcc.exe -DFLAG_SUPPORTED_Wundef  -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align -Wformat=2 -Wmissing-prototypes -Wstrict-overflow=2 -Wcast-qual    -Wundef -o CMakeFiles\\cmTC_57968.dir\\src.c.obj -c "D:\\Documentos\\Septimo semestre\\Sistos\\CHAT-SISTO\\cJSON\\build_mingw_no_tests\\CMakeFiles\\CMakeScratch\\TryCompile-zhsaa5\\src.c"
+        Linking C executable cmTC_57968.exe
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_57968.dir\\link.txt --verbose=1
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_57968.dir/objects.a
+        C:\\MinGW64\\mingw64\\bin\\ar.exe qc CMakeFiles\\cmTC_57968.dir/objects.a @CMakeFiles\\cmTC_57968.dir\\objects1.rsp
+        C:\\MinGW64\\mingw64\\bin\\gcc.exe  -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align -Wformat=2 -Wmissing-prototypes -Wstrict-overflow=2 -Wcast-qual  -Wl,--whole-archive CMakeFiles\\cmTC_57968.dir/objects.a -Wl,--no-whole-archive -o cmTC_57968.exe -Wl,--out-implib,libcmTC_57968.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\\cmTC_57968.dir\\linkLibs.rsp
+        mingw32-make.exe[1]: Leaving directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-zhsaa5'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CheckCCompilerFlag.cmake:56 (cmake_check_compiler_flag)"
+      - "CMakeLists.txt:102 (CHECK_C_COMPILER_FLAG)"
+    checks:
+      - "Performing Test FLAG_SUPPORTED_Wswitchdefault"
+    directories:
+      source: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-1ef2r9"
+      binary: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-1ef2r9"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align -Wformat=2 -Wmissing-prototypes -Wstrict-overflow=2 -Wcast-qual -Wundef"
+    buildResult:
+      variable: "FLAG_SUPPORTED_Wswitchdefault"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-1ef2r9'
+        
+        Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/MinGW64/mingw64/bin/mingw32-make.exe -f Makefile cmTC_83e0e/fast
+        C:/MinGW64/mingw64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_83e0e.dir\\build.make CMakeFiles/cmTC_83e0e.dir/build
+        mingw32-make.exe[1]: Entering directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-1ef2r9'
+        Building C object CMakeFiles/cmTC_83e0e.dir/src.c.obj
+        C:\\MinGW64\\mingw64\\bin\\gcc.exe -DFLAG_SUPPORTED_Wswitchdefault  -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align -Wformat=2 -Wmissing-prototypes -Wstrict-overflow=2 -Wcast-qual -Wundef    -Wswitch-default -o CMakeFiles\\cmTC_83e0e.dir\\src.c.obj -c "D:\\Documentos\\Septimo semestre\\Sistos\\CHAT-SISTO\\cJSON\\build_mingw_no_tests\\CMakeFiles\\CMakeScratch\\TryCompile-1ef2r9\\src.c"
+        Linking C executable cmTC_83e0e.exe
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_83e0e.dir\\link.txt --verbose=1
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_83e0e.dir/objects.a
+        C:\\MinGW64\\mingw64\\bin\\ar.exe qc CMakeFiles\\cmTC_83e0e.dir/objects.a @CMakeFiles\\cmTC_83e0e.dir\\objects1.rsp
+        C:\\MinGW64\\mingw64\\bin\\gcc.exe  -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align -Wformat=2 -Wmissing-prototypes -Wstrict-overflow=2 -Wcast-qual -Wundef  -Wl,--whole-archive CMakeFiles\\cmTC_83e0e.dir/objects.a -Wl,--no-whole-archive -o cmTC_83e0e.exe -Wl,--out-implib,libcmTC_83e0e.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\\cmTC_83e0e.dir\\linkLibs.rsp
+        mingw32-make.exe[1]: Leaving directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-1ef2r9'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CheckCCompilerFlag.cmake:56 (cmake_check_compiler_flag)"
+      - "CMakeLists.txt:102 (CHECK_C_COMPILER_FLAG)"
+    checks:
+      - "Performing Test FLAG_SUPPORTED_Wconversion"
+    directories:
+      source: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-4g9qip"
+      binary: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-4g9qip"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align -Wformat=2 -Wmissing-prototypes -Wstrict-overflow=2 -Wcast-qual -Wundef -Wswitch-default"
+    buildResult:
+      variable: "FLAG_SUPPORTED_Wconversion"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-4g9qip'
+        
+        Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/MinGW64/mingw64/bin/mingw32-make.exe -f Makefile cmTC_c4e3c/fast
+        C:/MinGW64/mingw64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_c4e3c.dir\\build.make CMakeFiles/cmTC_c4e3c.dir/build
+        mingw32-make.exe[1]: Entering directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-4g9qip'
+        Building C object CMakeFiles/cmTC_c4e3c.dir/src.c.obj
+        C:\\MinGW64\\mingw64\\bin\\gcc.exe -DFLAG_SUPPORTED_Wconversion  -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align -Wformat=2 -Wmissing-prototypes -Wstrict-overflow=2 -Wcast-qual -Wundef -Wswitch-default    -Wconversion -o CMakeFiles\\cmTC_c4e3c.dir\\src.c.obj -c "D:\\Documentos\\Septimo semestre\\Sistos\\CHAT-SISTO\\cJSON\\build_mingw_no_tests\\CMakeFiles\\CMakeScratch\\TryCompile-4g9qip\\src.c"
+        Linking C executable cmTC_c4e3c.exe
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_c4e3c.dir\\link.txt --verbose=1
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_c4e3c.dir/objects.a
+        C:\\MinGW64\\mingw64\\bin\\ar.exe qc CMakeFiles\\cmTC_c4e3c.dir/objects.a @CMakeFiles\\cmTC_c4e3c.dir\\objects1.rsp
+        C:\\MinGW64\\mingw64\\bin\\gcc.exe  -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align -Wformat=2 -Wmissing-prototypes -Wstrict-overflow=2 -Wcast-qual -Wundef -Wswitch-default  -Wl,--whole-archive CMakeFiles\\cmTC_c4e3c.dir/objects.a -Wl,--no-whole-archive -o cmTC_c4e3c.exe -Wl,--out-implib,libcmTC_c4e3c.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\\cmTC_c4e3c.dir\\linkLibs.rsp
+        mingw32-make.exe[1]: Leaving directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-4g9qip'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CheckCCompilerFlag.cmake:56 (cmake_check_compiler_flag)"
+      - "CMakeLists.txt:102 (CHECK_C_COMPILER_FLAG)"
+    checks:
+      - "Performing Test FLAG_SUPPORTED_Wccompat"
+    directories:
+      source: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-b8j6pi"
+      binary: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-b8j6pi"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align -Wformat=2 -Wmissing-prototypes -Wstrict-overflow=2 -Wcast-qual -Wundef -Wswitch-default -Wconversion"
+    buildResult:
+      variable: "FLAG_SUPPORTED_Wccompat"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-b8j6pi'
+        
+        Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/MinGW64/mingw64/bin/mingw32-make.exe -f Makefile cmTC_41893/fast
+        C:/MinGW64/mingw64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_41893.dir\\build.make CMakeFiles/cmTC_41893.dir/build
+        mingw32-make.exe[1]: Entering directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-b8j6pi'
+        Building C object CMakeFiles/cmTC_41893.dir/src.c.obj
+        C:\\MinGW64\\mingw64\\bin\\gcc.exe -DFLAG_SUPPORTED_Wccompat  -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align -Wformat=2 -Wmissing-prototypes -Wstrict-overflow=2 -Wcast-qual -Wundef -Wswitch-default -Wconversion    -Wc++-compat -o CMakeFiles\\cmTC_41893.dir\\src.c.obj -c "D:\\Documentos\\Septimo semestre\\Sistos\\CHAT-SISTO\\cJSON\\build_mingw_no_tests\\CMakeFiles\\CMakeScratch\\TryCompile-b8j6pi\\src.c"
+        Linking C executable cmTC_41893.exe
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_41893.dir\\link.txt --verbose=1
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_41893.dir/objects.a
+        C:\\MinGW64\\mingw64\\bin\\ar.exe qc CMakeFiles\\cmTC_41893.dir/objects.a @CMakeFiles\\cmTC_41893.dir\\objects1.rsp
+        C:\\MinGW64\\mingw64\\bin\\gcc.exe  -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align -Wformat=2 -Wmissing-prototypes -Wstrict-overflow=2 -Wcast-qual -Wundef -Wswitch-default -Wconversion  -Wl,--whole-archive CMakeFiles\\cmTC_41893.dir/objects.a -Wl,--no-whole-archive -o cmTC_41893.exe -Wl,--out-implib,libcmTC_41893.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\\cmTC_41893.dir\\linkLibs.rsp
+        mingw32-make.exe[1]: Leaving directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-b8j6pi'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CheckCCompilerFlag.cmake:56 (cmake_check_compiler_flag)"
+      - "CMakeLists.txt:102 (CHECK_C_COMPILER_FLAG)"
+    checks:
+      - "Performing Test FLAG_SUPPORTED_fstackprotectorstrong"
+    directories:
+      source: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-45qrlo"
+      binary: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-45qrlo"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align -Wformat=2 -Wmissing-prototypes -Wstrict-overflow=2 -Wcast-qual -Wundef -Wswitch-default -Wconversion -Wc++-compat"
+    buildResult:
+      variable: "FLAG_SUPPORTED_fstackprotectorstrong"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-45qrlo'
+        
+        Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/MinGW64/mingw64/bin/mingw32-make.exe -f Makefile cmTC_6f9bb/fast
+        C:/MinGW64/mingw64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_6f9bb.dir\\build.make CMakeFiles/cmTC_6f9bb.dir/build
+        mingw32-make.exe[1]: Entering directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-45qrlo'
+        Building C object CMakeFiles/cmTC_6f9bb.dir/src.c.obj
+        C:\\MinGW64\\mingw64\\bin\\gcc.exe -DFLAG_SUPPORTED_fstackprotectorstrong  -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align -Wformat=2 -Wmissing-prototypes -Wstrict-overflow=2 -Wcast-qual -Wundef -Wswitch-default -Wconversion -Wc++-compat    -fstack-protector-strong -o CMakeFiles\\cmTC_6f9bb.dir\\src.c.obj -c "D:\\Documentos\\Septimo semestre\\Sistos\\CHAT-SISTO\\cJSON\\build_mingw_no_tests\\CMakeFiles\\CMakeScratch\\TryCompile-45qrlo\\src.c"
+        Linking C executable cmTC_6f9bb.exe
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_6f9bb.dir\\link.txt --verbose=1
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_6f9bb.dir/objects.a
+        C:\\MinGW64\\mingw64\\bin\\ar.exe qc CMakeFiles\\cmTC_6f9bb.dir/objects.a @CMakeFiles\\cmTC_6f9bb.dir\\objects1.rsp
+        C:\\MinGW64\\mingw64\\bin\\gcc.exe  -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align -Wformat=2 -Wmissing-prototypes -Wstrict-overflow=2 -Wcast-qual -Wundef -Wswitch-default -Wconversion -Wc++-compat  -Wl,--whole-archive CMakeFiles\\cmTC_6f9bb.dir/objects.a -Wl,--no-whole-archive -o cmTC_6f9bb.exe -Wl,--out-implib,libcmTC_6f9bb.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\\cmTC_6f9bb.dir\\linkLibs.rsp
+        mingw32-make.exe[1]: Leaving directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-45qrlo'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CheckCCompilerFlag.cmake:56 (cmake_check_compiler_flag)"
+      - "CMakeLists.txt:102 (CHECK_C_COMPILER_FLAG)"
+    checks:
+      - "Performing Test FLAG_SUPPORTED_Wcomma"
+    directories:
+      source: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-6je16n"
+      binary: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-6je16n"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align -Wformat=2 -Wmissing-prototypes -Wstrict-overflow=2 -Wcast-qual -Wundef -Wswitch-default -Wconversion -Wc++-compat -fstack-protector-strong"
+    buildResult:
+      variable: "FLAG_SUPPORTED_Wcomma"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-6je16n'
+        
+        Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/MinGW64/mingw64/bin/mingw32-make.exe -f Makefile cmTC_3f8d6/fast
+        C:/MinGW64/mingw64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_3f8d6.dir\\build.make CMakeFiles/cmTC_3f8d6.dir/build
+        mingw32-make.exe[1]: Entering directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-6je16n'
+        Building C object CMakeFiles/cmTC_3f8d6.dir/src.c.obj
+        C:\\MinGW64\\mingw64\\bin\\gcc.exe -DFLAG_SUPPORTED_Wcomma  -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align -Wformat=2 -Wmissing-prototypes -Wstrict-overflow=2 -Wcast-qual -Wundef -Wswitch-default -Wconversion -Wc++-compat -fstack-protector-strong    -Wcomma -o CMakeFiles\\cmTC_3f8d6.dir\\src.c.obj -c "D:\\Documentos\\Septimo semestre\\Sistos\\CHAT-SISTO\\cJSON\\build_mingw_no_tests\\CMakeFiles\\CMakeScratch\\TryCompile-6je16n\\src.c"
+        gcc.exe: error: unrecognized command line option '-Wcomma'; did you mean '-Wcomment'?
+        mingw32-make.exe[1]: *** [CMakeFiles\\cmTC_3f8d6.dir\\build.make:80: CMakeFiles/cmTC_3f8d6.dir/src.c.obj] Error 1
+        mingw32-make.exe[1]: Leaving directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-6je16n'
+        mingw32-make.exe: *** [Makefile:133: cmTC_3f8d6/fast] Error 2
+        
+      exitCode: 2
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CheckCCompilerFlag.cmake:56 (cmake_check_compiler_flag)"
+      - "CMakeLists.txt:102 (CHECK_C_COMPILER_FLAG)"
+    checks:
+      - "Performing Test FLAG_SUPPORTED_Wdoublepromotion"
+    directories:
+      source: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-vnxte4"
+      binary: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-vnxte4"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align -Wformat=2 -Wmissing-prototypes -Wstrict-overflow=2 -Wcast-qual -Wundef -Wswitch-default -Wconversion -Wc++-compat -fstack-protector-strong"
+    buildResult:
+      variable: "FLAG_SUPPORTED_Wdoublepromotion"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-vnxte4'
+        
+        Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/MinGW64/mingw64/bin/mingw32-make.exe -f Makefile cmTC_a5cfd/fast
+        C:/MinGW64/mingw64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_a5cfd.dir\\build.make CMakeFiles/cmTC_a5cfd.dir/build
+        mingw32-make.exe[1]: Entering directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-vnxte4'
+        Building C object CMakeFiles/cmTC_a5cfd.dir/src.c.obj
+        C:\\MinGW64\\mingw64\\bin\\gcc.exe -DFLAG_SUPPORTED_Wdoublepromotion  -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align -Wformat=2 -Wmissing-prototypes -Wstrict-overflow=2 -Wcast-qual -Wundef -Wswitch-default -Wconversion -Wc++-compat -fstack-protector-strong    -Wdouble-promotion -o CMakeFiles\\cmTC_a5cfd.dir\\src.c.obj -c "D:\\Documentos\\Septimo semestre\\Sistos\\CHAT-SISTO\\cJSON\\build_mingw_no_tests\\CMakeFiles\\CMakeScratch\\TryCompile-vnxte4\\src.c"
+        Linking C executable cmTC_a5cfd.exe
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_a5cfd.dir\\link.txt --verbose=1
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_a5cfd.dir/objects.a
+        C:\\MinGW64\\mingw64\\bin\\ar.exe qc CMakeFiles\\cmTC_a5cfd.dir/objects.a @CMakeFiles\\cmTC_a5cfd.dir\\objects1.rsp
+        C:\\MinGW64\\mingw64\\bin\\gcc.exe  -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align -Wformat=2 -Wmissing-prototypes -Wstrict-overflow=2 -Wcast-qual -Wundef -Wswitch-default -Wconversion -Wc++-compat -fstack-protector-strong  -Wl,--whole-archive CMakeFiles\\cmTC_a5cfd.dir/objects.a -Wl,--no-whole-archive -o cmTC_a5cfd.exe -Wl,--out-implib,libcmTC_a5cfd.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\\cmTC_a5cfd.dir\\linkLibs.rsp
+        mingw32-make.exe[1]: Leaving directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-vnxte4'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CheckCCompilerFlag.cmake:56 (cmake_check_compiler_flag)"
+      - "CMakeLists.txt:102 (CHECK_C_COMPILER_FLAG)"
+    checks:
+      - "Performing Test FLAG_SUPPORTED_Wparentheses"
+    directories:
+      source: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-rf9kai"
+      binary: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-rf9kai"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align -Wformat=2 -Wmissing-prototypes -Wstrict-overflow=2 -Wcast-qual -Wundef -Wswitch-default -Wconversion -Wc++-compat -fstack-protector-strong -Wdouble-promotion"
+    buildResult:
+      variable: "FLAG_SUPPORTED_Wparentheses"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-rf9kai'
+        
+        Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/MinGW64/mingw64/bin/mingw32-make.exe -f Makefile cmTC_885a0/fast
+        C:/MinGW64/mingw64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_885a0.dir\\build.make CMakeFiles/cmTC_885a0.dir/build
+        mingw32-make.exe[1]: Entering directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-rf9kai'
+        Building C object CMakeFiles/cmTC_885a0.dir/src.c.obj
+        C:\\MinGW64\\mingw64\\bin\\gcc.exe -DFLAG_SUPPORTED_Wparentheses  -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align -Wformat=2 -Wmissing-prototypes -Wstrict-overflow=2 -Wcast-qual -Wundef -Wswitch-default -Wconversion -Wc++-compat -fstack-protector-strong -Wdouble-promotion    -Wparentheses -o CMakeFiles\\cmTC_885a0.dir\\src.c.obj -c "D:\\Documentos\\Septimo semestre\\Sistos\\CHAT-SISTO\\cJSON\\build_mingw_no_tests\\CMakeFiles\\CMakeScratch\\TryCompile-rf9kai\\src.c"
+        Linking C executable cmTC_885a0.exe
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_885a0.dir\\link.txt --verbose=1
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_885a0.dir/objects.a
+        C:\\MinGW64\\mingw64\\bin\\ar.exe qc CMakeFiles\\cmTC_885a0.dir/objects.a @CMakeFiles\\cmTC_885a0.dir\\objects1.rsp
+        C:\\MinGW64\\mingw64\\bin\\gcc.exe  -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align -Wformat=2 -Wmissing-prototypes -Wstrict-overflow=2 -Wcast-qual -Wundef -Wswitch-default -Wconversion -Wc++-compat -fstack-protector-strong -Wdouble-promotion  -Wl,--whole-archive CMakeFiles\\cmTC_885a0.dir/objects.a -Wl,--no-whole-archive -o cmTC_885a0.exe -Wl,--out-implib,libcmTC_885a0.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\\cmTC_885a0.dir\\linkLibs.rsp
+        mingw32-make.exe[1]: Leaving directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-rf9kai'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CheckCCompilerFlag.cmake:56 (cmake_check_compiler_flag)"
+      - "CMakeLists.txt:102 (CHECK_C_COMPILER_FLAG)"
+    checks:
+      - "Performing Test FLAG_SUPPORTED_Wformatoverflow"
+    directories:
+      source: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-yk3mld"
+      binary: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-yk3mld"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align -Wformat=2 -Wmissing-prototypes -Wstrict-overflow=2 -Wcast-qual -Wundef -Wswitch-default -Wconversion -Wc++-compat -fstack-protector-strong -Wdouble-promotion -Wparentheses"
+    buildResult:
+      variable: "FLAG_SUPPORTED_Wformatoverflow"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-yk3mld'
+        
+        Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/MinGW64/mingw64/bin/mingw32-make.exe -f Makefile cmTC_a3dc5/fast
+        C:/MinGW64/mingw64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_a3dc5.dir\\build.make CMakeFiles/cmTC_a3dc5.dir/build
+        mingw32-make.exe[1]: Entering directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-yk3mld'
+        Building C object CMakeFiles/cmTC_a3dc5.dir/src.c.obj
+        C:\\MinGW64\\mingw64\\bin\\gcc.exe -DFLAG_SUPPORTED_Wformatoverflow  -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align -Wformat=2 -Wmissing-prototypes -Wstrict-overflow=2 -Wcast-qual -Wundef -Wswitch-default -Wconversion -Wc++-compat -fstack-protector-strong -Wdouble-promotion -Wparentheses    -Wformat-overflow -o CMakeFiles\\cmTC_a3dc5.dir\\src.c.obj -c "D:\\Documentos\\Septimo semestre\\Sistos\\CHAT-SISTO\\cJSON\\build_mingw_no_tests\\CMakeFiles\\CMakeScratch\\TryCompile-yk3mld\\src.c"
+        Linking C executable cmTC_a3dc5.exe
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_a3dc5.dir\\link.txt --verbose=1
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_a3dc5.dir/objects.a
+        C:\\MinGW64\\mingw64\\bin\\ar.exe qc CMakeFiles\\cmTC_a3dc5.dir/objects.a @CMakeFiles\\cmTC_a3dc5.dir\\objects1.rsp
+        C:\\MinGW64\\mingw64\\bin\\gcc.exe  -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align -Wformat=2 -Wmissing-prototypes -Wstrict-overflow=2 -Wcast-qual -Wundef -Wswitch-default -Wconversion -Wc++-compat -fstack-protector-strong -Wdouble-promotion -Wparentheses  -Wl,--whole-archive CMakeFiles\\cmTC_a3dc5.dir/objects.a -Wl,--no-whole-archive -o cmTC_a3dc5.exe -Wl,--out-implib,libcmTC_a3dc5.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\\cmTC_a3dc5.dir\\linkLibs.rsp
+        mingw32-make.exe[1]: Leaving directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-yk3mld'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CheckCCompilerFlag.cmake:56 (cmake_check_compiler_flag)"
+      - "CMakeLists.txt:102 (CHECK_C_COMPILER_FLAG)"
+    checks:
+      - "Performing Test FLAG_SUPPORTED_Wunusedmacros"
+    directories:
+      source: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-j68fs2"
+      binary: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-j68fs2"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align -Wformat=2 -Wmissing-prototypes -Wstrict-overflow=2 -Wcast-qual -Wundef -Wswitch-default -Wconversion -Wc++-compat -fstack-protector-strong -Wdouble-promotion -Wparentheses -Wformat-overflow"
+    buildResult:
+      variable: "FLAG_SUPPORTED_Wunusedmacros"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-j68fs2'
+        
+        Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/MinGW64/mingw64/bin/mingw32-make.exe -f Makefile cmTC_6b415/fast
+        C:/MinGW64/mingw64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_6b415.dir\\build.make CMakeFiles/cmTC_6b415.dir/build
+        mingw32-make.exe[1]: Entering directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-j68fs2'
+        Building C object CMakeFiles/cmTC_6b415.dir/src.c.obj
+        C:\\MinGW64\\mingw64\\bin\\gcc.exe -DFLAG_SUPPORTED_Wunusedmacros  -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align -Wformat=2 -Wmissing-prototypes -Wstrict-overflow=2 -Wcast-qual -Wundef -Wswitch-default -Wconversion -Wc++-compat -fstack-protector-strong -Wdouble-promotion -Wparentheses -Wformat-overflow    -Wunused-macros -o CMakeFiles\\cmTC_6b415.dir\\src.c.obj -c "D:\\Documentos\\Septimo semestre\\Sistos\\CHAT-SISTO\\cJSON\\build_mingw_no_tests\\CMakeFiles\\CMakeScratch\\TryCompile-j68fs2\\src.c"
+        Linking C executable cmTC_6b415.exe
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_6b415.dir\\link.txt --verbose=1
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_6b415.dir/objects.a
+        C:\\MinGW64\\mingw64\\bin\\ar.exe qc CMakeFiles\\cmTC_6b415.dir/objects.a @CMakeFiles\\cmTC_6b415.dir\\objects1.rsp
+        C:\\MinGW64\\mingw64\\bin\\gcc.exe  -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align -Wformat=2 -Wmissing-prototypes -Wstrict-overflow=2 -Wcast-qual -Wundef -Wswitch-default -Wconversion -Wc++-compat -fstack-protector-strong -Wdouble-promotion -Wparentheses -Wformat-overflow  -Wl,--whole-archive CMakeFiles\\cmTC_6b415.dir/objects.a -Wl,--no-whole-archive -o cmTC_6b415.exe -Wl,--out-implib,libcmTC_6b415.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\\cmTC_6b415.dir\\linkLibs.rsp
+        mingw32-make.exe[1]: Leaving directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-j68fs2'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CheckCCompilerFlag.cmake:56 (cmake_check_compiler_flag)"
+      - "CMakeLists.txt:102 (CHECK_C_COMPILER_FLAG)"
+    checks:
+      - "Performing Test FLAG_SUPPORTED_Wmissingvariabledeclarations"
+    directories:
+      source: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-zs1udh"
+      binary: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-zs1udh"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align -Wformat=2 -Wmissing-prototypes -Wstrict-overflow=2 -Wcast-qual -Wundef -Wswitch-default -Wconversion -Wc++-compat -fstack-protector-strong -Wdouble-promotion -Wparentheses -Wformat-overflow -Wunused-macros"
+    buildResult:
+      variable: "FLAG_SUPPORTED_Wmissingvariabledeclarations"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-zs1udh'
+        
+        Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/MinGW64/mingw64/bin/mingw32-make.exe -f Makefile cmTC_26081/fast
+        C:/MinGW64/mingw64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_26081.dir\\build.make CMakeFiles/cmTC_26081.dir/build
+        mingw32-make.exe[1]: Entering directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-zs1udh'
+        Building C object CMakeFiles/cmTC_26081.dir/src.c.obj
+        C:\\MinGW64\\mingw64\\bin\\gcc.exe -DFLAG_SUPPORTED_Wmissingvariabledeclarations  -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align -Wformat=2 -Wmissing-prototypes -Wstrict-overflow=2 -Wcast-qual -Wundef -Wswitch-default -Wconversion -Wc++-compat -fstack-protector-strong -Wdouble-promotion -Wparentheses -Wformat-overflow -Wunused-macros    -Wmissing-variable-declarations -o CMakeFiles\\cmTC_26081.dir\\src.c.obj -c "D:\\Documentos\\Septimo semestre\\Sistos\\CHAT-SISTO\\cJSON\\build_mingw_no_tests\\CMakeFiles\\CMakeScratch\\TryCompile-zs1udh\\src.c"
+        gcc.exe: error: unrecognized command line option '-Wmissing-variable-declarations'; did you mean '-Wmissing-declarations'?
+        mingw32-make.exe[1]: *** [CMakeFiles\\cmTC_26081.dir\\build.make:80: CMakeFiles/cmTC_26081.dir/src.c.obj] Error 1
+        mingw32-make.exe[1]: Leaving directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-zs1udh'
+        mingw32-make.exe: *** [Makefile:133: cmTC_26081/fast] Error 2
+        
+      exitCode: 2
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CheckCCompilerFlag.cmake:56 (cmake_check_compiler_flag)"
+      - "CMakeLists.txt:102 (CHECK_C_COMPILER_FLAG)"
+    checks:
+      - "Performing Test FLAG_SUPPORTED_Wusedbutmarkedunused"
+    directories:
+      source: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-4bg1ki"
+      binary: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-4bg1ki"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align -Wformat=2 -Wmissing-prototypes -Wstrict-overflow=2 -Wcast-qual -Wundef -Wswitch-default -Wconversion -Wc++-compat -fstack-protector-strong -Wdouble-promotion -Wparentheses -Wformat-overflow -Wunused-macros"
+    buildResult:
+      variable: "FLAG_SUPPORTED_Wusedbutmarkedunused"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-4bg1ki'
+        
+        Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/MinGW64/mingw64/bin/mingw32-make.exe -f Makefile cmTC_631ab/fast
+        C:/MinGW64/mingw64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_631ab.dir\\build.make CMakeFiles/cmTC_631ab.dir/build
+        mingw32-make.exe[1]: Entering directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-4bg1ki'
+        Building C object CMakeFiles/cmTC_631ab.dir/src.c.obj
+        C:\\MinGW64\\mingw64\\bin\\gcc.exe -DFLAG_SUPPORTED_Wusedbutmarkedunused  -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align -Wformat=2 -Wmissing-prototypes -Wstrict-overflow=2 -Wcast-qual -Wundef -Wswitch-default -Wconversion -Wc++-compat -fstack-protector-strong -Wdouble-promotion -Wparentheses -Wformat-overflow -Wunused-macros    -Wused-but-marked-unused -o CMakeFiles\\cmTC_631ab.dir\\src.c.obj -c "D:\\Documentos\\Septimo semestre\\Sistos\\CHAT-SISTO\\cJSON\\build_mingw_no_tests\\CMakeFiles\\CMakeScratch\\TryCompile-4bg1ki\\src.c"
+        gcc.exe: error: unrecognized command line option '-Wused-but-marked-unused'
+        mingw32-make.exe[1]: *** [CMakeFiles\\cmTC_631ab.dir\\build.make:80: CMakeFiles/cmTC_631ab.dir/src.c.obj] Error 1
+        mingw32-make.exe[1]: Leaving directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-4bg1ki'
+        mingw32-make.exe: *** [Makefile:133: cmTC_631ab/fast] Error 2
+        
+      exitCode: 2
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CheckCCompilerFlag.cmake:56 (cmake_check_compiler_flag)"
+      - "CMakeLists.txt:102 (CHECK_C_COMPILER_FLAG)"
+    checks:
+      - "Performing Test FLAG_SUPPORTED_Wswitchenum"
+    directories:
+      source: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-ikinp5"
+      binary: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-ikinp5"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align -Wformat=2 -Wmissing-prototypes -Wstrict-overflow=2 -Wcast-qual -Wundef -Wswitch-default -Wconversion -Wc++-compat -fstack-protector-strong -Wdouble-promotion -Wparentheses -Wformat-overflow -Wunused-macros"
+    buildResult:
+      variable: "FLAG_SUPPORTED_Wswitchenum"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-ikinp5'
+        
+        Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/MinGW64/mingw64/bin/mingw32-make.exe -f Makefile cmTC_f26bf/fast
+        C:/MinGW64/mingw64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_f26bf.dir\\build.make CMakeFiles/cmTC_f26bf.dir/build
+        mingw32-make.exe[1]: Entering directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-ikinp5'
+        Building C object CMakeFiles/cmTC_f26bf.dir/src.c.obj
+        C:\\MinGW64\\mingw64\\bin\\gcc.exe -DFLAG_SUPPORTED_Wswitchenum  -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align -Wformat=2 -Wmissing-prototypes -Wstrict-overflow=2 -Wcast-qual -Wundef -Wswitch-default -Wconversion -Wc++-compat -fstack-protector-strong -Wdouble-promotion -Wparentheses -Wformat-overflow -Wunused-macros    -Wswitch-enum -o CMakeFiles\\cmTC_f26bf.dir\\src.c.obj -c "D:\\Documentos\\Septimo semestre\\Sistos\\CHAT-SISTO\\cJSON\\build_mingw_no_tests\\CMakeFiles\\CMakeScratch\\TryCompile-ikinp5\\src.c"
+        Linking C executable cmTC_f26bf.exe
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_f26bf.dir\\link.txt --verbose=1
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_f26bf.dir/objects.a
+        C:\\MinGW64\\mingw64\\bin\\ar.exe qc CMakeFiles\\cmTC_f26bf.dir/objects.a @CMakeFiles\\cmTC_f26bf.dir\\objects1.rsp
+        C:\\MinGW64\\mingw64\\bin\\gcc.exe  -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align -Wformat=2 -Wmissing-prototypes -Wstrict-overflow=2 -Wcast-qual -Wundef -Wswitch-default -Wconversion -Wc++-compat -fstack-protector-strong -Wdouble-promotion -Wparentheses -Wformat-overflow -Wunused-macros  -Wl,--whole-archive CMakeFiles\\cmTC_f26bf.dir/objects.a -Wl,--no-whole-archive -o cmTC_f26bf.exe -Wl,--out-implib,libcmTC_f26bf.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\\cmTC_f26bf.dir\\linkLibs.rsp
+        mingw32-make.exe[1]: Leaving directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-ikinp5'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CheckCCompilerFlag.cmake:56 (cmake_check_compiler_flag)"
+      - "CMakeLists.txt:102 (CHECK_C_COMPILER_FLAG)"
+    checks:
+      - "Performing Test FLAG_SUPPORTED_fvisibilityhidden"
+    directories:
+      source: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-kae7ig"
+      binary: "D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-kae7ig"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align -Wformat=2 -Wmissing-prototypes -Wstrict-overflow=2 -Wcast-qual -Wundef -Wswitch-default -Wconversion -Wc++-compat -fstack-protector-strong -Wdouble-promotion -Wparentheses -Wformat-overflow -Wunused-macros -Wswitch-enum"
+    buildResult:
+      variable: "FLAG_SUPPORTED_fvisibilityhidden"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-kae7ig'
+        
+        Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/MinGW64/mingw64/bin/mingw32-make.exe -f Makefile cmTC_7a127/fast
+        C:/MinGW64/mingw64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_7a127.dir\\build.make CMakeFiles/cmTC_7a127.dir/build
+        mingw32-make.exe[1]: Entering directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-kae7ig'
+        Building C object CMakeFiles/cmTC_7a127.dir/src.c.obj
+        C:\\MinGW64\\mingw64\\bin\\gcc.exe -DFLAG_SUPPORTED_fvisibilityhidden  -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align -Wformat=2 -Wmissing-prototypes -Wstrict-overflow=2 -Wcast-qual -Wundef -Wswitch-default -Wconversion -Wc++-compat -fstack-protector-strong -Wdouble-promotion -Wparentheses -Wformat-overflow -Wunused-macros -Wswitch-enum    -fvisibility=hidden -o CMakeFiles\\cmTC_7a127.dir\\src.c.obj -c "D:\\Documentos\\Septimo semestre\\Sistos\\CHAT-SISTO\\cJSON\\build_mingw_no_tests\\CMakeFiles\\CMakeScratch\\TryCompile-kae7ig\\src.c"
+        Linking C executable cmTC_7a127.exe
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_7a127.dir\\link.txt --verbose=1
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_7a127.dir/objects.a
+        C:\\MinGW64\\mingw64\\bin\\ar.exe qc CMakeFiles\\cmTC_7a127.dir/objects.a @CMakeFiles\\cmTC_7a127.dir\\objects1.rsp
+        C:\\MinGW64\\mingw64\\bin\\gcc.exe  -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align -Wformat=2 -Wmissing-prototypes -Wstrict-overflow=2 -Wcast-qual -Wundef -Wswitch-default -Wconversion -Wc++-compat -fstack-protector-strong -Wdouble-promotion -Wparentheses -Wformat-overflow -Wunused-macros -Wswitch-enum  -Wl,--whole-archive CMakeFiles\\cmTC_7a127.dir/objects.a -Wl,--no-whole-archive -o cmTC_7a127.exe -Wl,--out-implib,libcmTC_7a127.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\\cmTC_7a127.dir\\linkLibs.rsp
+        mingw32-make.exe[1]: Leaving directory 'D:/Documentos/Septimo semestre/Sistos/CHAT-SISTO/cJSON/build_mingw_no_tests/CMakeFiles/CMakeScratch/TryCompile-kae7ig'
+        
+      exitCode: 0
+...

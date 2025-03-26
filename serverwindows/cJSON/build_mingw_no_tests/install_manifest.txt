@@ -1,0 +1,8 @@
+C:/Program Files (x86)/cJSON/include/cjson/cJSON.h
+C:/Program Files (x86)/cJSON/lib/pkgconfig/libcjson.pc
+C:/Program Files (x86)/cJSON/lib/libcjson.dll.a
+C:/Program Files (x86)/cJSON/bin/libcjson.dll
+C:/Program Files (x86)/cJSON/lib/cmake/cJSON/cjson.cmake
+C:/Program Files (x86)/cJSON/lib/cmake/cJSON/cjson-noconfig.cmake
+C:/Program Files (x86)/cJSON/lib/cmake/cJSON/cJSONConfig.cmake
+C:/Program Files (x86)/cJSON/lib/cmake/cJSON/cJSONConfigVersion.cmake

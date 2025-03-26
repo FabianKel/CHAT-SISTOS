@@ -24,19 +24,25 @@ int main() {
 
     printf("Servidor escuchando en puerto %d...\n", PORT);
 
+
     while (1) {
+        printf("Esperando conexiones...\n");
         new_socket = accept(server_fd, (struct sockaddr*)&address, &addrlen);
         if (new_socket < 0) {
             perror("Error aceptando conexión");
             continue;
         }
-
+    
+        printf("Nueva conexión aceptada desde %s:%d\n",
+               inet_ntoa(address.sin_addr), ntohs(address.sin_port));
+    
         pthread_t thread_id;
         int *new_sock = malloc(sizeof(int));
         *new_sock = new_socket;
         pthread_create(&thread_id, NULL, handle_client, (void*)new_sock);
         pthread_detach(thread_id);
     }
+
     close(server_fd);
     return 0;
 }
