@@ -274,7 +274,8 @@ void *receive_thread(void *arg) {
                 struct json_object *usuario, *estado_usr, *direccionIP;
                 if (json_object_object_get_ex(parsed_json, "usuario", &usuario) && 
                     json_object_object_get_ex(parsed_json, "estado", &estado_usr) && 
-                    json_object_object_get_ex(parsed_json, "direccionIP", &direccionIP)) {
+                    json_object_object_get_ex(parsed_json, "direccionIP", &direccionIP)
+                ) {
                     
                     add_to_history("=== INFORMACIÓN DE USUARIO ===");
                     char history_msg[256];
@@ -377,8 +378,21 @@ int main(int argc, char *argv[]) {
     struct json_object *json_register = json_object_new_object();
     json_object_object_add(json_register, "tipo", json_object_new_string("REGISTRO"));
     json_object_object_add(json_register, "usuario", json_object_new_string(username));
-    json_object_object_add(json_register, "direccionIP", json_object_new_string(server_ip));
+    //json_object_object_add(json_register, "direccionIP", json_object_new_string(server_ip));
     
+
+
+    // Obtener la dirección IP del cliente
+    struct sockaddr_in local_address;
+    socklen_t address_length = sizeof(local_address);
+    if (getsockname(sock, (struct sockaddr *)&local_address, &address_length) == 0) {
+        char client_ip[INET_ADDRSTRLEN];
+        inet_ntop(AF_INET, &local_address.sin_addr, client_ip, INET_ADDRSTRLEN);
+        json_object_object_add(json_register, "direccionIP", json_object_new_string(client_ip));
+    } else {
+        perror("Error al obtener la dirección IP del cliente");
+    }
+
     const char *json_str = json_object_to_json_string(json_register);
     if (send(sock, json_str, strlen(json_str), 0) < 0) {
         perror("Error al enviar registro");
