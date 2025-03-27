@@ -254,24 +254,34 @@ void *handle_client(void *arg) {
                 enviar_JSON(client_socket, resp);
                 cJSON_Delete(resp);
             } else {
-                if (strcmp(client_info.username, usuario->valuestring) == 0) {
-                    if (strcmp(client_info.estado, estado->valuestring) == 0) {
+                // Buscar el cliente en la lista global y actualizar su estado
+                Client *client = find_client_by_username(usuario->valuestring);
+                if (client) {
+                    if (strcmp(client->estado, estado->valuestring) == 0) {
                         cJSON *resp = cJSON_CreateObject();
                         cJSON_AddStringToObject(resp, "respuesta", "ERROR");
                         cJSON_AddStringToObject(resp, "razon", "ESTADO_YA_SELECCIONADO");
                         enviar_JSON(client_socket, resp);
                         cJSON_Delete(resp);
                     } else {
-                        strncpy(client_info.estado, estado->valuestring, sizeof(client_info.estado) - 1);
+                        // Actualizar el estado del cliente en la lista global
+                        strncpy(client->estado, estado->valuestring, sizeof(client->estado) - 1);
                         
                         cJSON *resp = cJSON_CreateObject();
                         cJSON_AddStringToObject(resp, "respuesta", "OK");
                         enviar_JSON(client_socket, resp);
                         cJSON_Delete(resp);
                     }
+                } else {
+                    cJSON *resp = cJSON_CreateObject();
+                    cJSON_AddStringToObject(resp, "respuesta", "ERROR");
+                    cJSON_AddStringToObject(resp, "razon", "USUARIO_NO_ENCONTRADO");
+                    enviar_JSON(client_socket, resp);
+                    cJSON_Delete(resp);
                 }
             }
         }
+        
         // Solicitud de MOSTRAR información de usuario
         else if (tipo && strcmp(tipo->valuestring, "MOSTRAR") == 0) {
             cJSON *usuario = cJSON_GetObjectItemCaseSensitive(json, "usuario");
