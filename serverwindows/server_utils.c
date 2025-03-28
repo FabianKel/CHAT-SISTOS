@@ -4,7 +4,6 @@
 #include <time.h>
 
 #ifdef _WIN32
-    #include <winsock2.h>
     #include <ws2tcpip.h>
     #include <windows.h>
     #pragma comment(lib, "ws2_32.lib")
@@ -267,53 +266,68 @@ void *handle_client(void *arg) {
         cJSON *tipo = cJSON_GetObjectItemCaseSensitive(json, "tipo");
         cJSON *accion = cJSON_GetObjectItemCaseSensitive(json, "accion");
 
-        // REGISTRO de usuario
+       // REGISTRO de usuario
+
         if (tipo && strcmp(tipo->valuestring, "REGISTRO") == 0) {
             cJSON *usuario = cJSON_GetObjectItemCaseSensitive(json, "usuario");
             cJSON *direccionIP = cJSON_GetObjectItemCaseSensitive(json, "direccionIP");
-            
-            if (!usuario || !direccionIP || 
-                !cJSON_IsString(usuario) || !cJSON_IsString(direccionIP)) {
+
+            if (!usuario || !cJSON_IsString(usuario)) {
                 cJSON *resp = cJSON_CreateObject();
                 cJSON_AddStringToObject(resp, "respuesta", "ERROR");
                 cJSON_AddStringToObject(resp, "razon", "Formato inválido en REGISTRO");
                 enviar_JSON(client_socket, resp);
                 cJSON_Delete(resp);
-            } else {
-                // Verificar duplicados de nombre de usuario o dirección IP
-                Client *existing = find_client_by_username(usuario->valuestring);
-                int ip_duplicada = 0;
-                for (int i = 0; i < client_count; i++) {
-                    if (clients[i].is_active && strcmp(clients[i].ip_address, direccionIP->valuestring) == 0) {
-                        ip_duplicada = 1;
-                        break;
-                    }
-                }
-        
-                if (existing || ip_duplicada) {
-                    cJSON *resp = cJSON_CreateObject();
-                    cJSON_AddStringToObject(resp, "respuesta", "ERROR");
-                    cJSON_AddStringToObject(resp, "razon", ip_duplicada ? "IP_DUPLICADA" : "Nombre duplicado");
-                    enviar_JSON(client_socket, resp);
-                    cJSON_Delete(resp);
-                } else {
-                    // Registro exitoso
-                    strncpy(client_info.username, usuario->valuestring, sizeof(client_info.username) - 1);
-                    strncpy(client_info.ip_address, direccionIP->valuestring, sizeof(client_info.ip_address) - 1);
-                    strncpy(client_info.estado, "ACTIVO", sizeof(client_info.estado) - 1);
-                    
-                    add_client(client_info);
-                    registered = 1;
-                    
-                    cJSON *resp = cJSON_CreateObject();
-                    cJSON_AddStringToObject(resp, "respuesta", "OK");
-                    enviar_JSON(client_socket, resp);
-                    cJSON_Delete(resp);
+                return 0;
+            }
+
+            // Si no se proporciona direccionIP, asignar un valor predeterminado
+            const char *ip = direccionIP && cJSON_IsString(direccionIP) ? direccionIP->valuestring : "0.0.0.0";
+
+            // Verificar duplicados de nombre de usuario o dirección IP
+            int nombre_duplicado = (find_client_by_username(usuario->valuestring) != NULL);
+            int ip_duplicada = 0;
+
+            for (int i = 0; i < client_count; i++) {
+                if (clients[i].is_active && strncmp(clients[i].ip_address, ip, sizeof(clients[i].ip_address)) == 0) {
+                    ip_duplicada = 1;
+                    break;
                 }
             }
-        }
-        // Manejo de ESTADO
-        else if (tipo && strcmp(tipo->valuestring, "ESTADO") == 0) {
+
+            if (nombre_duplicado || ip_duplicada) {
+                cJSON *resp = cJSON_CreateObject();
+                cJSON_AddStringToObject(resp, "respuesta", "ERROR");
+                cJSON_AddStringToObject(resp, "razon", ip_duplicada ? "IP_DUPLICADA" : "Nombre duplicado");
+                enviar_JSON(client_socket, resp);
+                cJSON_Delete(resp);
+                return 0;
+            }
+
+            // Registro exitoso
+            strncpy(client_info.username, usuario->valuestring, sizeof(client_info.username) - 1);
+            client_info.username[sizeof(client_info.username) - 1] = '\0';
+
+            strncpy(client_info.ip_address, ip, sizeof(client_info.ip_address) - 1);
+            client_info.ip_address[sizeof(client_info.ip_address) - 1] = '\0';
+
+            strncpy(client_info.estado, "ACTIVO", sizeof(client_info.estado) - 1);
+            client_info.estado[sizeof(client_info.estado) - 1] = '\0';
+
+            add_client(client_info);
+            registered = 1;
+
+            // Imprimir en la consola del servidor
+            printf("Usuario registrado exitosamente: %s, IP: %s\n", client_info.username, client_info.ip_address);
+
+            cJSON *resp = cJSON_CreateObject();
+            cJSON_AddStringToObject(resp, "respuesta", "OK");
+            enviar_JSON(client_socket, resp);
+            cJSON_Delete(resp);
+        
+        
+
+        } else if (tipo && strcmp(tipo->valuestring, "ESTADO") == 0) {
             cJSON *usuario = cJSON_GetObjectItemCaseSensitive(json, "usuario");
             cJSON *estado = cJSON_GetObjectItemCaseSensitive(json, "estado");
             
