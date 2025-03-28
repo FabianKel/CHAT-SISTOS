@@ -59,6 +59,14 @@ int main() {
 
     printf("Servidor escuchando en puerto %d...\n", PORT);
 
+    // Se crea un hilo para monitorear inactividad
+    pthread_t inactivity_thread;
+    if (pthread_create(&inactivity_thread, NULL, check_inactivity, NULL) != 0) {
+        perror("Error al crear el hilo de inactividad");
+        return 1;
+    }
+    pthread_detach(inactivity_thread);
+
     // Bucle de aceptación de conexiones
     while (1) {
         printf("Esperando conexiones...\n");

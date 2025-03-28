@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 #ifdef _WIN32
     #include <winsock2.h>
@@ -41,6 +42,7 @@ void add_client(Client client) {
     
     if (client_count < MAX_CLIENTS) {
         client.is_active = 1;  // Marcar como activo
+        client.last_action = time(NULL); // Inicializa con el tiempo actual
         clients[client_count++] = client;
     } else {
         fprintf(stderr, "Se alcanzó el máximo de clientes.\n");
@@ -97,9 +99,67 @@ Client* find_client_by_username(const char* username) {
         pthread_mutex_unlock(&clients_mutex);
     #endif
         
-        return result;
-    }
+    return result;
+}
 
+void* check_inactivity(void *arg) {
+    while (1) {
+#ifdef _WIN32
+        Sleep(5000);
+#else
+        sleep(5);
+#endif
+
+#ifdef _WIN32
+        WaitForSingleObject(clients_mutex, INFINITE);
+#else
+        pthread_mutex_lock(&clients_mutex);
+#endif
+
+        time_t now = time(NULL);
+        for (int i = 0; i < client_count; i++) {
+            if (clients[i].is_active && (now - clients[i].last_action > INACTIVITY_THRESHOLD)) {
+                strncpy(clients[i].estado, "INACTIVO", sizeof(clients[i].estado) - 1);
+                printf("Usuario %s marcado como INACTIVO por inactividad.\n", clients[i].username);
+            }
+        }
+
+#ifdef _WIN32
+        ReleaseMutex(clients_mutex);
+#else
+        pthread_mutex_unlock(&clients_mutex);
+#endif
+    }
+    return NULL;
+}
+
+void actualizar_actividad(Client* client) {
+    #ifdef _WIN32
+        WaitForSingleObject(clients_mutex, INFINITE);
+    #else
+        pthread_mutex_lock(&clients_mutex);
+    #endif
+    
+    for (int i = 0; i < client_count; i++) {
+        if (clients[i].socket == client->socket) {
+            
+            if (strcmp(clients[i].estado, "INACTIVO") == 0) {
+                printf("Actividad actualizada para %s a ACTIVO\n", clients[i].username);
+            }
+            clients[i].last_action = time(NULL);
+            clients[i].is_active = 1; // Opcional, si deseas marcarlo como activo
+            strncpy(clients[i].estado, "ACTIVO", sizeof(clients[i].estado) - 1);
+            clients[i].estado[sizeof(clients[i].estado) - 1] = '\0'; 
+
+            break;
+        }
+    }
+    #ifdef _WIN32
+        ReleaseMutex(clients_mutex);
+    #else
+        pthread_mutex_unlock(&clients_mutex);
+    #endif
+}
 // Enviar mensaje a un socket
 void enviar_mensaje(int sock, const char *mensaje) {
     send(sock, mensaje, strlen(mensaje), 0);
@@ -194,8 +254,10 @@ void *handle_client(void *arg) {
 
     while ((bytes_read = recv(client_socket, buffer, BUFFER_SIZE - 1, 0)) > 0) {
         buffer[bytes_read] = '\0';
-        printf("Mensaje recibido: %s\n", buffer);
+        strncpy(client_info.estado, "INACTIVO", sizeof(client_info.estado) - 1);
 
+        actualizar_actividad(&client_info);
+        printf("Mensaje recibido: %s\n", buffer);
         cJSON *json = cJSON_Parse(buffer);
         if (!json) {
             fprintf(stderr, "Error al parsear JSON\n");
