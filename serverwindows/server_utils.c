@@ -118,11 +118,16 @@ void* check_inactivity(void *arg) {
 
         time_t now = time(NULL);
         for (int i = 0; i < client_count; i++) {
-            if (clients[i].is_active && (now - clients[i].last_action > INACTIVITY_THRESHOLD)) {
+            if (clients[i].is_active &&
+                strcmp(clients[i].estado, "ACTIVO") == 0 &&
+                (now - clients[i].last_action > INACTIVITY_THRESHOLD)) {
+        
                 strncpy(clients[i].estado, "INACTIVO", sizeof(clients[i].estado) - 1);
-                printf("Usuario %s marcado como INACTIVO por inactividad.\n", clients[i].username);
+                clients[i].estado[sizeof(clients[i].estado) - 1] = '\0';
+                printf("Usuario %s ha sido marcado como INACTIVO por inactividad.\n", clients[i].username);
             }
         }
+        
 
 #ifdef _WIN32
         ReleaseMutex(clients_mutex);
@@ -142,15 +147,13 @@ void actualizar_actividad(Client* client) {
     
     for (int i = 0; i < client_count; i++) {
         if (clients[i].socket == client->socket) {
-            
             if (strcmp(clients[i].estado, "INACTIVO") == 0) {
                 printf("Actividad actualizada para %s a ACTIVO\n", clients[i].username);
+                strncpy(clients[i].estado, "ACTIVO", sizeof(clients[i].estado) - 1);
+                clients[i].estado[sizeof(clients[i].estado) - 1] = '\0';
             }
             clients[i].last_action = time(NULL);
-            clients[i].is_active = 1; // Opcional, si deseas marcarlo como activo
-            strncpy(clients[i].estado, "ACTIVO", sizeof(clients[i].estado) - 1);
-            clients[i].estado[sizeof(clients[i].estado) - 1] = '\0'; 
-
+            clients[i].is_active = 1;
             break;
         }
     }
