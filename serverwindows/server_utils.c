@@ -161,8 +161,9 @@ void list_connected_users(int socket) {
             }
         }
         
+        
         cJSON *resp = cJSON_CreateObject();
-        cJSON_AddStringToObject(resp, "tipo", "LISTA");
+        cJSON_AddStringToObject(resp, "accion", "LISTA");  
         cJSON_AddItemToObject(resp, "usuarios", lista);
         
         enviar_JSON(socket, resp);

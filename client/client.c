@@ -18,6 +18,7 @@ char message_history[MAX_HISTORY][256];
 int history_count = 0;
 pthread_mutex_t history_mutex = PTHREAD_MUTEX_INITIALIZER;
 int running = 1;
+pthread_t recv_thread;
 
 void add_to_history(const char *message) {
     pthread_mutex_lock(&history_mutex);
@@ -258,25 +259,24 @@ void *receive_thread(void *arg) {
         
         
          // Verificar si hay tipo
-         if (json_object_object_get_ex(parsed_json, "tipo", &tipo)) {
-            tipo_str = json_object_get_string(tipo);
-            if (strcmp(tipo_str, "LISTA") == 0) {
+         if (json_object_object_get_ex(parsed_json, "accion", &accion)) {
+            accion_str = json_object_get_string(accion);
+            
+            if (strcmp(accion_str, "LISTA") == 0) {
                 struct json_object *usuarios;
                 if (json_object_object_get_ex(parsed_json, "usuarios", &usuarios)) {
                     int num_usuarios = json_object_array_length(usuarios);
                     add_to_history("=== USUARIOS CONECTADOS ===");
                     for (int i = 0; i < num_usuarios; i++) {
                         struct json_object *usuario_obj = json_object_array_get_idx(usuarios, i);
-                        struct json_object *nombre, *estado_usr;
-                        const char *nombre_str, *estado_str;
+                        struct json_object *nombre, *estado;
                         
                         if (json_object_object_get_ex(usuario_obj, "nombre", &nombre) && 
-                            json_object_object_get_ex(usuario_obj, "estado", &estado_usr)) {
-                            nombre_str = json_object_get_string(nombre);
-                            estado_str = json_object_get_string(estado_usr);
-                            
+                            json_object_object_get_ex(usuario_obj, "estado", &estado)) {
                             char history_msg[256];
-                            sprintf(history_msg, "%s [%s]", nombre_str, estado_str);
+                            sprintf(history_msg, "%s [%s]", 
+                                    json_object_get_string(nombre), 
+                                    json_object_get_string(estado));
                             add_to_history(history_msg);
                         }
                     }
@@ -356,7 +356,6 @@ void *receive_thread(void *arg) {
 
 int main(int argc, char *argv[]) {
     struct sockaddr_in server;
-    pthread_t recv_thread;
     char message[1024];
     
     if (argc != 4) {
