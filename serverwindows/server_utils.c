@@ -306,10 +306,10 @@ void *handle_client(void *arg) {
                 
                 if (dest) {
                     cJSON *resp = cJSON_CreateObject();
-                    cJSON_AddStringToObject(resp, "tipo", "INFO_USUARIO");
+                    cJSON_AddStringToObject(resp, "tipo", "MOSTRAR");
                     cJSON_AddStringToObject(resp, "usuario", dest->username);
                     cJSON_AddStringToObject(resp, "estado", dest->estado);
-                    cJSON_AddStringToObject(resp, "direccionIP", dest->ip_address); // Cambiado de "ip" a "direccionIP"
+                    cJSON_AddStringToObject(resp, "direccionIP", dest->ip_address); 
                     enviar_JSON(client_socket, resp);
                     cJSON_Delete(resp);
                 } else {

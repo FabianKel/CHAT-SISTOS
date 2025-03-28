@@ -285,25 +285,25 @@ void *receive_thread(void *arg) {
                 }
             }
 
-            else if (strcmp(tipo_str, "INFO_USUARIO") == 0) {
-                struct json_object *usuario, *estado_usr, *direccionIP;
-                if (json_object_object_get_ex(parsed_json, "usuario", &usuario) && 
-                    json_object_object_get_ex(parsed_json, "estado", &estado_usr) && 
-                    json_object_object_get_ex(parsed_json, "direccionIP", &direccionIP)) {
-                    
-                    add_to_history("=== INFORMACIÓN DE USUARIO ===");
-                    char history_msg[256];
-                    sprintf(history_msg, "Usuario: %s", json_object_get_string(usuario));
-                    add_to_history(history_msg);
-                    sprintf(history_msg, "Estado: %s", json_object_get_string(estado_usr));
-                    add_to_history(history_msg);
-                    sprintf(history_msg, "IP: %s", json_object_get_string(direccionIP));
-                    add_to_history(history_msg);
-                    add_to_history("============================");
-                    display_history();
-                }
-            }
-        }
+          }  else if (json_object_object_get_ex(parsed_json, "tipo", &tipo) && 
+         strcmp(json_object_get_string(tipo), "MOSTRAR") == 0) {
+    struct json_object *usuario, *estado_usr, *direccionIP;
+    if (json_object_object_get_ex(parsed_json, "usuario", &usuario) && 
+        json_object_object_get_ex(parsed_json, "estado", &estado_usr) && 
+        json_object_object_get_ex(parsed_json, "direccionIP", &direccionIP)) {
+        
+        add_to_history("=== INFORMACIÓN DE USUARIO ===");
+        char history_msg[256];
+        sprintf(history_msg, "Usuario: %s", json_object_get_string(usuario));
+        add_to_history(history_msg);
+        sprintf(history_msg, "Estado: %s", json_object_get_string(estado_usr));
+        add_to_history(history_msg);
+        sprintf(history_msg, "IP: %s", json_object_get_string(direccionIP));
+        add_to_history(history_msg);
+        add_to_history("============================");
+        display_history();
+    }
+}
         
         // Verificar si hay acción
         if (json_object_object_get_ex(parsed_json, "accion", &accion)) {
