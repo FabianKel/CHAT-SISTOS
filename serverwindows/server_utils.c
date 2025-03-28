@@ -217,12 +217,20 @@ void *handle_client(void *arg) {
                 enviar_JSON(client_socket, resp);
                 cJSON_Delete(resp);
             } else {
-                // Verificar duplicados
+                // Verificar duplicados de nombre de usuario o dirección IP
                 Client *existing = find_client_by_username(usuario->valuestring);
-                if (existing) {
+                int ip_duplicada = 0;
+                for (int i = 0; i < client_count; i++) {
+                    if (clients[i].is_active && strcmp(clients[i].ip_address, direccionIP->valuestring) == 0) {
+                        ip_duplicada = 1;
+                        break;
+                    }
+                }
+        
+                if (existing || ip_duplicada) {
                     cJSON *resp = cJSON_CreateObject();
                     cJSON_AddStringToObject(resp, "respuesta", "ERROR");
-                    cJSON_AddStringToObject(resp, "razon", "Nombre o dirección duplicado");
+                    cJSON_AddStringToObject(resp, "razon", ip_duplicada ? "IP_DUPLICADA" : "Nombre duplicado");
                     enviar_JSON(client_socket, resp);
                     cJSON_Delete(resp);
                 } else {
@@ -235,7 +243,7 @@ void *handle_client(void *arg) {
                     registered = 1;
                     
                     cJSON *resp = cJSON_CreateObject();
-                    cJSON_AddStringToObject(resp, "response", "OK");
+                    cJSON_AddStringToObject(resp, "respuesta", "OK");
                     enviar_JSON(client_socket, resp);
                     cJSON_Delete(resp);
                 }
@@ -312,6 +320,32 @@ void *handle_client(void *arg) {
                 }
             }
         }
+
+        else if (tipo && strcmp(tipo->valuestring, "EXIT") == 0) {
+            cJSON *usuario = cJSON_GetObjectItemCaseSensitive(json, "usuario");
+        
+            if (usuario && cJSON_IsString(usuario)) {
+                // Buscar el cliente en la lista global y marcarlo como inactivo
+                Client *client = find_client_by_username(usuario->valuestring);
+                if (client) {
+                    client->is_active = 0;
+                    printf("Usuario %s desconectado.\n", usuario->valuestring);
+                } else {
+                    printf("Usuario %s no encontrado para desconexión.\n", usuario->valuestring);
+                }
+            } else {
+                printf("Formato inválido en mensaje EXIT.\n");
+            }
+        
+            // Cerrar el socket después de procesar el mensaje EXIT
+            remove_client(client_socket);
+        #ifdef _WIN32
+            closesocket(client_socket);
+        #else
+            close(client_socket);
+        #endif
+        }
+          
         // Manejo de acciones como BROADCAST, DM, LISTA
         else if (accion && cJSON_IsString(accion)) {
             if (strcmp(accion->valuestring, "BROADCAST") == 0) {
@@ -335,8 +369,11 @@ void *handle_client(void *arg) {
         cJSON_Delete(json);
     }
 
-    // Limpiar al salir
-    remove_client(client_socket);
+    if (bytes_read == 0 || bytes_read == -1) {
+        printf("Cliente desconectado inesperadamente.\n");
+        remove_client(client_socket);
+    }
+    
     
 #ifdef _WIN32
     closesocket(client_socket);

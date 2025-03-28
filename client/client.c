@@ -61,23 +61,15 @@ void enviar_json(const char *json_str) {
         perror("Error al enviar mensaje");
     }
 }
-
 void manejar_comando(char *message, const char *username, const char *server_ip) {
     struct json_object *json_msg;
     const char *json_str;
 
     // Verificar si el mensaje comienza con "/"
     if (message[0] == '/') {
-        if(strncmp(message, "/EXIT", 5) == 0){
-            json_msg = json_object_new_object();
-            json_object_object_add(json_msg, "tipo", json_object_new_string("EXIT"));
-            json_object_object_add(json_msg, "usuario", json_object_new_string(username));
-            json_object_object_add(json_msg, "estado", json_object_new_string(""));
-            json_str = json_object_to_json_string(json_msg);
-            enviar_json(json_str);
-            json_object_put(json_msg);
-            running = 0;
-
+        if (strncmp(message, "/EXIT", 5) == 0) {
+            handle_exit();
+            return; // Salir de la función después de manejar el comando
         } else if (strncmp(message, "/BROADCAST", 10) == 0) {
             // Comando de broadcast
             char mensaje[256];
@@ -97,7 +89,6 @@ void manejar_comando(char *message, const char *username, const char *server_ip)
             sprintf(history_msg, "Tú (broadcast): %s", mensaje);
             add_to_history(history_msg);
             display_history();
-            
         } else if (strncmp(message, "/DM", 3) == 0) {
             // Comando de DM (Direct Message)
             char destinatario[256], mensaje[256];
@@ -118,7 +109,6 @@ void manejar_comando(char *message, const char *username, const char *server_ip)
             sprintf(history_msg, "Tú -> %s: %s", destinatario, mensaje);
             add_to_history(history_msg);
             display_history();
-            
         } else if (strncmp(message, "/LISTA", 6) == 0) {
             // Comando para solicitar la lista de usuarios
             json_msg = json_object_new_object();
@@ -127,7 +117,6 @@ void manejar_comando(char *message, const char *username, const char *server_ip)
             json_str = json_object_to_json_string(json_msg);
             enviar_json(json_str);
             json_object_put(json_msg);
-            
         } else if (strncmp(message, "/ESTADO", 7) == 0) {
             // Comando para cambiar estado
             char nuevo_estado[256];
@@ -159,7 +148,6 @@ void manejar_comando(char *message, const char *username, const char *server_ip)
             sprintf(history_msg, "Tu estado ha cambiado a: %s", nuevo_estado);
             add_to_history(history_msg);
             display_history();
-            
         } else if (strncmp(message, "/MOSTRAR", 8) == 0) {
             // Comando para mostrar información de un usuario
             char usuario_buscado[256];
@@ -172,7 +160,6 @@ void manejar_comando(char *message, const char *username, const char *server_ip)
             json_str = json_object_to_json_string(json_msg);
             enviar_json(json_str);
             json_object_put(json_msg);
-            
         } else if (strncmp(message, "/AYUDA", 6) == 0) {
             // Comando de ayuda, muestra información sobre los comandos disponibles
             add_to_history("=== AYUDA DEL CHAT ===");
@@ -210,12 +197,38 @@ void manejar_comando(char *message, const char *username, const char *server_ip)
         display_history();
     }
 }
+void handle_exit() {
+    struct json_object *json_msg = json_object_new_object();
+    json_object_object_add(json_msg, "tipo", json_object_new_string("EXIT"));
+    json_object_object_add(json_msg, "usuario", json_object_new_string(username));
+    const char *json_str = json_object_to_json_string(json_msg);
+
+    // Enviar mensaje EXIT al servidor
+    enviar_json(json_str);
+    json_object_put(json_msg);
+
+    printf("Desconectando del servidor...\n");
+
+    // Establecer running a 0 para detener el thread de recepción
+    running = 0;
+
+    // Cerrar el socket
+    shutdown(sock, SHUT_RDWR);  // Cerrar lectura y escritura
+    close(sock);
+
+    // Cancelar el thread de recepción
+    pthread_cancel(recv_thread);
+    pthread_join(recv_thread, NULL);
+}
 
 void *receive_thread(void *arg) {
+    pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, NULL);
+    pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, NULL);
+
     char buffer[1024];
     int read_size;
     
-    while ((read_size = recv(sock, buffer, sizeof(buffer) - 1, 0)) > 0) {
+    while (running && (read_size = recv(sock, buffer, sizeof(buffer) - 1, 0)) > 0) {
         buffer[read_size] = '\0';
         
         struct json_object *parsed_json = json_tokener_parse(buffer);
@@ -375,33 +388,33 @@ int main(int argc, char *argv[]) {
     
     printf("Conectado al servidor %s:%d\n", server_ip, port);
     
-    // Registro de usuario
-    struct json_object *json_register = json_object_new_object();
-    json_object_object_add(json_register, "tipo", json_object_new_string("REGISTRO"));
-    json_object_object_add(json_register, "usuario", json_object_new_string(username));
-    //json_object_object_add(json_register, "direccionIP", json_object_new_string(server_ip));
-    
+   // Registro de usuario
+struct json_object *json_register = json_object_new_object();
+json_object_object_add(json_register, "tipo", json_object_new_string("REGISTRO"));
+json_object_object_add(json_register, "usuario", json_object_new_string(username));
 
-
-    // Obtener la dirección IP del cliente
-    struct sockaddr_in local_address;
-    socklen_t address_length = sizeof(local_address);
-    if (getsockname(sock, (struct sockaddr *)&local_address, &address_length) == 0) {
-        char client_ip[INET_ADDRSTRLEN];
-        inet_ntop(AF_INET, &local_address.sin_addr, client_ip, INET_ADDRSTRLEN);
-        json_object_object_add(json_register, "direccionIP", json_object_new_string(client_ip));
-    } else {
-        perror("Error al obtener la dirección IP del cliente");
-    }
-
-    const char *json_str = json_object_to_json_string(json_register);
-    if (send(sock, json_str, strlen(json_str), 0) < 0) {
-        perror("Error al enviar registro");
-        return 1;
-    }
-    
+// Obtener la dirección IP del cliente
+struct sockaddr_in local_address;
+socklen_t address_length = sizeof(local_address);
+if (getsockname(sock, (struct sockaddr *)&local_address, &address_length) == 0) {
+    char client_ip[INET_ADDRSTRLEN];
+    inet_ntop(AF_INET, &local_address.sin_addr, client_ip, INET_ADDRSTRLEN);
+    json_object_object_add(json_register, "direccionIP", json_object_new_string(client_ip));
+} else {
+    perror("Error al obtener la dirección IP del cliente");
     json_object_put(json_register);
-    
+    return 1;
+}
+
+const char *json_str = json_object_to_json_string(json_register);
+if (send(sock, json_str, strlen(json_str), 0) < 0) {
+    perror("Error al enviar registro");
+    json_object_put(json_register);
+    return 1;
+}
+
+json_object_put(json_register);
+
     // Esperar respuesta del servidor
     char buffer[1024];
     int read_size = recv(sock, buffer, sizeof(buffer) - 1, 0);
@@ -441,9 +454,13 @@ int main(int argc, char *argv[]) {
     
     // Loop principal
     while (running) {
-        fgets(message, sizeof(message), stdin);
+        if (fgets(message, sizeof(message), stdin) == NULL) {
+            // Si fgets devuelve NULL, salir del bucle
+            break;
+        }
+    
         message[strcspn(message, "\n")] = 0; // Quitar el \n del final
-        
+    
         if (strlen(message) > 0) {
             manejar_comando(message, username, server_ip);
         }
@@ -454,6 +471,6 @@ int main(int argc, char *argv[]) {
     
     // Esperar a que termine el thread
     pthread_join(recv_thread, NULL);
+    printf("Cliente desconectado.\n");
     
-    return 0;
 }
