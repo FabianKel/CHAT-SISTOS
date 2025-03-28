@@ -80,30 +80,59 @@ CHAT-SISTOS/
 
 ## **Cómo ejecutar**
 
-### **Compilación**
+### **1. Versión Windows (Servidor) + Ubuntu (Cliente)**
+
+**Compilación del servidor en Windows**
+En la carpeta ```serverwindows```, se compila con:
 
 ```bash
-gcc -o server server.c server_utils.c -lpthread -lcjson
-gcc -o client client.c -lpthread -ljson-c
+gcc -o server server.c server_utils.c cJSON/cJSON.c -I"c:\Users\rebe1\OneDrive\Documentos\GitHub\CHAT-SISTOS\serverwindows\cJSON" -lws2_32 -lpthread
 ```
-o simplemente correr el siguiente comando dentro de la carpeta raíz:
+**Nota: Asegúrate de actualizar la ruta cJSON a la correcta si es diferente en tu sistema.**
+
+
+**Ejecución del servidor en Windows**
+Ejecuta el servidor con:
+
 ```bash
+./server.exe
+```
+
+**Compilación y ejecución del cliente en Ubuntu**
+Dentro de la carpeta raíz del proyecto, limpia y compila el cliente:
+
+```bash
+make clean
 make
 ```
-
-### **Ejecución**
-
-Ejecutar el servidor:
-
-```bash
-./server
-```
-
-Ejecutar un  cliente:
+Luego, ejecuta el cliente con
 ```bash
 ./client <nombre_usuario> <servidor_ip> <puerto>
 ```
+Por ejemplo:
+```bash
+./client Juan 127.0.0.1 50214
+```
 
+### **2. Versión Ubuntu (Servidor y Cliente en Linux)**
+
+**Compilación del servidor y cliente en Ubuntu**
+Desde la carpeta raíz del proyecto:
+```bash
+make clean
+make
+```
+
+**Ejecución del servidor en Ubuntu**
+```bash
+./server.exe
+```
+
+**Ejecución del cliente en Ubuntu**
+
+```bash
+./client <nombre_usuario> <servidor_ip> <puerto>
+```
 Por ejemplo:
 ```bash
 ./client Juan 127.0.0.1 50214
@@ -118,6 +147,16 @@ Por ejemplo:
 - `/MOSTRAR <usuario>` – Mostrar información de un usuario.
 - `/AYUDA` – Mostrar comandos disponibles.
 - `/EXIT` – Salir del chat.
+
+## **Funcionalidades**
+* Todos los clientes reciben los mensajes realizados con `/BROADCAST`
+* Al pasar **30** segundos sin realizar nada, el cliente pasa a estado `INACTIVO`
+* La información mostrada de cada usuario es la siguiente:
+    - `Nombre de usuario`
+    - `Estado`
+    - `IP`
+* El comando `/LISTA` muestra únicamente los usuarios `ACTIVOS` u `OCUPADOS`
+* No es posible conectarse con dos clientes teniendo el mismo **nombre** o **dirección IP**
 
 ## **Link del repositorio**
 [CHAT-SISTOS](https://github.com/FabianKel/CHAT-SISTOS/tree/main)
