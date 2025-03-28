@@ -1,5 +1,6 @@
 #ifndef SERVER_UTILS_H
 #define SERVER_UTILS_H
+#define INACTIVITY_THRESHOLD 30 // Tiempo en segundos antes de marcar como inactivo
 
 #ifdef _WIN32
     #include <winsock2.h>
@@ -32,6 +33,7 @@ typedef struct {
     char ip_address[IP_LENGTH];
     char estado[ESTADO_LENGTH];
     int is_active;  // Para rastrear si el cliente está conectado
+    time_t last_action; // Momento de la última actividad
 } Client;
 
 // Variables globales para la lista de clientes
@@ -57,6 +59,8 @@ void add_client(Client client);
 
 // Eliminar un cliente de la lista (marcar como inactivo)
 void remove_client(int sock);
+void* check_inactivity(void* arg);
+
 
 // Buscar un cliente por nombre de usuario
 Client* find_client_by_username(const char* username);

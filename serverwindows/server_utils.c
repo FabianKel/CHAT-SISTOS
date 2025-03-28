@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 #ifdef _WIN32
     #include <winsock2.h>
@@ -41,6 +42,7 @@ void add_client(Client client) {
     
     if (client_count < MAX_CLIENTS) {
         client.is_active = 1;  // Marcar como activo
+        client.last_action = time(NULL); // Inicializa con el tiempo actual
         clients[client_count++] = client;
     } else {
         fprintf(stderr, "Se alcanzó el máximo de clientes.\n");
@@ -97,9 +99,70 @@ Client* find_client_by_username(const char* username) {
         pthread_mutex_unlock(&clients_mutex);
     #endif
         
-        return result;
-    }
+    return result;
+}
 
+void* check_inactivity(void *arg) {
+    while (1) {
+#ifdef _WIN32
+        Sleep(5000);
+#else
+        sleep(5);
+#endif
+
+#ifdef _WIN32
+        WaitForSingleObject(clients_mutex, INFINITE);
+#else
+        pthread_mutex_lock(&clients_mutex);
+#endif
+
+        time_t now = time(NULL);
+        for (int i = 0; i < client_count; i++) {
+            if (clients[i].is_active &&
+                strcmp(clients[i].estado, "ACTIVO") == 0 &&
+                (now - clients[i].last_action > INACTIVITY_THRESHOLD)) {
+        
+                strncpy(clients[i].estado, "INACTIVO", sizeof(clients[i].estado) - 1);
+                clients[i].estado[sizeof(clients[i].estado) - 1] = '\0';
+                printf("Usuario %s ha sido marcado como INACTIVO por inactividad.\n", clients[i].username);
+            }
+        }
+        
+
+#ifdef _WIN32
+        ReleaseMutex(clients_mutex);
+#else
+        pthread_mutex_unlock(&clients_mutex);
+#endif
+    }
+    return NULL;
+}
+
+void actualizar_actividad(Client* client) {
+    #ifdef _WIN32
+        WaitForSingleObject(clients_mutex, INFINITE);
+    #else
+        pthread_mutex_lock(&clients_mutex);
+    #endif
+    
+    for (int i = 0; i < client_count; i++) {
+        if (clients[i].socket == client->socket) {
+            if (strcmp(clients[i].estado, "INACTIVO") == 0) {
+                printf("Actividad actualizada para %s a ACTIVO\n", clients[i].username);
+                strncpy(clients[i].estado, "ACTIVO", sizeof(clients[i].estado) - 1);
+                clients[i].estado[sizeof(clients[i].estado) - 1] = '\0';
+            }
+            clients[i].last_action = time(NULL);
+            clients[i].is_active = 1;
+            break;
+        }
+    }
+    #ifdef _WIN32
+        ReleaseMutex(clients_mutex);
+    #else
+        pthread_mutex_unlock(&clients_mutex);
+    #endif
+}
 // Enviar mensaje a un socket
 void enviar_mensaje(int sock, const char *mensaje) {
     send(sock, mensaje, strlen(mensaje), 0);
@@ -161,8 +224,9 @@ void list_connected_users(int socket) {
             }
         }
         
+        
         cJSON *resp = cJSON_CreateObject();
-        cJSON_AddStringToObject(resp, "tipo", "LISTA");
+        cJSON_AddStringToObject(resp, "accion", "LISTA");  
         cJSON_AddItemToObject(resp, "usuarios", lista);
         
         enviar_JSON(socket, resp);
@@ -193,8 +257,10 @@ void *handle_client(void *arg) {
 
     while ((bytes_read = recv(client_socket, buffer, BUFFER_SIZE - 1, 0)) > 0) {
         buffer[bytes_read] = '\0';
-        printf("Mensaje recibido: %s\n", buffer);
+        strncpy(client_info.estado, "INACTIVO", sizeof(client_info.estado) - 1);
 
+        actualizar_actividad(&client_info);
+        printf("Mensaje recibido: %s\n", buffer);
         cJSON *json = cJSON_Parse(buffer);
         if (!json) {
             fprintf(stderr, "Error al parsear JSON\n");
@@ -217,12 +283,20 @@ void *handle_client(void *arg) {
                 enviar_JSON(client_socket, resp);
                 cJSON_Delete(resp);
             } else {
-                // Verificar duplicados
+                // Verificar duplicados de nombre de usuario o dirección IP
                 Client *existing = find_client_by_username(usuario->valuestring);
-                if (existing) {
+                int ip_duplicada = 0;
+                for (int i = 0; i < client_count; i++) {
+                    if (clients[i].is_active && strcmp(clients[i].ip_address, direccionIP->valuestring) == 0) {
+                        ip_duplicada = 1;
+                        break;
+                    }
+                }
+        
+                if (existing || ip_duplicada) {
                     cJSON *resp = cJSON_CreateObject();
                     cJSON_AddStringToObject(resp, "respuesta", "ERROR");
-                    cJSON_AddStringToObject(resp, "razon", "Nombre o dirección duplicado");
+                    cJSON_AddStringToObject(resp, "razon", ip_duplicada ? "IP_DUPLICADA" : "Nombre duplicado");
                     enviar_JSON(client_socket, resp);
                     cJSON_Delete(resp);
                 } else {
@@ -235,7 +309,7 @@ void *handle_client(void *arg) {
                     registered = 1;
                     
                     cJSON *resp = cJSON_CreateObject();
-                    cJSON_AddStringToObject(resp, "response", "OK");
+                    cJSON_AddStringToObject(resp, "respuesta", "OK");
                     enviar_JSON(client_socket, resp);
                     cJSON_Delete(resp);
                 }
@@ -254,24 +328,34 @@ void *handle_client(void *arg) {
                 enviar_JSON(client_socket, resp);
                 cJSON_Delete(resp);
             } else {
-                if (strcmp(client_info.username, usuario->valuestring) == 0) {
-                    if (strcmp(client_info.estado, estado->valuestring) == 0) {
+                // Buscar el cliente en la lista global y actualizar su estado
+                Client *client = find_client_by_username(usuario->valuestring);
+                if (client) {
+                    if (strcmp(client->estado, estado->valuestring) == 0) {
                         cJSON *resp = cJSON_CreateObject();
                         cJSON_AddStringToObject(resp, "respuesta", "ERROR");
                         cJSON_AddStringToObject(resp, "razon", "ESTADO_YA_SELECCIONADO");
                         enviar_JSON(client_socket, resp);
                         cJSON_Delete(resp);
                     } else {
-                        strncpy(client_info.estado, estado->valuestring, sizeof(client_info.estado) - 1);
+                        // Actualizar el estado del cliente en la lista global
+                        strncpy(client->estado, estado->valuestring, sizeof(client->estado) - 1);
                         
                         cJSON *resp = cJSON_CreateObject();
                         cJSON_AddStringToObject(resp, "respuesta", "OK");
                         enviar_JSON(client_socket, resp);
                         cJSON_Delete(resp);
                     }
+                } else {
+                    cJSON *resp = cJSON_CreateObject();
+                    cJSON_AddStringToObject(resp, "respuesta", "ERROR");
+                    cJSON_AddStringToObject(resp, "razon", "USUARIO_NO_ENCONTRADO");
+                    enviar_JSON(client_socket, resp);
+                    cJSON_Delete(resp);
                 }
             }
         }
+        
         // Solicitud de MOSTRAR información de usuario
         else if (tipo && strcmp(tipo->valuestring, "MOSTRAR") == 0) {
             cJSON *usuario = cJSON_GetObjectItemCaseSensitive(json, "usuario");
@@ -287,10 +371,10 @@ void *handle_client(void *arg) {
                 
                 if (dest) {
                     cJSON *resp = cJSON_CreateObject();
-                    cJSON_AddStringToObject(resp, "tipo", "INFO_USUARIO");
+                    cJSON_AddStringToObject(resp, "tipo", "MOSTRAR");
                     cJSON_AddStringToObject(resp, "usuario", dest->username);
                     cJSON_AddStringToObject(resp, "estado", dest->estado);
-                    cJSON_AddStringToObject(resp, "direccionIP", dest->ip_address); // Cambiado de "ip" a "direccionIP"
+                    cJSON_AddStringToObject(resp, "direccionIP", dest->ip_address); 
                     enviar_JSON(client_socket, resp);
                     cJSON_Delete(resp);
                 } else {
@@ -302,6 +386,32 @@ void *handle_client(void *arg) {
                 }
             }
         }
+
+        else if (tipo && strcmp(tipo->valuestring, "EXIT") == 0) {
+            cJSON *usuario = cJSON_GetObjectItemCaseSensitive(json, "usuario");
+        
+            if (usuario && cJSON_IsString(usuario)) {
+                // Buscar el cliente en la lista global y marcarlo como inactivo
+                Client *client = find_client_by_username(usuario->valuestring);
+                if (client) {
+                    client->is_active = 0;
+                    printf("Usuario %s desconectado.\n", usuario->valuestring);
+                } else {
+                    printf("Usuario %s no encontrado para desconexión.\n", usuario->valuestring);
+                }
+            } else {
+                printf("Formato inválido en mensaje EXIT.\n");
+            }
+        
+            // Cerrar el socket después de procesar el mensaje EXIT
+            remove_client(client_socket);
+        #ifdef _WIN32
+            closesocket(client_socket);
+        #else
+            close(client_socket);
+        #endif
+        }
+          
         // Manejo de acciones como BROADCAST, DM, LISTA
         else if (accion && cJSON_IsString(accion)) {
             if (strcmp(accion->valuestring, "BROADCAST") == 0) {
@@ -325,8 +435,11 @@ void *handle_client(void *arg) {
         cJSON_Delete(json);
     }
 
-    // Limpiar al salir
-    remove_client(client_socket);
+    if (bytes_read == 0 || bytes_read == -1) {
+        printf("Cliente desconectado inesperadamente.\n");
+        remove_client(client_socket);
+    }
+    
     
 #ifdef _WIN32
     closesocket(client_socket);
