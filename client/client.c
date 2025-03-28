@@ -271,16 +271,15 @@ void *receive_thread(void *arg) {
                         struct json_object *usuario_obj = json_object_array_get_idx(usuarios, i);
                         struct json_object *nombre, *estado;
                         
-                        if (json_object_object_get_ex(usuario_obj, "nombre", &nombre) && 
-                            json_object_object_get_ex(usuario_obj, "estado", &estado)) {
+                        json_object_object_foreach(usuario_obj, key, val) {
+                            const char *value_str = json_object_get_string(val);
+                        
                             char history_msg[256];
-                            sprintf(history_msg, "%s [%s]", 
-                                    json_object_get_string(nombre), 
-                                    json_object_get_string(estado));
+                            snprintf(history_msg, sizeof(history_msg), "%s: %s", key, value_str);
                             add_to_history(history_msg);
                         }
+                        add_to_history("==========================");
                     }
-                    add_to_history("==========================");
                     display_history();
                 }
             }
