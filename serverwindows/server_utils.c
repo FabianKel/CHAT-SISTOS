@@ -281,9 +281,19 @@ void *handle_client(void *arg) {
                 return 0;
             }
 
-            // Si no se proporciona direccionIP, asignar un valor predeterminado
-            const char *ip = direccionIP && cJSON_IsString(direccionIP) ? direccionIP->valuestring : "0.0.0.0";
-
+         
+           // Si no se proporciona direccionIP, obtenerla desde el socket
+            struct sockaddr_in addr;
+            socklen_t addr_len = sizeof(addr);
+            const char *ip;
+            if (direccionIP && cJSON_IsString(direccionIP)) {
+                ip = direccionIP->valuestring;
+            } else if (getpeername(client_socket, (struct sockaddr*)&addr, &addr_len) == 0) {
+                ip = inet_ntoa(addr.sin_addr); // Convertir la dirección IP a formato legible
+            } else {
+                ip = "0.0.0.0"; // Valor predeterminado si falla obtener la IP
+            }
+            
             // Verificar duplicados de nombre de usuario o dirección IP
             int nombre_duplicado = (find_client_by_username(usuario->valuestring) != NULL);
             int ip_duplicada = 0;
